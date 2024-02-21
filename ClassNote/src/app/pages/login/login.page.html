@@ -65,14 +65,16 @@
           <form [formGroup]="UserForm" #FormLogin="ngForm" (ngSubmit)="validarLogin()">
             <ion-item lines="none">
               <ion-label style="color: #4D4D4D;" position="floating">Usuário</ion-label>
-              <ion-input formControlName="username" ngModel name="username" id="username" type="text" required></ion-input>
+              <ion-input formControlName="username" ngModel name="username" id="username" type="text"
+                required></ion-input>
             </ion-item>
             <ion-item lines="none">
               <ion-label style="color: #4D4D4D;" position="floating">Senha</ion-label>
-              <ion-input formControlName="password" ngModel name="password" id="password" type="password" required></ion-input>
+              <ion-input formControlName="password" ngModel name="password" id="password" type="password"
+                required></ion-input>
             </ion-item>
-            <ion-button style="font-family: Josefin Sans; font-weight: bold;" expand="block" type="submit" fill="outline"
-              class="ion-margin-top">Entrar</ion-button>
+            <ion-button style="font-family: Josefin Sans; font-weight: bold;" expand="block" type="submit"
+              fill="outline" class="ion-margin-top">Entrar</ion-button>
           </form>
           <ion-row>
             <ion-col>
@@ -80,13 +82,14 @@
             </ion-col>
           </ion-row>
         </ion-col>
+        <ion-row class="footer">
+          <ion-col size="8" class="ion-text-center ion-padding">
+            <p style="opacity: 0.5; font-size: 12px; margin-top: 40px;">Desenvolvido pelo Departamento de Tecnologia e
+              Marketing do Colégio Anglo Tatuí.</p>
+          </ion-col>
+        </ion-row>
       </ion-row>
-      <ion-row>
-        <ion-col class="ion-text-center ion-padding">
-          <p style="opacity: 0.5; font-size: 12px; margin-top: 40px;">Desenvolvido pelo Departamento de Tecnologia e
-            Marketing do Colégio Anglo Tatuí.</p>
-        </ion-col>
-      </ion-row>
+
     </ion-grid>
   </div>
 </ion-content>
