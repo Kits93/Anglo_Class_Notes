@@ -3,10 +3,6 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: 'home',
-    loadChildren: () => import('./pages/home/home.module').then( m => m.HomePageModule)
-  },
-  {
     path: '',
     redirectTo: 'login',
     pathMatch: 'full'
@@ -14,6 +10,18 @@ const routes: Routes = [
   {
     path: 'login',
     loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
+  },
+  {
+    path: 'turma-aulas',
+    loadChildren: () => import('./pages/turma-aulas/turma-aulas.module').then( m => m.TurmaAulasPageModule)
+  },
+  {
+    path: 'turma',
+    loadChildren: () => import('./pages/turma/turma.module').then( m => m.TurmaPageModule)
+  },
+  {
+    path: 'cadastro-aula',
+    loadChildren: () => import('./pages/cadastro-aula/cadastro-aula.module').then( m => m.CadastroAulaPageModule)
   },
 ];
 

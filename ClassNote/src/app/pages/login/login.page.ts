@@ -46,7 +46,7 @@ export class LoginPage implements OnInit {
 
 
       console.log(usuario);
-      // this.router.navigate(['../home']);
+      this.router.navigate(['../turma']);
 
       // this.loginService.post(usuario)
       this.presentToast('ok')

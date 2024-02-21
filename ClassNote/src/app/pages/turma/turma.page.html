@@ -1,0 +1,57 @@
+<ion-content [fullscreen]="true">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title size="large">Turmas</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+
+  <div class="main-content">
+
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="8">
+        <ion-datetime-button datetime="datetime"></ion-datetime-button>
+
+        <ion-modal [keepContentsMounted]="true">
+          <ng-template>
+            <ion-datetime id="datetime"></ion-datetime>
+          </ng-template>
+        </ion-modal>
+      </ion-col>
+    </ion-row>
+
+
+
+    <ion-row>
+      <ion-col>
+        <ion-col size="10">
+          <ion-grid>
+            <ion-row wrap>
+              <ion-col size="12" size-md="6" size-lg="4" *ngFor="let item of items">
+                <ion-card>
+                  <ion-card-header>
+                    {{ item.turma }}
+                  </ion-card-header>
+                  <ion-card-content>
+                    {{ item.ensino }}
+                  </ion-card-content>
+                  <ion-row class="ion-align-items-center ion-justify-content-end">
+                    <ion-col size="auto">
+                      <ion-icon class="ion-margin" name="caret-down-outline"></ion-icon>
+                    </ion-col>
+                  </ion-row>
+                </ion-card>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-col>
+
+
+
+
+
+      </ion-col>
+    </ion-row>
+  </div>
+
+</ion-content>
