@@ -30,7 +30,7 @@ export class TurmaPage implements OnInit {
 
   acessarTurma(turma:any){
     console.log(turma)
-    this.router.navigate(['../turma-aulas']);
+    this.router.navigate(['../turma-aulas'], turma);
   }
 }
 
