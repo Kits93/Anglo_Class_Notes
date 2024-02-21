@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -12,17 +13,38 @@ export class LoginPage implements OnInit {
   constructor(private router: Router, private http: HttpClient) { }
 
   ngOnInit() {
+    this.createFormAdd(); // Chame o método para criar o formulário quando o componente é inicializado
   }
 
-  validarLogin(form:any){
-    // console.log("Olá mundo!")
-    console.log(form)
+  UserForm!: FormGroup;
 
-    // this.router.navigate(['../home'])
+  get username() {
+		return this.UserForm.get('username')!;
+	}
 
-    this.http.get('').subscribe(users => {
-      console.log(users); // Aqui você pode fazer o que quiser com os dados dos usuários, como mostrá-los na interface do usuário
+  createFormAdd() {
+    this.UserForm = new FormGroup({
+      username: new FormControl('', Validators.compose([
+        Validators.maxLength(70),
+        Validators.minLength(3),
+        Validators.required])),
+      password: new FormControl('', Validators.compose([
+        Validators.required]))
     });
+  }
+
+  validarLogin() {
+    if (this.UserForm.valid) {
+      let usuario = {
+        username: this.UserForm.value.username,
+        password: this.UserForm.value.password
+      };
+
+      console.log(usuario);
+      this.router.navigate(['../home']);
+    } else {
+      console.log('Formulário inválido!');
+    }
   }
 
 }

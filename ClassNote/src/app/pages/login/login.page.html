@@ -1,10 +1,4 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>login</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content [fullscreen]="true">
+<!-- <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
       <ion-title size="large">login</ion-title>
@@ -15,13 +9,13 @@
     <ion-col>
 
       <ion-row class="ion-justify-content-center ion-align-items-center">
-        <!-- img -->
+        
       </ion-row>
 
       <ion-col>
         <form #FormLogin="ngForm" (ngSubmit)="validarLogin(FormLogin.value)">
           <ion-row class="ion-justify-content-center ion-align-items-center">
-            <!-- username -->
+            
             <ion-list>
               <ion-item>
                 <ion-label for="username">Usuário</ion-label>
@@ -32,7 +26,7 @@
           </ion-row>
     
           <ion-row class="ion-justify-content-center ion-align-items-center">
-            <!-- password -->
+            
             <ion-list>
               <ion-item>
                 <ion-label for="id">Senha</ion-label>
@@ -43,11 +37,56 @@
           </ion-row>
     
           <ion-row class="ion-justify-content-center ion-align-items-center">
-            <!-- button -->
+            
             <ion-button type="submit" fill="outline">Entrar</ion-button>
           </ion-row>
         </form>
       </ion-col>
     </ion-col>
   </ion-row>
+</ion-content> -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap"
+  rel="stylesheet">
+
+
+<ion-content class="ion-padding" [fullscreen]="true">
+  <div class="center-content">
+    <ion-grid class="ion-justify-content-center">
+      <ion-row class="ion-justify-content-center">
+        <ion-col size-sm="8" class="ion-text-center">
+          <img src="../../../assets/img/logo-anglo-tatui.png" alt="Logo" width="60%" style="max-width: 225px;">
+        </ion-col>
+      </ion-row>
+      <ion-row class="ion-justify-content-center">
+        <ion-col size-sm="8" class="ion-text-center ion-padding">
+          <form [formGroup]="UserForm" #FormLogin="ngForm" (ngSubmit)="validarLogin()">
+            <ion-item lines="none">
+              <ion-label style="color: #4D4D4D;" position="floating">Usuário</ion-label>
+              <ion-input formControlName="username" ngModel name="username" id="username" type="text" required></ion-input>
+            </ion-item>
+            <ion-item lines="none">
+              <ion-label style="color: #4D4D4D;" position="floating">Senha</ion-label>
+              <ion-input formControlName="password" ngModel name="password" id="password" type="password" required></ion-input>
+            </ion-item>
+            <ion-button style="font-family: Josefin Sans; font-weight: bold;" expand="block" type="submit" fill="outline"
+              class="ion-margin-top">Entrar</ion-button>
+          </form>
+          <ion-row>
+            <ion-col>
+              <span>Esqueceu sua senha? </span><a style="cursor: pointer;">Clique aqui!</a>
+            </ion-col>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col class="ion-text-center ion-padding">
+          <p style="opacity: 0.5; font-size: 12px; margin-top: 40px;">Desenvolvido pelo Departamento de Tecnologia e
+            Marketing do Colégio Anglo Tatuí.</p>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
 </ion-content>
