@@ -9,3 +9,9 @@
   ion-modal {
     --height: auto;
   }
+
+  ion-card:hover {
+    /* Estilos que deseja aplicar quando o ion-card é hoverado */
+    transition: 0.3s;
+    box-shadow: 3px 3px 0 3px rgba(0, 110, 255, 0.5);
+  }

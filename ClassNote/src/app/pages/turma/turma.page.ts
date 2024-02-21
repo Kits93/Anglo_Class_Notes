@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-turma',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TurmaPage implements OnInit {
 
-  constructor() { }
+  constructor(private router:Router) { }
 
   ngOnInit() {
   }
@@ -27,6 +28,9 @@ export class TurmaPage implements OnInit {
     { "turma": "9º ano D", "ensino": "Ensino Fundamental II" }
   ]
 
-
+  acessarTurma(turma:any){
+    console.log(turma)
+    this.router.navigate(['../turma-aulas']);
+  }
 }
 
