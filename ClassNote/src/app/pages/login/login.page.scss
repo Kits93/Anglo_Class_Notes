@@ -5,10 +5,82 @@
   height: 100%;
 }
 
-.footer{
+.footer {
   position: absolute;
   bottom: 0;
   align-items: center;
   justify-content: center;
   text-align: center;
+}
+
+.form-col {
+  background-color: white;
+  padding: 20px; /* Ajuste conforme necessário */
+  border-radius: 10px; /* Se desejar bordas arredondadas */
+}
+
+// svg
+
+.svg {
+  transform-origin: bottom;
+  position: fixed;
+  animation: scale 6s infinite alternate;
+}
+
+@keyframes scale {
+  0% {
+    transform: translate(100px, -110);
+  }
+
+  100% {
+    transform: translate(-65px, -180px);
+  }
+}
+
+.svg2 {
+  transform-origin: bottom;
+  position: fixed;
+  animation: scale2 6s infinite alternate;
+}
+
+@keyframes scale2 {
+  0% {
+    transform: translate(200px, -180);
+  }
+
+  100% {
+    transform: translate(-250px, -230px);
+  }
+}
+
+.svg3 {
+  transform-origin: bottom;
+  position: fixed;
+  animation: scale3 6s infinite alternate;
+}
+
+@keyframes scale3 {
+  0% {
+    transform: translate(140px, -120px);
+  }
+
+  100% {
+    transform: translate(140px, -180px);
+  }
+}
+
+.svg4 {
+  transform-origin: bottom;
+  position: fixed;
+  animation: scale4 6s infinite alternate;
+}
+
+@keyframes scale4 {
+  0% {
+    transform: translate(30px, -120px);
+  }
+
+  100% {
+    transform: translate(170px, -190px);
+  }
 }

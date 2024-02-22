@@ -1,67 +1,39 @@
-<!-- <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">login</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <ion-row>
-    <ion-col>
-
-      <ion-row class="ion-justify-content-center ion-align-items-center">
-        
-      </ion-row>
-
-      <ion-col>
-        <form #FormLogin="ngForm" (ngSubmit)="validarLogin(FormLogin.value)">
-          <ion-row class="ion-justify-content-center ion-align-items-center">
-            
-            <ion-list>
-              <ion-item>
-                <ion-label for="username">Usuário</ion-label>
-                <ion-input ngModel name="username" id="username" type="text"></ion-input>
-              </ion-item>
-            </ion-list>
-    
-          </ion-row>
-    
-          <ion-row class="ion-justify-content-center ion-align-items-center">
-            
-            <ion-list>
-              <ion-item>
-                <ion-label for="id">Senha</ion-label>
-                <ion-input ngModel name="password" id="password" type="password"></ion-input>
-              </ion-item>
-            </ion-list>
-    
-          </ion-row>
-    
-          <ion-row class="ion-justify-content-center ion-align-items-center">
-            
-            <ion-button type="submit" fill="outline">Entrar</ion-button>
-          </ion-row>
-        </form>
-      </ion-col>
-    </ion-col>
-  </ion-row>
-</ion-content> -->
-
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap"
   rel="stylesheet">
 
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 
 <ion-content class="ion-padding" [fullscreen]="true">
   <div class="center-content">
-    <ion-grid class="ion-justify-content-center">
+
+
+    <svg class="svg" width="316" height="316" viewBox="0 0 316 316" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="117" cy="117" r="117" fill="#1970C0" opacity="0.5" />
+    </svg>
+
+    <svg class="svg2" width="234" height="234" viewBox="0 0 234 234" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="117" cy="117" r="117" fill="#1970C0" opacity="0.2" />
+    </svg>
+
+    <svg class="svg3" width="187" height="187" viewBox="0 0 237 237" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="117" cy="117" r="117" fill="#1970C0" opacity="0.8" />
+    </svg>
+
+    <svg class="svg4" width="234" height="234" viewBox="0 0 234 234" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="117" cy="117" r="117" fill="#1970C0" opacity="0.3" />
+    </svg>
+
+    <ion-grid class="ion-justify-content-center ion-padding">
       <ion-row class="ion-justify-content-center">
-        <ion-col size-sm="8" class="ion-text-center">
-          <img src="../../../assets/img/logo-anglo-tatui.png" alt="Logo" width="60%" style="max-width: 225px;">
+        <ion-col size-sm="8" size="12" class="ion-text-center">
+          <img style="position: absolute;" src="../../../assets/img/logo-anglo-tatui.png" alt="Logo" width="70%" style="max-width: 225px;">
         </ion-col>
       </ion-row>
       <ion-row class="ion-justify-content-center">
-        <ion-col size-sm="8" class="ion-text-center ion-padding">
+        <ion-col size-sm="8" size-md="6" size="12" class="ion-text-center ion-padding form-col">
           <form [formGroup]="UserForm" #FormLogin="ngForm" (ngSubmit)="validarLogin()">
             <ion-item lines="none">
               <ion-label style="color: #4D4D4D;" position="floating">Usuário</ion-label>
@@ -89,6 +61,12 @@
           </ion-col>
         </ion-row>
       </ion-row>
+
+      
+
+
+
+
 
     </ion-grid>
   </div>
