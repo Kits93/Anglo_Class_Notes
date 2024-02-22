@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 })
 export class TurmaPage implements OnInit {
 
-  constructor(private router:Router) { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
   }
@@ -28,9 +28,8 @@ export class TurmaPage implements OnInit {
     { "turma": "9º ano D", "ensino": "Ensino Fundamental II" }
   ]
 
-  acessarTurma(turma:any){
-    console.log(turma)
-    this.router.navigate(['../turma-aulas'], turma);
+  acessarTurma(turma: any) {
+    console.log(turma);
+    this.router.navigate(['../turma-aulas'], { state: { turma: turma } });
   }
 }
-

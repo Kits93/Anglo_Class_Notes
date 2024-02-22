@@ -13,8 +13,9 @@ import { TurmaAulasPage } from './turma-aulas.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    TurmaAulasPageRoutingModule
+    TurmaAulasPageRoutingModule,
+    MatFormFieldModule, MatInputModule, MatDatepickerModule, MatButtonModule
   ],
   declarations: [TurmaAulasPage]
 })
-export class TurmaAulasPageModule {}
+export class TurmaAulasPageModule { }

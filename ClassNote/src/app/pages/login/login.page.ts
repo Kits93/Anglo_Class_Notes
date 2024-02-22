@@ -36,6 +36,8 @@ export class LoginPage implements OnInit {
     });
   }
 
+  usuario: any
+
   validarLogin() {
     if (this.UserForm.valid) {
       let usuario = {
@@ -57,7 +59,6 @@ export class LoginPage implements OnInit {
     }
   }
 
-
   // toast
 
   async presentToast(state: 'ok' | 'error') {
@@ -66,15 +67,15 @@ export class LoginPage implements OnInit {
 
     if (state == 'ok') {
       toast = await this.toastController.create({
-        message: 'success!',
-        duration: 1500,
+        message: `Dados corretos! bem vindo, ${this.UserForm.value.username}`,
+        duration: 2500,
         color: 'success',
         position: 'bottom',
       });
     } else {
       toast = await this.toastController.create({
-        message: 'fail!',
-        duration: 1500,
+        message: 'Falha no login, tente novamente.',
+        duration: 2500,
         color: 'danger',
         position: 'bottom',
       });
@@ -83,8 +84,6 @@ export class LoginPage implements OnInit {
     await toast.present();
 
     console.log(state)
-
-
 
   }
 }
