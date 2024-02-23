@@ -34,7 +34,7 @@
       </ion-row>
       <ion-row class="ion-justify-content-center">
         <ion-col size-sm="8" size-md="6" size="12" class="ion-text-center ion-padding form-col">
-          <form [formGroup]="UserForm" #FormLogin="ngForm" (ngSubmit)="validarLogin()">
+          <form [formGroup]="UserForm" #FormLogin="ngForm" (ngSubmit)="validarLogin(UserForm.value)">
             <ion-item lines="none">
               <ion-label style="color: #4D4D4D;" position="floating">Usuário</ion-label>
               <ion-input formControlName="username" ngModel name="username" id="username" type="text"

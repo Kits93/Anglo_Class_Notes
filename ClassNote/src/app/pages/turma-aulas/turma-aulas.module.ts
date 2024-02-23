@@ -14,7 +14,6 @@ import { TurmaAulasPage } from './turma-aulas.page';
     FormsModule,
     IonicModule,
     TurmaAulasPageRoutingModule,
-    MatFormFieldModule, MatInputModule, MatDatepickerModule, MatButtonModule
   ],
   declarations: [TurmaAulasPage]
 })
