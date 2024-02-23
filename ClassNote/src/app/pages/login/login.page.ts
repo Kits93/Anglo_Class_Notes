@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { ToastController } from '@ionic/angular';
-// import { LoginService } from 'src/app/services/login/login.service';
+import { LoginService } from 'src/app/services/login/login.service';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +13,7 @@ import { ToastController } from '@ionic/angular';
 })
 export class LoginPage implements OnInit {
 
-  constructor(private router: Router, private http: HttpClient, private toastController: ToastController) { }
+  constructor(private router: Router, private http: HttpClient, private toastController: ToastController, private loginService: LoginService) { }
 
   ngOnInit() {
     this.createFormAdd(); // Chame o método para criar o formulário quando o componente é inicializado
@@ -36,25 +36,37 @@ export class LoginPage implements OnInit {
     });
   }
 
-  validarLogin() {
-    if (this.UserForm.valid) {
-      let usuario = {
-        username: this.UserForm.value.username,
-        password: this.UserForm.value.password
-      };
+  validarLogin(form: any) {
+
+    this.loginService.loginVerify(form).subscribe((data: any) => {
+      console.log(data)
+      if (data.success == '1') {
+        this.loginService.autorizarJwt(data.token);
+        this.router.navigate(['/home']);
+      }
+    })
 
 
 
-      console.log(usuario);
-      this.router.navigate(['../turma']);
+    // if (this.UserForm.valid) {
+    //   let usuario = {
+    //     username: this.UserForm.value.username,
+    //     password: this.UserForm.value.password
+    //   };
 
-      // this.loginService.post(usuario)
-      this.presentToast('ok')
 
-    } else {
-      this.presentToast('error')
-      console.log('Formulário inválido!');
-    }
+
+    //   console.log(usuario);
+    //   this.router.navigate(['../turma']);
+
+    //   // this.loginService.post(usuario)
+    //   this.presentToast('ok')
+
+    // } else {
+    //   this.presentToast('error')
+    //   console.log('Formulário inválido!');
+    // }
+
   }
 
 
