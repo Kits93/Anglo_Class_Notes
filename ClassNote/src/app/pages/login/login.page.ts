@@ -37,15 +37,6 @@ export class LoginPage implements OnInit {
   }
 
   validarLogin(form: any) {
-    // Configurar cabeçalhos CORS
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*' // Permitindo solicitações de qualquer origem
-      })
-    };
-
-    // Fazer solicitação HTTP com cabeçalhos CORS configurados
     this.loginService.loginVerify(form).subscribe((data: any) => {
       console.log(data);
       if (data.success == '1') {
@@ -54,7 +45,7 @@ export class LoginPage implements OnInit {
         this.router.navigate(['../turma']);
       } else {
         this.presentToast('error');
-        // console.log('Formulário inválido!');
+        console.log('Formulário inválido!');
       }
     });
   }

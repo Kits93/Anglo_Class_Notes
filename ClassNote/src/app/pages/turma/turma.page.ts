@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { TurmaService } from 'src/app/services/turma/turma.service';
 
 @Component({
   selector: 'app-turma',
@@ -8,9 +9,22 @@ import { Router } from '@angular/router';
 })
 export class TurmaPage implements OnInit {
 
-  constructor(private router: Router) { }
+  turmas: any[] = []
+
+  constructor(private router: Router, private turmasService: TurmaService) { }
 
   ngOnInit() {
+    this.listar_turmas()
+  }
+
+  listar_turmas() {
+    this.turmasService.read().subscribe((dados: any) => {
+      console.log(dados)
+      this.turmas = dados.turmas
+      if (!dados.success || dados.success != 1) {
+        this.turmas = []
+      }
+    })
   }
 
   items = [

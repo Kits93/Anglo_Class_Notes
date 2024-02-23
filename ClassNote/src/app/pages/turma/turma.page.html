@@ -21,13 +21,14 @@
         <ion-col size="10">
           <ion-grid>
             <ion-row wrap>
-              <ion-col class="turma" size="12" size-md="6" size-lg="4" *ngFor="let item of items">
-                <ion-card (click)="acessarTurma(item.turma)">
+              <ion-col class="turma" size="12" size-md="6" size-lg="4" *ngFor="let turma of turmas">
+                <ion-card (click)="acessarTurma(turma.nome_turma)">
                   <ion-card-header>
-                    <ion-card-title>{{ item.turma }}</ion-card-title>
+                    <ion-card-title>{{ turma.nome_turma }}</ion-card-title>
                   </ion-card-header>
                   <ion-card-content>
-                    {{ item.ensino }}
+                    {{ turma.ensino }}
+                    {{turma.turno}}
                   </ion-card-content>
                   <ion-row class="ion-align-items-center ion-justify-content-end">
                     <ion-col size="auto">
