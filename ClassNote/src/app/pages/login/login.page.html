@@ -6,24 +6,28 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
-<ion-content class="ion-padding" [fullscreen]="true">
+<ion-content mode="ios" class="ion-padding" [fullscreen]="true">
   <div class="center-content">
 
 
-    <svg class="svg" width="316" height="316" viewBox="0 0 316 316" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg id="bubble1" width="316" height="316" viewBox="0 0 316 316" fill="none" xmlns="http://www.w3.org/2000/svg">
       <circle cx="117" cy="117" r="117" fill="#1970C0" opacity="0.5" />
     </svg>
 
-    <svg class="svg2" width="234" height="234" viewBox="0 0 234 234" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg id="bubble2" width="234" height="234" viewBox="0 0 234 234" fill="none" xmlns="http://www.w3.org/2000/svg">
       <circle cx="117" cy="117" r="117" fill="#1970C0" opacity="0.2" />
     </svg>
 
-    <svg class="svg3" width="187" height="187" viewBox="0 0 237 237" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg id="bubble3" width="187" height="187" viewBox="0 0 237 237" fill="none" xmlns="http://www.w3.org/2000/svg">
       <circle cx="117" cy="117" r="117" fill="#1970C0" opacity="0.8" />
     </svg>
 
-    <svg class="svg4" width="234" height="234" viewBox="0 0 234 234" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg id="bubble4" width="234" height="234" viewBox="0 0 234 234" fill="none" xmlns="http://www.w3.org/2000/svg">
       <circle cx="117" cy="117" r="117" fill="#1970C0" opacity="0.3" />
+    </svg>
+
+    <svg id="bubble5" width="234" height="234" viewBox="0 0 234 234" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="117" cy="117" r="117" fill="#1970C0" opacity="0.6" />
     </svg>
 
     <ion-grid class="ion-justify-content-center ion-padding">
@@ -36,16 +40,16 @@
         <ion-col size-sm="8" size-md="6" size="12" class="ion-text-center ion-padding form-col">
           <form [formGroup]="UserForm" #FormLogin="ngForm" (ngSubmit)="validarLogin(UserForm.value)">
             <ion-item lines="none">
-              <ion-label style="color: #4D4D4D;" position="floating">Usuário</ion-label>
+              <ion-label style="color: #4D4D4D; opacity: 1;" position="floating">Usuário</ion-label>
               <ion-input formControlName="username" ngModel name="username" id="username" type="text"
                 required></ion-input>
             </ion-item>
             <ion-item lines="none">
-              <ion-label style="color: #4D4D4D;" position="floating">Senha</ion-label>
+              <ion-label style="color: #4D4D4D; opacity: 1;" position="floating">Senha</ion-label>
               <ion-input formControlName="password" ngModel name="password" id="password" type="password"
                 required></ion-input>
             </ion-item>
-            <ion-button style="font-family: Josefin Sans; font-weight: bold;" expand="block" type="submit"
+            <ion-button style="font-family: Josefin Sans; font-weight: bold; opacity: 1;" expand="block" type="submit"
               fill="outline" class="ion-margin-top">Entrar</ion-button>
           </form>
           <ion-row>

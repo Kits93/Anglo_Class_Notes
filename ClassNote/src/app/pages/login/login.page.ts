@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { ToastController } from '@ionic/angular';
@@ -37,43 +37,33 @@ export class LoginPage implements OnInit {
   }
 
   validarLogin(form: any) {
+    // Configurar cabeçalhos CORS
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*' // Permitindo solicitações de qualquer origem
+      })
+    };
 
+    // Fazer solicitação HTTP com cabeçalhos CORS configurados
     this.loginService.loginVerify(form).subscribe((data: any) => {
-      console.log(data)
+      console.log(data);
       if (data.success == '1') {
         this.loginService.autorizarJwt(data.token);
-        this.router.navigate(['/home']);
+        this.presentToast('ok');
+        this.router.navigate(['../turma']);
+      } else {
+        this.presentToast('error');
+        // console.log('Formulário inválido!');
       }
-    })
-
-
-
-    // if (this.UserForm.valid) {
-    //   let usuario = {
-    //     username: this.UserForm.value.username,
-    //     password: this.UserForm.value.password
-    //   };
-
-
-
-    //   console.log(usuario);
-    //   this.router.navigate(['../turma']);
-
-    //   // this.loginService.post(usuario)
-    //   this.presentToast('ok')
-
-    // } else {
-    //   this.presentToast('error')
-    //   console.log('Formulário inválido!');
-    // }
-
+    });
   }
 
   // toast
 
   async presentToast(state: 'ok' | 'error') {
 
-    let toast: any
+    let toast: any;
 
     if (state == 'ok') {
       toast = await this.toastController.create({
@@ -93,7 +83,7 @@ export class LoginPage implements OnInit {
 
     await toast.present();
 
-    console.log(state)
+    console.log(state);
 
   }
 }

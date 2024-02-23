@@ -15,21 +15,23 @@
 
 .form-col {
   background-color: white;
-  padding: 20px; /* Ajuste conforme necessário */
-  border-radius: 10px; /* Se desejar bordas arredondadas */
+  padding: 20px;
+  border-radius: 10px;
+  outline: 1px solid #196fc059;
+  opacity: 0.8;
 }
 
 // svg
 
-.svg {
+#bubble1 {
   transform-origin: bottom;
   position: fixed;
-  animation: scale 6s infinite alternate;
+  animation: moving 8s infinite alternate;
 }
 
-@keyframes scale {
+@keyframes moving {
   0% {
-    transform: translate(100px, -110);
+    transform: translate(65px, 40px);
   }
 
   100% {
@@ -37,15 +39,15 @@
   }
 }
 
-.svg2 {
+#bubble2 {
   transform-origin: bottom;
   position: fixed;
-  animation: scale2 6s infinite alternate;
+  animation: moving2 8s infinite alternate;
 }
 
-@keyframes scale2 {
+@keyframes moving2 {
   0% {
-    transform: translate(200px, -180);
+    transform: translate(150px, -130);
   }
 
   100% {
@@ -53,34 +55,54 @@
   }
 }
 
-.svg3 {
+#bubble3 {
   transform-origin: bottom;
   position: fixed;
-  animation: scale3 6s infinite alternate;
+  animation: moving3 8s infinite alternate;
 }
 
-@keyframes scale3 {
+@keyframes moving3 {
   0% {
-    transform: translate(140px, -120px);
+    transform: translate(40px, -60px);
   }
 
   100% {
-    transform: translate(140px, -180px);
+    transform: translate(130px, -260px);
   }
 }
 
-.svg4 {
+#bubble4 {
   transform-origin: bottom;
   position: fixed;
-  animation: scale4 6s infinite alternate;
+  animation: moving4 8s infinite alternate;
 }
 
-@keyframes scale4 {
+@keyframes moving4 {
+  0% {
+    transform: translate(-110px, -50px);
+  }
+
   0% {
     transform: translate(30px, -120px);
   }
 
   100% {
     transform: translate(170px, -190px);
+  }
+}
+
+#bubble5 {
+  transform-origin: bottom;
+  position: fixed;
+  animation: moving5 8s infinite alternate;
+}
+
+@keyframes moving5 {
+  0% {
+    transform: translate(-10px, -150px);
+  }
+
+  100% {
+    transform: translate(190px, 20px);
   }
 }
