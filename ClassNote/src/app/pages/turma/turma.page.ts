@@ -15,12 +15,25 @@ export class TurmaPage implements OnInit {
 
   ngOnInit() {
     this.listar_turmas()
+
   }
+
+  results: any[] = []
+
+
+  handleInput(event: any) {
+    const query = event.target.value.toLowerCase();
+    console.log(this.results)
+    console.log(query)
+    this.results = this.turmas.filter((turma: any) => turma.nome_turma.toLowerCase().includes(query));
+  }
+
 
   listar_turmas() {
     this.turmasService.read().subscribe((dados: any) => {
       console.log(dados)
       this.turmas = dados.turmas
+      this.results = this.turmas
       if (!dados.success || dados.success != 1) {
         this.turmas = []
       }

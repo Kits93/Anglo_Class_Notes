@@ -1,21 +1,23 @@
 .block {
-    width: 100%;
-    height: 300px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+  width: 100%;
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-  .turma{
-    cursor: pointer;
-  }
-  
-  ion-modal {
-    --height: auto;
-  }
+.turma {
+  cursor: pointer;
+}
 
-  ion-card:hover {
-    /* Estilos que deseja aplicar quando o ion-card é hoverado */
-    transition: 0.3s;
-    box-shadow: 3px 3px 0 3px rgba(0, 110, 255, 0.5);
-  }
+ion-modal {
+  --height: auto;
+}
+
+ion-card:hover {
+  transition: 0.3s;
+  box-shadow: 3px 3px 0 3px rgba(0, 110, 255, 0.5);
+  transform: scale(0.95);
+  animation: alternate 2s;
+
+}

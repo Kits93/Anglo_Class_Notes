@@ -1,7 +1,9 @@
 <ion-content [fullscreen]="true">
   <ion-header class="ion-text-center">
     <ion-toolbar>
-      <ion-title size="large">Turmas</ion-title>
+      <ion-title size="large">
+        <h1>Selecione uma turma</h1>
+      </ion-title>
     </ion-toolbar>
   </ion-header>
 
@@ -9,9 +11,23 @@
   <div class="main-content">
 
     <ion-row class="ion-justify-content-center ion-text-center">
-      <ion-col class="ion-margin" size="8">
+      <ion-col class="ion-margin" size="11">
 
-        <h2>Selecione uma turma</h2>
+        <ion-searchbar [debounce]="100" (ionInput)="handleInput($event)">
+          <ion-button id="popover-button">
+            <ion-icon name="filter-circle"></ion-icon>
+          </ion-button>
+          <ion-popover trigger="popover-button" [dismissOnSelect]="true">
+            <ng-template>
+              <ion-content>
+                <ion-list>
+                  <ion-item [button]="true" [detail]="false">Fundamental I</ion-item>
+                  <ion-item [button]="true" [detail]="false">Fundamental II</ion-item>
+                  <ion-item [button]="true" [detail]="false">Ensino Médio</ion-item>
+                </ion-list>
+              </ion-content>
+            </ng-template>
+          </ion-popover></ion-searchbar>
 
       </ion-col>
     </ion-row>
@@ -21,18 +37,19 @@
         <ion-col size="10">
           <ion-grid>
             <ion-row wrap>
-              <ion-col class="turma" size="12" size-md="6" size-lg="4" *ngFor="let turma of turmas">
+              <ion-col class="turma" size="12" size-md="6" size-lg="4" *ngFor="let turma of results">
                 <ion-card (click)="acessarTurma(turma.nome_turma)">
                   <ion-card-header>
                     <ion-card-title>{{ turma.nome_turma }}</ion-card-title>
                   </ion-card-header>
                   <ion-card-content>
                     {{ turma.ensino }}
+                    -
                     {{turma.turno}}
                   </ion-card-content>
                   <ion-row class="ion-align-items-center ion-justify-content-end">
                     <ion-col size="auto">
-                      <ion-icon class="ion-margin" name="caret-down-outline"></ion-icon>
+                      <ion-icon class="ion-margin icon" name="caret-down-outline"></ion-icon>
                     </ion-col>
                   </ion-row>
                 </ion-card>

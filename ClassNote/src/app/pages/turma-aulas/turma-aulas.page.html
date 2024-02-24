@@ -1,8 +1,19 @@
 <ion-content [fullscreen]="true">
-  <ion-header class="ion-text-center">
+  <!-- <ion-header class="ion-text-center">
     <ion-toolbar>
 
       <ion-title size="large">Aulas da turma {{turma}}</ion-title>
+    </ion-toolbar>
+  </ion-header>  -->
+
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-button (click)="back()">
+          <ion-icon style="position: relative;" slot="icon-only" name="arrow-back"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+      <ion-title class="ion-text-center">Aulas da turma {{turma}}</ion-title>
     </ion-toolbar>
   </ion-header>
 
