@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { AccessPermissionGuard } from './guard/access-permission.guard';
 
 const routes: Routes = [
   {
@@ -9,19 +10,19 @@ const routes: Routes = [
   },
   {
     path: 'login',
-    loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
+    loadChildren: () => import('./pages/login/login.module').then(m => m.LoginPageModule)
   },
   {
     path: 'turma-aulas',
-    loadChildren: () => import('./pages/turma-aulas/turma-aulas.module').then( m => m.TurmaAulasPageModule)
+    loadChildren: () => import('./pages/turma-aulas/turma-aulas.module').then(m => m.TurmaAulasPageModule), canActivate: [AccessPermissionGuard]
   },
   {
     path: 'turma',
-    loadChildren: () => import('./pages/turma/turma.module').then( m => m.TurmaPageModule)
+    loadChildren: () => import('./pages/turma/turma.module').then(m => m.TurmaPageModule), canActivate: [AccessPermissionGuard]
   },
   {
     path: 'cadastro-aula',
-    loadChildren: () => import('./pages/cadastro-aula/cadastro-aula.module').then( m => m.CadastroAulaPageModule)
+    loadChildren: () => import('./pages/cadastro-aula/cadastro-aula.module').then(m => m.CadastroAulaPageModule), canActivate: [AccessPermissionGuard]
   },
 ];
 
