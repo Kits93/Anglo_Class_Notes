@@ -13,21 +13,25 @@
     <ion-row class="ion-justify-content-center ion-text-center">
       <ion-col class="ion-margin" size="11">
 
-        <ion-searchbar [debounce]="100" (ionInput)="handleInput($event)">
-          <ion-button id="popover-button">
-            <ion-icon name="filter-circle"></ion-icon>
-          </ion-button>
-          <ion-popover trigger="popover-button" [dismissOnSelect]="true">
-            <ng-template>
-              <ion-content>
-                <ion-list>
-                  <ion-item [button]="true" [detail]="false">Fundamental I</ion-item>
-                  <ion-item [button]="true" [detail]="false">Fundamental II</ion-item>
-                  <ion-item [button]="true" [detail]="false">Ensino Médio</ion-item>
-                </ion-list>
-              </ion-content>
-            </ng-template>
-          </ion-popover></ion-searchbar>
+        <ng-container>
+
+          <ion-row>
+            <ion-col size="3">
+              <ion-select class="select" interface="popover" placeholder="Ensino" [(ngModel)]="ensinoSelected">
+                <ion-select-option value="">Todos</ion-select-option>
+                <ion-select-option value="Ensino Fundamental I">Ensino Fundamental I</ion-select-option>
+                <ion-select-option value="Ensino Fundamental II">Ensino Fundamental II</ion-select-option>
+                <ion-select-option value="Ensino Médio">Ensino Médio</ion-select-option>
+              </ion-select>
+            </ion-col>
+            <ion-col>
+              <ion-button (click)="filtrarTurmas()">
+                <ion-icon name="filter"></ion-icon>
+              </ion-button>
+            </ion-col>
+          </ion-row>
+
+        </ng-container>
 
       </ion-col>
     </ion-row>
@@ -37,7 +41,7 @@
         <ion-col size="10">
           <ion-grid>
             <ion-row wrap>
-              <ion-col class="turma" size="12" size-md="6" size-lg="4" *ngFor="let turma of results">
+              <ion-col class="turma" size="12" size-md="6" size-lg="4" *ngFor="let turma of turmasFilter">
                 <ion-card (click)="acessarTurma(turma.nome_turma)">
                   <ion-card-header>
                     <ion-card-title>{{ turma.nome_turma }}</ion-card-title>
