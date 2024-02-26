@@ -11,7 +11,7 @@ export class TurmaPage implements OnInit {
 
   turmas: any[] = []
 
-  constructor(private router: Router, private route:ActivatedRoute, private turmasService: TurmaService) { }
+  constructor(private router: Router, private route: ActivatedRoute, private turmasService: TurmaService) { }
 
   username: any
 
@@ -47,6 +47,37 @@ export class TurmaPage implements OnInit {
         this.turmas = []
       }
     })
+  }
+
+  getGradientStyle(ensino: any) {
+    if (ensino === 'Ensino Médio') {
+      return {
+        fill: 'url(#paint0_linear_red)'
+      };
+    } else if (ensino === 'Ensino Fundamental II') {
+      return {
+        fill: 'url(#paint0_linear_blue)'
+      };
+    } else if (ensino === 'Ensino Fundamental I') {
+      return {
+        fill: 'url(#paint0_linear_yellow)'
+      };
+    }
+    return {
+      fill: '#000000'
+    };
+  }
+
+  defineColor(ensino: any) {
+    if (ensino == 'Ensino Médio') {
+      return 'card-ensino-M'
+    } else if (ensino == 'Ensino Fundamental I') {
+      return 'card-ensino-FI'
+    } else if (ensino == 'Ensino Fundamental II') {
+      return 'card-ensino-FII'
+    } else {
+      return
+    }
   }
 
   acessarTurma(turma: any) {

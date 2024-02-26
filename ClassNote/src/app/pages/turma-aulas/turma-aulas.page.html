@@ -1,57 +1,23 @@
-<ion-content [fullscreen]="true">
-  <!-- <ion-header class="ion-text-center">
-    <ion-toolbar>
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="goBack()">
+        <ion-icon style="position: relative;" slot="icon-only" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center">{{turma}}</ion-title>
+  </ion-toolbar>
+</ion-header>
 
-      <ion-title size="large">Aulas da turma {{turma}}</ion-title>
-    </ion-toolbar>
-  </ion-header>  -->
-
-  <ion-header>
-    <ion-toolbar>
-      <ion-buttons slot="start">
-        <ion-button (click)="goBack()">
-          <ion-icon style="position: relative;" slot="icon-only" name="arrow-back"></ion-icon>
-        </ion-button>
-      </ion-buttons>
-      <ion-title class="ion-text-center">Aulas da turma {{turma}}</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <ion-row class=" ion-padding-bottom ion-text-center ion-justify-content-center ion-align-items-center table">
-    <ion-col size="11">
-
-
-
-      <ion-grid style="border: 1px solid #fff; border-radius: 8px;">
-        <ion-row class="infos">
-          <ion-col>Aula</ion-col>
-          <ion-col>Disciplina</ion-col>
-          <ion-col>Professor</ion-col>
-          <ion-col>Conteúdo</ion-col>
-        </ion-row>
-        <ion-row class="aula-turma" *ngFor="let aula of aulas">
-          <ion-col style="font-weight: bold;">{{ aula.aula }}</ion-col>
-          <ion-col>{{ aula.disciplina }}</ion-col>
-          <ion-col>{{ aula.professor }}</ion-col>
-          <ion-col>{{ aula.conteudo }}</ion-col>
-        </ion-row>
-      </ion-grid>
-
-
-      <ion-row>
-        <ion-col>
-          <ion-button expand="block" (click)="setOpen(true)">Open</ion-button>
-        </ion-col>
-      </ion-row>
-
-
-    </ion-col>
-  </ion-row>
-
-  <ion-row>
-    <ion-col>
-
-    </ion-col>
-  </ion-row>
-
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let aula of aulas">
+      <ion-label>
+        <h2>Aula {{aula.num_aula}}</h2>
+        <p>Disciplina: {{aula.fk_id_disciplina}}</p>
+        <p>Professor: {{aula.fk_id_usuario}}</p>
+        <p>Conteúdo: Conteudo</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
 </ion-content>

@@ -1,4 +1,4 @@
-<ion-menu side="start" contentId="main-content" content="main-content">
+<ion-menu side="start" contentId="main-content">
   <ion-header>
     <ion-toolbar>
       <ion-title>Class Notes</ion-title>
@@ -12,7 +12,6 @@
         <ion-col style="margin: auto;" size="9">Bem vindo, {{username}}</ion-col>
       </ion-row>
     </ion-toolbar>
-
   </ion-header>
 
   <ion-content style="height: 100%;" class="ion-no-padding ion-no-margin">
@@ -20,7 +19,7 @@
       <ion-list-header mode="ios">
         <ion-label>Conta</ion-label>
       </ion-list-header>
-      <ion-item (click)="logout()" style="bottom: 0;">
+      <ion-item (click)="logout()" class="logout">
         <ion-label>Sair</ion-label>
         <ion-icon name="log-out"></ion-icon>
       </ion-item>
@@ -46,22 +45,18 @@
 
 <ion-content id="main-content" [fullscreen]="true" mode="md">
   <div class="main-content">
-    <ion-row class="ion-justify-content-center ion-text-center">
+    <ion-row class="ion-justify-content-start ion-text-center">
       <ion-col class="ion-margin" size="11">
         <ng-container>
           <ion-row>
             <ion-col size="9">
-              <ion-select class="select" interface="popover" placeholder="Ensino" [(ngModel)]="ensinoSelected">
+              <ion-select class="select" interface="popover" placeholder="Ensino" [(ngModel)]="ensinoSelected"
+                (ionChange)="filtrarTurmas()">
                 <ion-select-option value="">Todos</ion-select-option>
                 <ion-select-option value="Ensino Fundamental I">Ensino Fundamental I</ion-select-option>
                 <ion-select-option value="Ensino Fundamental II">Ensino Fundamental II</ion-select-option>
                 <ion-select-option value="Ensino Médio">Ensino Médio</ion-select-option>
               </ion-select>
-            </ion-col>
-            <ion-col size="3">
-              <ion-button (click)="filtrarTurmas()">
-                <ion-icon name="filter"></ion-icon>
-              </ion-button>
             </ion-col>
           </ion-row>
         </ng-container>
@@ -73,14 +68,39 @@
           <ion-grid>
             <ion-row wrap>
               <ion-col class="turma" size="12" size-md="6" size-lg="4" *ngFor="let turma of turmasFilter">
-                <ion-card (click)="acessarTurma(turma.nome_turma)">
+                <ion-card (click)="acessarTurma(turma.nome_turma)" [ngClass]="defineColor(turma.ensino)">
                   <ion-card-header>
                     <ion-card-title>{{ turma.nome_turma }}</ion-card-title>
+
+                    <svg style="position: absolute; right: 1.5em; top: 0;" width="38" height="100" viewBox="0 0 218 529"
+                      fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M0 0H218V529L109 439L0 529V0Z" [ngStyle]="getGradientStyle(turma.ensino)" />
+                      <defs>
+                        <linearGradient id="paint0_linear_red" x1="218" y1="0" x2="1.09733e-05" y2="529"
+                          gradientUnits="userSpaceOnUse">
+                          <stop stop-color="#741515" />
+                          <stop offset="1" stop-color="#C22929" />
+                        </linearGradient>
+                      </defs>
+                      <defs>
+                        <linearGradient id="paint0_linear_blue" x1="218" y1="0" x2="1.09733e-05" y2="529"
+                          gradientUnits="userSpaceOnUse">
+                          <stop stop-color="#1C2BB6" />
+                          <stop offset="1" stop-color="#2871DF" />
+                        </linearGradient>
+                      </defs>
+                      <defs>
+                        <linearGradient id="paint0_linear_yellow" x1="218" y1="0" x2="1.09733e-05" y2="529"
+                          gradientUnits="userSpaceOnUse">
+                          <stop stop-color="#EDAD07" />
+                          <stop offset="1" stop-color="#FFF61A" />
+                        </linearGradient>
+                      </defs>
+                    </svg>
+
                   </ion-card-header>
                   <ion-card-content>
-                    {{ turma.ensino }}
-                    -
-                    {{turma.turno}}
+                    {{ turma.ensino }} - {{turma.turno}}
                   </ion-card-content>
                   <ion-row class="ion-align-items-center ion-justify-content-end">
                     <ion-col size="auto">

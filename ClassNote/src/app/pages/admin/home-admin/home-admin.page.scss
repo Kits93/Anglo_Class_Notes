@@ -5,18 +5,41 @@ ion-item {
 
 }
 
-ion-list-header{
+ion-list-header {
   font-size: 18px;
 }
 
-ion-item:hover{
+ion-item:hover {
   transition: 0.5s;
-  outline: 1px solid #196fc085;
-  color: #1970C0;
+  outline: 1px solid var(--ion-color-primary);
+  color: #269bdf;
   font-weight: 50px;
   cursor: pointer;
-  ion-icon{
+
+  ion-icon,
+  ion-label {
     transition: 0.3s;
-    color: #1970C0; 
+    color: var(--ion-color-primary);
+  }
+}
+
+.logout {
+  color: #b10707ce;
+
+  ion-icon,
+  ion-label {
+    transition: 0.3s;
+    color: #b10707ce;
+  }
+}
+
+.logout:hover {
+  outline: 1px solid #b10707ce;
+  color: #b10707ce;
+
+  ion-icon,
+  ion-label {
+    transition: 0.3s;
+    color: #b10707ce;
   }
 }
