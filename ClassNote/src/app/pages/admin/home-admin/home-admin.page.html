@@ -1,0 +1,70 @@
+<ion-menu side="start" contentId="main-content">
+  <ion-header>
+    <ion-toolbar style="border-bottom: 1px solid #fff;">
+      <ion-title>Class Notes</ion-title>
+    </ion-toolbar>
+
+    <ion-toolbar>
+      <ion-row>
+        <ion-col size="3">
+          <img src=".././../../../assets/img/logo-anglo-tatui.png" alt="logo-anglo-tatui">
+        </ion-col>
+        <ion-col style="margin: auto;" size="9">Bem vindo, {{username}}</ion-col>
+      </ion-row>
+    </ion-toolbar>
+
+  </ion-header>
+
+  <ion-content style="height: 100%;" class="ion-no-padding ion-no-margin">
+    <ion-list lines="none">
+      <ion-list-header mode="ios">
+        <ion-label>Gerenciamento</ion-label>
+      </ion-list-header>
+      <ion-item routerLink="/home-admin" class="ion-color-primary">
+        <ion-label>Início</ion-label>
+        <ion-icon name="home"></ion-icon>
+      </ion-item>
+      <ion-item routerLink="/gerenciar-turmas">
+        <ion-label>Turmas</ion-label>
+        <ion-icon name="people"></ion-icon>
+      </ion-item>
+      <ion-item routerLink="/gerenciar-disciplinas">
+        <ion-label>Disciplinas</ion-label>
+        <ion-icon name="book"></ion-icon>
+      </ion-item>
+      <ion-item routerLink="/gerenciar-usuarios">
+        <ion-label>Usuários</ion-label>
+        <ion-icon name="people-circle"></ion-icon>
+      </ion-item>
+      
+      <ion-list-header mode="ios">
+        <ion-label>Conta</ion-label>
+      </ion-list-header>
+      <ion-item (click)="logout()" style="bottom: 0;">
+        <ion-label>Sair</ion-label>
+        <ion-icon name="log-out"></ion-icon>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+
+</ion-menu>
+
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <!-- Botão do menu de hambúrguer -->
+      <ion-menu-toggle auto-hide="false">
+        <ion-button>
+          <ion-icon slot="icon-only" name="menu"></ion-icon>
+        </ion-button>
+      </ion-menu-toggle>
+    </ion-buttons>
+    <ion-title>
+      Administração
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content id="main-content">
+  <!-- Seu conteúdo principal aqui -->
+</ion-content>

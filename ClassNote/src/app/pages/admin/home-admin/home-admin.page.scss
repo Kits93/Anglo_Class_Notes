@@ -1,0 +1,22 @@
+ion-item {
+  margin: 10px;
+  border-radius: 8px;
+  outline: 0px solid #196fc085;
+
+}
+
+ion-list-header{
+  font-size: 18px;
+}
+
+ion-item:hover{
+  transition: 0.5s;
+  outline: 1px solid #196fc085;
+  color: #1970C0;
+  font-weight: 50px;
+  cursor: pointer;
+  ion-icon{
+    transition: 0.3s;
+    color: #1970C0; 
+  }
+}

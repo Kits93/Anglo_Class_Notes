@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { TurmaService } from 'src/app/services/turma/turma.service';
 
 @Component({
@@ -11,9 +11,17 @@ export class TurmaPage implements OnInit {
 
   turmas: any[] = []
 
-  constructor(private router: Router, private turmasService: TurmaService) { }
+  constructor(private router: Router, private route:ActivatedRoute, private turmasService: TurmaService) { }
+
+  username: any
 
   ngOnInit() {
+
+    this.route.params.subscribe(params => {
+      this.username = params['username'].toUpperCase();
+      console.log(this.username)
+    });
+
     this.filtrarTurmas()
     this.listar_turmas()
   }
@@ -22,7 +30,7 @@ export class TurmaPage implements OnInit {
 
   ensinoSelected: any = ''
 
-  filtrarTurmas(){
+  filtrarTurmas() {
     if (this.ensinoSelected === '') {
       this.turmasFilter = this.turmas
     } else {
@@ -44,5 +52,10 @@ export class TurmaPage implements OnInit {
   acessarTurma(turma: any) {
     console.log(turma);
     this.router.navigate(['../turma-aulas'], { state: { turma: turma } });
+  }
+
+  logout() {
+    localStorage.clear()
+    this.router.navigate(['/login'])
   }
 }

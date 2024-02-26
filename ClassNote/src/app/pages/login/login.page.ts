@@ -1,3 +1,4 @@
+import { HomeAdminPage } from './../admin/home-admin/home-admin.page';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -6,6 +7,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ToastController } from '@ionic/angular';
 import { LoginService } from 'src/app/services/login/login.service';
 
+import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -13,9 +16,10 @@ import { LoginService } from 'src/app/services/login/login.service';
 })
 export class LoginPage implements OnInit {
 
-  constructor(private router: Router, private http: HttpClient, private toastController: ToastController, private loginService: LoginService) { }
+  constructor(private authService: AuthenticationService, private router: Router, private http: HttpClient, private toastController: ToastController, private loginService: LoginService) { }
 
   ngOnInit() {
+    localStorage.clear()
     this.createFormAdd(); // Chame o método para criar o formulário quando o componente é inicializado
   }
 
@@ -42,7 +46,14 @@ export class LoginPage implements OnInit {
       if (data.success == '1') {
         this.loginService.autorizarJwt(data.token);
         this.presentToast('ok');
-        this.router.navigate(['../turma']);
+        if (this.authService.isAdmin(data.token)) {
+          this.router.navigate(['../home-admin', this.UserForm.value.username]);
+        } else if (this.authService.isTeacher(data.token)) {
+          this.router.navigate(['../turma', this.UserForm.value.username]);
+        } else {
+          this.presentToast('error');
+          console.log('Formulário inválido!');
+        }
       } else {
         this.presentToast('error');
         console.log('Formulário inválido!');

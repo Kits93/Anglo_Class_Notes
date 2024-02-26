@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Location } from '@angular/common';
 
 import { Platform } from '@ionic/angular';
 
@@ -15,7 +16,7 @@ export class TurmaAulasPage implements OnInit {
 
   turma: any
 
-  constructor(private platform: Platform, private route: ActivatedRoute, private router: Router) {
+  constructor(private platform: Platform, private route: ActivatedRoute, private router: Router, private location: Location) {
     this.isMobile = this.platform.is('mobile');
   }
 
@@ -27,8 +28,8 @@ export class TurmaAulasPage implements OnInit {
     }
   }
 
-  back() {
-    this.router.navigate(['../turma'])
+  goBack() {
+    this.location.back()
   }
 
   // dados

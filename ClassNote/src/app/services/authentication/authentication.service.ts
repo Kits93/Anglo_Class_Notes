@@ -12,6 +12,8 @@ export class AuthenticationService {
     this.isAuthenticated = !!this.authToken;
   }
 
+  // verificações e funções de login
+
   login(token: string) {
     this.isAuthenticated = true;
     this.authToken = token;
@@ -30,5 +32,27 @@ export class AuthenticationService {
 
   getAuthToken(): string | null {
     return this.authToken;
+  }
+
+  // verificações e funções de tipagem de usuário
+
+  getTokenPayload(token: string): any {
+    const tokenPayload = token.split('.')[1];
+    const decodedTokenPayload = JSON.parse(atob(tokenPayload));
+    return decodedTokenPayload;
+  }
+
+  getUserRole(token: string): string | null {
+    const decodedTokenPayload = this.getTokenPayload(token);
+    return decodedTokenPayload ? decodedTokenPayload.role : null;
+  }
+
+  isAdmin(token: string): boolean {
+    const userRole = this.getUserRole(token);
+    return userRole === 'admin';
+  }
+  isTeacher(token: string): boolean {
+    const userRole = this.getUserRole(token);
+    return userRole === 'teacher';
   }
 }

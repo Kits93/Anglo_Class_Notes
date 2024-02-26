@@ -25,4 +25,8 @@ export class LoginService {
     return this.httpClient.post(this.API + 'login/login.php', login);
   }
 
+  logout(){
+    localStorage.clear()
+  }
+
 }
