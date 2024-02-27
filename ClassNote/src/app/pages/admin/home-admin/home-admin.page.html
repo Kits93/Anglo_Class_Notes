@@ -40,6 +40,10 @@
       <ion-list-header mode="ios">
         <ion-label>Conta</ion-label>
       </ion-list-header>
+      <ion-item routerLink="/minha-conta">
+        <ion-label>Minha Conta</ion-label>
+        <ion-icon name="person-circle-outline"></ion-icon>
+      </ion-item>
       <ion-item (click)="logout()" class="logout">
         <ion-label>Sair</ion-label>
         <ion-icon name="log-out"></ion-icon>
@@ -49,7 +53,7 @@
 
 </ion-menu>
 
-<ion-header>
+<ion-header *ngIf="exibirMenu">
   <ion-toolbar>
     <ion-buttons slot="start">
       <!-- Botão do menu de hambúrguer -->
@@ -65,6 +69,70 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content id="main-content">
-  <!-- Seu conteúdo principal aqui -->
+<ion-content id="main-content" >
+  <ion-row>
+
+
+
+    <ion-col class="column column-fixed" style="margin: -5px; border-right: 4px solid var(--ion-color-primary);" *ngIf="!exibirMenu" size="4">
+      <!-- a -->
+
+
+      <ion-header style="top: -5px;">
+        <ion-toolbar color="primary" style="border-bottom: 1px solid #fff; position: absolute;">
+          <ion-title>Class Notes</ion-title>
+        </ion-toolbar>
+
+        <ion-toolbar color="primary">
+          <ion-row>
+            <ion-col size="3">
+              <img src=".././../../../assets/img/logo-anglo-tatui.png" alt="logo-anglo-tatui">
+            </ion-col>
+            <ion-col style="margin: auto;" size="9">Bem vindo, {{username}}</ion-col>
+          </ion-row>
+        </ion-toolbar>
+      </ion-header>
+
+      <ion-list lines="none">
+        <ion-list-header mode="ios">
+          <ion-label>Gerenciamento</ion-label>
+        </ion-list-header>
+        <ion-item routerLink="/home-admin" class="ion-color-primary">
+          <ion-label>Início</ion-label>
+          <ion-icon name="home"></ion-icon>
+        </ion-item>
+        <ion-item routerLink="/gerenciar-turmas">
+          <ion-label>Turmas</ion-label>
+          <ion-icon name="people"></ion-icon>
+        </ion-item>
+        <ion-item routerLink="/gerenciar-disciplinas">
+          <ion-label>Disciplinas</ion-label>
+          <ion-icon name="book"></ion-icon>
+        </ion-item>
+        <ion-item routerLink="/gerenciar-usuarios">
+          <ion-label>Usuários</ion-label>
+          <ion-icon name="people-circle"></ion-icon>
+        </ion-item>
+
+        <ion-list-header mode="ios">
+          <ion-label>Conta</ion-label>
+        </ion-list-header>
+        <ion-item routerLink="/minha-conta">
+          <ion-label>Minha Conta</ion-label>
+          <ion-icon name="person-circle-outline"></ion-icon>
+        </ion-item>
+        <ion-item (click)="logout()" class="logout">
+          <ion-label>Sair</ion-label>
+          <ion-icon name="log-out"></ion-icon>
+        </ion-item>
+      </ion-list>
+
+
+    </ion-col>
+    <ion-col class="column column-scrollable">
+      baaaa
+    </ion-col>
+
+
+  </ion-row>
 </ion-content>

@@ -17,7 +17,6 @@ export class AccessPermissionGuard implements CanActivate {
     if (this.authService.checkAuth()) {
       return true;
     } else {
-      // Se o usuário não estiver autenticado, redirecione-o para a página de login
       this.router.navigate(['/login']);
       return false;
     }

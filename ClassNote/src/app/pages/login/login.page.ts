@@ -20,7 +20,7 @@ export class LoginPage implements OnInit {
 
   ngOnInit() {
     localStorage.clear()
-    this.createFormAdd(); // Chame o método para criar o formulário quando o componente é inicializado
+    this.createFormAdd();
   }
 
   UserForm!: FormGroup;
@@ -46,10 +46,15 @@ export class LoginPage implements OnInit {
       if (data.success == '1') {
         this.loginService.autorizarJwt(data.token);
         this.presentToast('ok');
+
+        this.authService.login(data.token)
+
         if (this.authService.isAdmin(data.token)) {
-          this.router.navigate(['../home-admin', this.UserForm.value.username]);
+          console.log(this.UserForm.value.username)
+          this.router.navigate(['/home-admin', this.UserForm.value.username]);
         } else if (this.authService.isTeacher(data.token)) {
-          this.router.navigate(['../turma', this.UserForm.value.username]);
+          console.log(this.UserForm.value.username)
+          this.router.navigate(['/turma', this.UserForm.value.username]);
         } else {
           this.presentToast('error');
           console.log('Formulário inválido!');

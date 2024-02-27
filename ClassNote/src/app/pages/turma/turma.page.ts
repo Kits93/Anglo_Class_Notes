@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { TurmaService } from 'src/app/services/turma/turma.service';
+import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
 
 @Component({
   selector: 'app-turma',
@@ -11,7 +12,7 @@ export class TurmaPage implements OnInit {
 
   turmas: any[] = []
 
-  constructor(private router: Router, private route: ActivatedRoute, private turmasService: TurmaService) { }
+  constructor(private authService: AuthenticationService, private router: Router, private route: ActivatedRoute, private turmasService: TurmaService) { }
 
   username: any
 
@@ -86,7 +87,7 @@ export class TurmaPage implements OnInit {
   }
 
   logout() {
-    localStorage.clear()
+    this.authService.logout
     this.router.navigate(['/login'])
   }
 }

@@ -46,6 +46,10 @@ const routes: Routes = [
     path: 'forgot-password',
     loadChildren: () => import('./pages/forgot-password/forgot-password.module').then( m => m.ForgotPasswordPageModule)
   },
+  {
+    path: 'minha-conta',
+    loadChildren: () => import('./pages/admin/minha-conta/minha-conta.module').then( m => m.MinhaContaPageModule)
+  },
 
 
 ];

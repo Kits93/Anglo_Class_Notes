@@ -43,3 +43,40 @@ ion-item:hover {
     color: #b10707ce;
   }
 }
+
+
+
+#main-container{
+  display: flex;
+}
+
+.column {
+  flex: 1;
+  height: 100vh; /* Altura total da tela */
+  overflow-y: auto; /* Adiciona scroll se o conteúdo for maior do que a altura da tela */
+}
+
+.column-fixed {
+  position: sticky; /* Define a posição fixa */
+  top: 0; /* Mantém a coluna fixa no topo da tela */
+  background-color: #f0f0f0; /* Cor de fundo opcional */
+  width: 200px; /* Largura da coluna fixa */
+}
+
+.column-scrollable {
+  background-color: #ffffff; /* Cor de fundo opcional */
+  padding-left: 220px; /* Ajuste o padding conforme a largura da coluna fixa */
+}
+
+.column::-webkit-scrollbar {
+  width: 0; /* Oculta a barra de rolagem no Chrome/Safari */
+}
+
+.column-scrollable::-webkit-scrollbar {
+  width: 0; /* Oculta a barra de rolagem no Chrome/Safari */
+}
+
+
+.toolbar{
+  
+}
