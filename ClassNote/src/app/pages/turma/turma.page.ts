@@ -81,9 +81,10 @@ export class TurmaPage implements OnInit {
     }
   }
 
-  acessarTurma(id_turma: any) {
+  acessarTurma(id_turma: any, ensino: any) {
     console.log(id_turma);
-    this.router.navigate(['../turma-aulas'], { state: { id_turma: id_turma } });
+    console.log(ensino);
+    this.router.navigate(['../turma-aulas'], { state: { id_turma: id_turma, ensino: ensino } });
   }
 
   logout() {

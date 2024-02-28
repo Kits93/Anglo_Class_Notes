@@ -12,16 +12,20 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
+    path: 'forgot-password',
+    loadChildren: () => import('./pages/forgot-password/forgot-password.module').then(m => m.ForgotPasswordPageModule)
+  },
+  {
     path: 'login',
     loadChildren: () => import('./pages/login/login.module').then(m => m.LoginPageModule)
   },
   {
-    path: 'turma-aulas',
-    loadChildren: () => import('./pages/turma-aulas/turma-aulas.module').then(m => m.TurmaAulasPageModule), canActivate: [AccessPermissionGuard, CheckTeacherTypeGuard]
-  },
-  {
     path: 'turma/:username',
     loadChildren: () => import('./pages/turma/turma.module').then(m => m.TurmaPageModule), canActivate: [AccessPermissionGuard, CheckTeacherTypeGuard]
+  },
+  {
+    path: 'turma-aulas',
+    loadChildren: () => import('./pages/turma-aulas/turma-aulas.module').then(m => m.TurmaAulasPageModule), canActivate: [AccessPermissionGuard, CheckTeacherTypeGuard]
   },
   {
     path: 'cadastro-aula',
@@ -29,34 +33,28 @@ const routes: Routes = [
   },
   {
     path: 'home-admin/:username',
-    loadChildren: () => import('./pages/admin/home-admin/home-admin.module').then( m => m.HomeAdminPageModule), canActivate: [AccessPermissionGuard, CheckAdminTypeGuard]
-  },
-  {
-    path: 'gerenciar-disciplinas',
-    loadChildren: () => import('./pages/admin/gerenciar-disciplinas/gerenciar-disciplinas.module').then( m => m.GerenciarDisciplinasPageModule), canActivate: [AccessPermissionGuard, CheckAdminTypeGuard]
-  },
-  {
-    path: 'gerenciar-usuarios',
-    loadChildren: () => import('./pages/admin/gerenciar-usuarios/gerenciar-usuarios.module').then( m => m.GerenciarUsuariosPageModule), canActivate: [AccessPermissionGuard, CheckAdminTypeGuard]
+    loadChildren: () => import('./pages/admin/home-admin/home-admin.module').then(m => m.HomeAdminPageModule), canActivate: [AccessPermissionGuard, CheckAdminTypeGuard]
   },
   {
     path: 'gerenciar-turmas',
-    loadChildren: () => import('./pages/admin/gerenciar-turmas/gerenciar-turmas.module').then( m => m.GerenciarTurmasPageModule), canActivate: [AccessPermissionGuard, CheckAdminTypeGuard]
+    loadChildren: () => import('./pages/admin/gerenciar-turmas/gerenciar-turmas.module').then(m => m.GerenciarTurmasPageModule), canActivate: [AccessPermissionGuard, CheckAdminTypeGuard]
   },
   {
-    path: 'forgot-password',
-    loadChildren: () => import('./pages/forgot-password/forgot-password.module').then( m => m.ForgotPasswordPageModule)
+    path: 'gerenciar-disciplinas',
+    loadChildren: () => import('./pages/admin/gerenciar-disciplinas/gerenciar-disciplinas.module').then(m => m.GerenciarDisciplinasPageModule), canActivate: [AccessPermissionGuard, CheckAdminTypeGuard]
   },
   {
-    path: 'minha-conta',
-    loadChildren: () => import('./pages/admin/minha-conta/minha-conta.module').then( m => m.MinhaContaPageModule)
+    path: 'gerenciar-usuarios',
+    loadChildren: () => import('./pages/admin/gerenciar-usuarios/gerenciar-usuarios.module').then(m => m.GerenciarUsuariosPageModule), canActivate: [AccessPermissionGuard, CheckAdminTypeGuard]
   },
   {
     path: 'usuario/:id_user',
-    loadChildren: () => import('./pages/admin/usuario/usuario.module').then( m => m.UsuarioPageModule)
+    loadChildren: () => import('./pages/admin/usuario/usuario.module').then(m => m.UsuarioPageModule), canActivate: [AccessPermissionGuard, CheckAdminTypeGuard]
   },
-
-
+  {
+    path: 'minha-conta',
+    loadChildren: () => import('./pages/admin/minha-conta/minha-conta.module').then(m => m.MinhaContaPageModule), canActivate: [AccessPermissionGuard]
+  },
 ];
 
 @NgModule({

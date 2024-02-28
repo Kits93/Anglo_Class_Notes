@@ -9,6 +9,7 @@ import { TurmaAulasPageRoutingModule } from './turma-aulas-routing.module';
 
 import { TurmaAulasPage } from './turma-aulas.page';
 import { AulaService } from 'src/app/services/aula/aula.service';
+import { TurmaService } from 'src/app/services/turma/turma.service';
 
 @NgModule({
   imports: [
@@ -18,7 +19,7 @@ import { AulaService } from 'src/app/services/aula/aula.service';
     TurmaAulasPageRoutingModule,
     HttpClientModule
   ],
-  providers: [AulaService],
+  providers: [AulaService,TurmaService],
   declarations: [TurmaAulasPage]
 })
 export class TurmaAulasPageModule { }

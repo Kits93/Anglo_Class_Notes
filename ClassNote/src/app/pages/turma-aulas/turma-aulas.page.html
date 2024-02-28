@@ -5,19 +5,26 @@
         <ion-icon style="position: relative;" slot="icon-only" name="arrow-back"></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-title class="ion-text-center">{{id_turma}}</ion-title>
+    <ion-title class="ion-text-center">{{nome_turma}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <ion-list>
     <ion-item *ngFor="let aula of aulas">
-      <ion-label>
+
+      <ion-label *ngIf="aula.id_aula != null">
         <h2>Aula {{aula.num_aula}}</h2>
         <p>Disciplina: {{aula.nome_disciplina}}</p>
-        <p>Professor: {{aula.username}}</p>
+        <p>Professor: {{aula.nome_professor}}</p>
         <p>Conteúdo: {{aula.conteudo}}</p>
       </ion-label>
+
+      <ion-label *ngIf="aula.id_aula == null">
+        <h2>Aula {{aula.num_aula}}</h2>
+        <p>{{aula.nome_disciplina}}</p>
+      </ion-label>
+      
     </ion-item>
   </ion-list>
 </ion-content>

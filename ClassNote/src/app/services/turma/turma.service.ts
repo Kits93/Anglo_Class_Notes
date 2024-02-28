@@ -23,4 +23,8 @@ export class TurmaService {
     );
   }
 
+  readOne(fk_id_turma: any) {
+    return this.httpClient.post(this.API + 'turma/readOne_turma.php' , fk_id_turma)
+  }
+
 }
