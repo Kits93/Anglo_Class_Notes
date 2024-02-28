@@ -8,6 +8,7 @@ import { ToastController } from '@ionic/angular';
 import { LoginService } from 'src/app/services/login/login.service';
 
 import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
+import { ChangePasswordComponent } from 'src/app/components/change-password/change-password.component';
 
 @Component({
   selector: 'app-login',
@@ -15,6 +16,7 @@ import { AuthenticationService } from 'src/app/services/authentication/authentic
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
+  popoverController: any;
 
   constructor(private authService: AuthenticationService, private router: Router, private http: HttpClient, private toastController: ToastController, private loginService: LoginService) { }
 
@@ -91,6 +93,17 @@ export class LoginPage implements OnInit {
     await toast.present();
 
     console.log(state);
-
   }
+
+  async openChangePasswordPopover() {
+    const popover = await this.popoverController.create({
+      component: ChangePasswordComponent,
+      translucent: true,
+      componentProps: {
+        // Passe quaisquer dados necessários para o componente de alteração de senha aqui
+      }
+    });
+    return await popover.present();
+  }
+  
 }

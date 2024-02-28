@@ -12,7 +12,8 @@ import { AulaService } from 'src/app/services/aula/aula.service';
 })
 export class TurmaAulasPage implements OnInit {
 
-  turma: any
+  id_turma: any
+  data_selecionada: any
 
   aulas: any[] = []
 
@@ -22,35 +23,36 @@ export class TurmaAulasPage implements OnInit {
   ngOnInit(): void {
     const navigation = window.history.state;
     if (navigation.turma) {
-      this.turma = navigation.turma;
-      console.log(this.turma);
+      this.id_turma = navigation.turma;
+      console.log(this.id_turma);
     }
 
+    this.data_selecionada = "2024-02-26";
+
     this.listar_aulas()
-    
+
   }
 
   goBack() {
     this.location.back()
   }
 
-  aula:any = {
-    'id_turma': 26,
-    'data_selecionada': '2024-02-26'
-  }
-
   // dados
 
   listar_aulas() {
-    this.aulaService.read(this.aula).subscribe((dados: any) => {
-      console.log(dados)
-      this.aulas = dados.aulas
+    const data = {
+      id_turma: this.id_turma,
+      data_selecionada: '2024-02-27' // Coloque aqui a data selecionada
+    };
+  
+    this.aulaService.read(data).subscribe((dados: any) => {
+      console.log(dados);
+      this.aulas = dados.aulas;
       if (!dados.success || dados.success != 1) {
-        this.aulas = []
+        this.aulas = [];
       }
-    })
+    });
   }
-
 
   // aulas = [
   //   {

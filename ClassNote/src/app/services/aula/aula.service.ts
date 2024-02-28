@@ -12,8 +12,7 @@ export class AulaService {
 
   constructor(private httpClient: HttpClient) { }
 
-  read(aula: any[]) {
-    // na verdade,deve ser post
-    return this.httpClient.post(this.API + 'aula/read_aula.php', aula)
+  read(data:any) {
+    return this.httpClient.post(this.API + 'aula/read_aula.php', data);
   }
 }

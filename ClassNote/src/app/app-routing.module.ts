@@ -42,13 +42,18 @@ const routes: Routes = [
   {
     path: 'gerenciar-turmas',
     loadChildren: () => import('./pages/admin/gerenciar-turmas/gerenciar-turmas.module').then( m => m.GerenciarTurmasPageModule), canActivate: [AccessPermissionGuard, CheckAdminTypeGuard]
-  },  {
+  },
+  {
     path: 'forgot-password',
     loadChildren: () => import('./pages/forgot-password/forgot-password.module').then( m => m.ForgotPasswordPageModule)
   },
   {
     path: 'minha-conta',
     loadChildren: () => import('./pages/admin/minha-conta/minha-conta.module').then( m => m.MinhaContaPageModule)
+  },
+  {
+    path: 'usuario/:id_user',
+    loadChildren: () => import('./pages/admin/usuario/usuario.module').then( m => m.UsuarioPageModule)
   },
 
 

@@ -5,7 +5,7 @@
         <ion-icon style="position: relative;" slot="icon-only" name="arrow-back"></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-title class="ion-text-center">{{turma}}</ion-title>
+    <ion-title class="ion-text-center">{{id_turma}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -14,9 +14,9 @@
     <ion-item *ngFor="let aula of aulas">
       <ion-label>
         <h2>Aula {{aula.num_aula}}</h2>
-        <p>Disciplina: {{aula.fk_id_disciplina}}</p>
-        <p>Professor: {{aula.fk_id_usuario}}</p>
-        <p>Conteúdo: Conteudo</p>
+        <p>Disciplina: {{aula.nome_disciplina}}</p>
+        <p>Professor: {{aula.username}}</p>
+        <p>Conteúdo: {{aula.conteudo}}</p>
       </ion-label>
     </ion-item>
   </ion-list>

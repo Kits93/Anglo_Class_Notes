@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { UsuarioService } from 'src/app/services/usuario/usuario.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-gerenciar-usuarios',
@@ -11,7 +12,7 @@ export class GerenciarUsuariosPage implements OnInit {
 
   usuarios: any[] = [];
 
-  constructor(private location: Location, private usuarioService: UsuarioService) { }
+  constructor(private router: Router, private location: Location, private usuarioService: UsuarioService) { }
 
   ngOnInit() {
     this.listar_usuarios();
@@ -31,8 +32,8 @@ export class GerenciarUsuariosPage implements OnInit {
     });
   }
 
-  editarUsuario(usuario:any){
-    console.log(usuario)
+  acessarUsuario(id_user: any){
+    this.router.navigate(['/usuario', id_user])
   }
 
 }
