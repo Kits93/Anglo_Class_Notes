@@ -98,19 +98,19 @@
         <ion-list-header mode="ios">
           <ion-label>Gerenciamento</ion-label>
         </ion-list-header>
-        <ion-item routerLink="/home-admin" class="ion-color-primary">
+        <ion-item (click)="setItemMenu('inicio')" class="ion-color-primary">
           <ion-label>Início</ion-label>
           <ion-icon name="home"></ion-icon>
         </ion-item>
-        <ion-item routerLink="/gerenciar-turmas">
+        <ion-item (click)="setItemMenu('turmas')" >
           <ion-label>Turmas</ion-label>
           <ion-icon name="people"></ion-icon>
         </ion-item>
-        <ion-item routerLink="/gerenciar-disciplinas">
+        <ion-item (click)="setItemMenu('disciplinas')" >
           <ion-label>Disciplinas</ion-label>
           <ion-icon name="book"></ion-icon>
         </ion-item>
-        <ion-item routerLink="/gerenciar-usuarios">
+        <ion-item (click)="setItemMenu('usuarios')">
           <ion-label>Usuários</ion-label>
           <ion-icon name="people-circle"></ion-icon>
         </ion-item>
@@ -118,7 +118,7 @@
         <ion-list-header mode="ios">
           <ion-label>Conta</ion-label>
         </ion-list-header>
-        <ion-item routerLink="/minha-conta">
+        <ion-item (click)="setItemMenu('turmas')" routerLink="/minha-conta">
           <ion-label>Minha Conta</ion-label>
           <ion-icon name="person-circle-outline"></ion-icon>
         </ion-item>
@@ -131,7 +131,12 @@
 
     </ion-col>
     <ion-col class="column column-scrollable">
-      baaaa
+      
+      <app-inicio *ngIf="selectedItem === 'inicio'"></app-inicio>
+      <app-turmas *ngIf="selectedItem === 'turmas'"></app-turmas>
+      <app-disciplinas *ngIf="selectedItem === 'disciplinas'"></app-disciplinas>
+      <app-usuarios *ngIf="selectedItem === 'usuarios'"></app-usuarios>
+
     </ion-col>
 
 

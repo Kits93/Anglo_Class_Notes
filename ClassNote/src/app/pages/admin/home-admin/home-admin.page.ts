@@ -31,6 +31,12 @@ export class HomeAdminPage implements OnInit {
     });
   }
 
+  selectedItem: any
+
+  setItemMenu(item: any){
+    this.selectedItem = item
+  }
+
   logout() {
     this.authService.logout
     this.router.navigate(['/login'])
