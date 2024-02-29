@@ -1,0 +1,52 @@
+<ion-col size="12">
+  <ion-row>
+    <ion-col>
+      <h2>{{ nomeTurma }}</h2> <!-- Título da turma -->
+    </ion-col>
+  </ion-row>
+  <form #formData="ngForm" (ngSubmit)="submitForm()">
+    <ion-item>
+      <ion-label position="stacked">Data:</ion-label>
+      <input matInput [matDatepicker]="picker" disabled>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Número da Aula:</ion-label>
+      <input matInput type="text" name="num_aula">
+      <!-- Opções do select para número da aula -->
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Usuário:</ion-label>
+      <mat-form-field appearance="fill">
+        <mat-label>Usuário</mat-label>
+        <input matInput type="text" name="usuario">
+        <!-- Opções do select para usuário usando mat-autocomplete -->
+        <mat-autocomplete #auto="matAutocomplete">
+          <!-- Opções filtradas exibidas aqui -->
+        </mat-autocomplete>
+      </mat-form-field>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Disciplina:</ion-label>
+      <mat-form-field appearance="fill">
+        <mat-label>Disciplina</mat-label>
+        <input matInput type="text" name="disciplina">
+        <!-- Opções do select para disciplina usando mat-autocomplete -->
+        <mat-autocomplete #auto="matAutocomplete">
+          <!-- Opções filtradas exibidas aqui -->
+        </mat-autocomplete>
+      </mat-form-field>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Conteúdo:</ion-label>
+      <ion-textarea name="conteudo" rows="6"></ion-textarea>
+    </ion-item>
+
+    <ion-button type="submit" expand="block">Enviar</ion-button>
+  </form>
+</ion-col>

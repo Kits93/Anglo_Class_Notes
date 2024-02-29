@@ -12,7 +12,17 @@ export class AulaService {
 
   constructor(private httpClient: HttpClient) { }
 
-  read(data:any) {
+  create(aula: any[]) {
+    return this.httpClient.post(this.API + 'aula/create_aula.php', aula);
+  }
+
+  read(data: any) {
     return this.httpClient.post(this.API + 'aula/read_aula.php', data);
   }
+
+  update(aula: any[]) {
+    return this.httpClient.put(this.API + 'aula/update_aula.php', aula);
+  }
+
+
 }

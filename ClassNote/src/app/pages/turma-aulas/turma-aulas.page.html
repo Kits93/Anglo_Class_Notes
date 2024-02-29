@@ -5,26 +5,33 @@
         <ion-icon style="position: relative;" slot="icon-only" name="arrow-back"></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-title class="ion-text-center">{{nome_turma}}</ion-title>
+    <ion-title class="ion-text-center">{{nome_turma}} - {{ensino}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <ion-list>
-    <ion-item *ngFor="let aula of aulas">
+    <div>
+      <app-calendar (dataEvent)="receiveDataFromChild($event)"
+        style="display: flex; justify-content: end;"></app-calendar>
+    </div>
+    <div *ngFor="let aula of aulas">
+      <ion-item (click)="selectAula(aula.id_aula, nome_turma)" style="cursor: pointer;">
 
-      <ion-label *ngIf="aula.id_aula != null">
-        <h2>Aula {{aula.num_aula}}</h2>
-        <p>Disciplina: {{aula.nome_disciplina}}</p>
-        <p>Professor: {{aula.nome_professor}}</p>
-        <p>Conteúdo: {{aula.conteudo}}</p>
-      </ion-label>
+        <ion-label *ngIf="aula.id_aula != null">
+          <h2>Aula {{aula.num_aula}}</h2>
+          <p>Disciplina: {{aula.nome_disciplina}}</p>
+          <p>Professor: {{aula.nome_professor}}</p>
+          <p>Conteúdo: {{aula.conteudo}}</p>
+        </ion-label>
 
-      <ion-label *ngIf="aula.id_aula == null">
-        <h2>Aula {{aula.num_aula}}</h2>
-        <p>{{aula.nome_disciplina}}</p>
-      </ion-label>
-      
-    </ion-item>
+        <ion-label *ngIf="aula.id_aula == null">
+          <h2>Aula {{aula.num_aula}}</h2>
+          <p>{{aula.nome_disciplina}}</p>
+        </ion-label>
+
+      </ion-item>
+    </div>
+
   </ion-list>
 </ion-content>
