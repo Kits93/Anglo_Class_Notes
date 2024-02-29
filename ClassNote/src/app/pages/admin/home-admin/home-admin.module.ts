@@ -14,14 +14,19 @@ import { TurmasComponent } from 'src/app/components/home-admin/turmas/turmas.com
 import { MyAccountComponent } from 'src/app/components/home-admin/my-account/my-account.component';
 import { UsuariosComponent } from 'src/app/components/home-admin/usuarios/usuarios.component';
 
+import { UsuarioService } from 'src/app/services/usuario/usuario.service';
+import { HttpClientModule } from '@angular/common/http';
+
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
+    HttpClientModule,
     HomeAdminPageRoutingModule
   ],
+  providers: [UsuarioService],
   declarations: [HomeAdminPage, InicioComponent, DisciplinasComponent, TurmasComponent, MyAccountComponent, UsuariosComponent]
 })
 export class HomeAdminPageModule { }
