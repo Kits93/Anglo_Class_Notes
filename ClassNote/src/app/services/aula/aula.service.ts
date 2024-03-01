@@ -20,6 +20,10 @@ export class AulaService {
     return this.httpClient.post(this.API + 'aula/read_aula.php', data);
   }
 
+  readOnce(id: any){
+    return this.httpClient.post(this.API + 'aula/readOnce_aula.php', id);
+  }
+
   update(aula: any[]) {
     return this.httpClient.put(this.API + 'aula/update_aula.php', aula);
   }

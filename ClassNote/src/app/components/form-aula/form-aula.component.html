@@ -1,52 +1,83 @@
 <ion-col size="12">
   <ion-row>
-    <ion-col>
+    <ion-col class="ion-text-center">
       <h2>{{ nomeTurma }}</h2> <!-- Título da turma -->
     </ion-col>
   </ion-row>
+  <div>
+
+  </div>
   <form #formData="ngForm" (ngSubmit)="submitForm()">
-    <ion-item>
-      <ion-label position="stacked">Data:</ion-label>
-      <input matInput [matDatepicker]="picker" disabled>
-      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
-    </ion-item>
+    <ion-list lines="none">
+      <ion-item>
+        <ion-label position="stacked">Aula</ion-label>
+        <ion-icon name="book" slot="start"></ion-icon>
+        <div style="left: -1em;" class="options-container ion-margin ion-align-items-center">
+          <div class="option" [class.selected]="aulaSelecionada.num_aula === 1" (click)="selectOption(1)">1</div>
+          <div class="option" [class.selected]="aulaSelecionada.num_aula === 2"
+            [class.disabled]="aulaSelecionada.num_aula !== 2" (click)="selectOption(2)">2</div>
+          <div class="option" [class.selected]="aulaSelecionada.num_aula === 3"
+            [class.disabled]="aulaSelecionada.num_aula !== 3" (click)="selectOption(3)">3</div>
+          <div class="option" [class.selected]="aulaSelecionada.num_aula === 4"
+            [class.disabled]="aulaSelecionada.num_aula !== 4" (click)="selectOption(4)">4</div>
+          <div class="option" [class.selected]="aulaSelecionada.num_aula === 5"
+            [class.disabled]="aulaSelecionada.num_aula !== 5" (click)="selectOption(5)">5</div>
+          <div class="option" [class.selected]="aulaSelecionada.num_aula === 6"
+            [class.disabled]="aulaSelecionada.num_aula !== 6" (click)="selectOption(6)">6</div>
+          <div class="option" [class.selected]="aulaSelecionada.num_aula === 7"
+            [class.disabled]="aulaSelecionada.num_aula !== 7" (click)="selectOption(7)">7</div>
+        </div>
+      </ion-item>
 
-    <ion-item>
-      <ion-label position="stacked">Número da Aula:</ion-label>
-      <input matInput type="text" name="num_aula">
-      <!-- Opções do select para número da aula -->
-    </ion-item>
 
-    <ion-item>
-      <ion-label position="stacked">Usuário:</ion-label>
-      <mat-form-field appearance="fill">
-        <mat-label>Usuário</mat-label>
-        <input matInput type="text" name="usuario">
-        <!-- Opções do select para usuário usando mat-autocomplete -->
-        <mat-autocomplete #auto="matAutocomplete">
-          <!-- Opções filtradas exibidas aqui -->
-        </mat-autocomplete>
-      </mat-form-field>
-    </ion-item>
+      <ion-item>
+        <ion-icon name="person" slot="start"></ion-icon> <!-- Alinhar o ícone à esquerda -->
+        <mat-form-field appearance="fill">
+          <mat-label>Usuário</mat-label>
+          <input [value]="aulaSelecionada.username" matInput type="text" name="usuario" disabled>
+          <!-- Opções do select para usuário usando mat-autocomplete -->
+          <mat-autocomplete #auto="matAutocomplete">
+            <!-- Opções filtradas exibidas aqui -->
+          </mat-autocomplete>
+        </mat-form-field>
+      </ion-item>
 
-    <ion-item>
-      <ion-label position="stacked">Disciplina:</ion-label>
-      <mat-form-field appearance="fill">
-        <mat-label>Disciplina</mat-label>
-        <input matInput type="text" name="disciplina">
-        <!-- Opções do select para disciplina usando mat-autocomplete -->
-        <mat-autocomplete #auto="matAutocomplete">
-          <!-- Opções filtradas exibidas aqui -->
-        </mat-autocomplete>
-      </mat-form-field>
-    </ion-item>
+      <ion-item>
+        <ion-icon name="school" slot="start"></ion-icon>
+        <mat-form-field appearance="fill">
+          <mat-label>Disciplina</mat-label>
+          <input [formControl]="disciplinaControl" [value]="aulaSelecionada?.nome_disciplina" matInput type="text"
+            name="disciplina" [matAutocomplete]="auto">
+      
+            <mat-autocomplete #auto="matAutocomplete">
+              <mat-option *ngFor="let disciplina of filteredDisciplinas" [value]="disciplina.nome_disciplina">
+                {{disciplina.nome_disciplina}}
+              </mat-option>
+            </mat-autocomplete>
+        </mat-form-field>
+      </ion-item>
 
-    <ion-item>
-      <ion-label position="stacked">Conteúdo:</ion-label>
-      <ion-textarea name="conteudo" rows="6"></ion-textarea>
-    </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Conteúdo:</ion-label>
+        <ion-icon name="document-text" slot="start"></ion-icon> <!-- Alinhar o ícone à esquerda -->
+        <ion-textarea [value]="aulaSelecionada.conteudo" name="conteudo" rows="4"></ion-textarea>
+      </ion-item>
 
-    <ion-button type="submit" expand="block">Enviar</ion-button>
+      <ion-item>
+        <mat-form-field>
+          <ion-label position="stacked">Data:</ion-label>
+          <input [value]="aulaSelecionada.data_aula" matInput [matDatepicker]="picker" disabled>
+          <mat-datepicker-toggle matSuffix [for]="picker" slot="start"></mat-datepicker-toggle>
+          <!-- Posiciona o ícone à direita -->
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
+      </ion-item>
+
+
+
+      <ion-button type="submit" expand="block">Enviar</ion-button>
+    </ion-list>
+
   </form>
 </ion-col>

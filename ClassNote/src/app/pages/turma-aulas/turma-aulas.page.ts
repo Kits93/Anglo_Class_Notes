@@ -18,12 +18,15 @@ export class TurmaAulasPage implements OnInit {
   constructor(private modalCtrl: ModalController, private turmaService: TurmaService, private aulaService: AulaService, private route: ActivatedRoute, private router: Router, private location: Location) {
   }
 
-  async openFormModal(nome_turma: any) {
+  async openFormModal(id_aula: any, nome_turma: any) {
+
+    console.log(id_aula, nome_turma)
+
     const modal = await this.modalCtrl.create({
       component: FormAulaComponent,
-      cssClass: 'modal-right',
       componentProps: {
-        nomeTurma: nome_turma, // Passando o nome da turma para o componente filho
+        idAula: id_aula,
+        nomeTurma: nome_turma,
       }
 
     });
@@ -111,7 +114,7 @@ export class TurmaAulasPage implements OnInit {
   selectAula(id: any, nome_turma: any) {
 
     if (id) {
-      this.openFormModal(nome_turma)
+      this.openFormModal(id, nome_turma)
     } else {
       alert("olá alteravel")
     }

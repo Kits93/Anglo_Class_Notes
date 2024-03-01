@@ -13,6 +13,10 @@ export class DisciplinaService {
   constructor(private httpClient: HttpClient) { }
 
   post(disciplina:any){
-  return this.httpClient.post(this.API + 'clientes/insert_clientes.php', disciplina[0]);
+  return this.httpClient.post(this.API + 'disciplina/create_disciplina.php', disciplina[0]);
+  }
+
+  read() {
+    return this.httpClient.get(this.API + 'disciplina/read_disciplina.php');
   }
 }
