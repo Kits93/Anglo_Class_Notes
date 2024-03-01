@@ -15,6 +15,7 @@
   </ion-header>
 
   <ion-content style="height: 100%;" class="ion-no-padding ion-no-margin">
+
     <ion-list lines="none">
       <ion-list-header mode="ios">
         <ion-label>Conta</ion-label>
@@ -63,12 +64,18 @@
       </ion-col>
     </ion-row>
     <ion-row>
+      <ion-col class="ion-text-center ion-justify-content-center ion-align-items-center spinner_cont" size="12"
+        *ngIf="this.isLoading">
+        <ion-spinner style="margin: 0 auto;" class="spinner" color="danger" name="dots"></ion-spinner>
+      </ion-col>
       <ion-col>
         <ion-col size="10">
+
           <ion-grid>
             <ion-row wrap>
               <ion-col class="turma" size="12" size-md="6" size-lg="4" *ngFor="let turma of turmasFilter">
-                <ion-card (click)="acessarTurma(turma.id_turma, turma.ensino)" [ngClass]="defineColor(turma.ensino)">
+                <ion-card (click)="acessarTurma(turma.id_turma, turma.ensino)" [ngClass]="defineColor(turma.ensino)"
+                  *ngIf="!isLoading">
                   <ion-card-header>
                     <ion-card-title>{{ turma.nome_turma }}</ion-card-title>
 

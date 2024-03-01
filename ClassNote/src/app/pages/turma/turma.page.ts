@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { TurmaService } from 'src/app/services/turma/turma.service';
 import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
+import { LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-turma',
@@ -12,7 +13,7 @@ export class TurmaPage implements OnInit {
 
   turmas: any[] = []
 
-  constructor(private authService: AuthenticationService, private router: Router, private route: ActivatedRoute, private turmasService: TurmaService) { }
+  constructor(private loadingCtrl: LoadingController, private authService: AuthenticationService, private router: Router, private route: ActivatedRoute, private turmasService: TurmaService) { }
 
   username: any
 
@@ -39,8 +40,15 @@ export class TurmaPage implements OnInit {
     }
   }
 
+
+isLoading: boolean = true
   listar_turmas() {
+    setTimeout(() => {
+      this.isLoading = false
+    }, 200);
+    
     this.turmasService.read().subscribe((dados: any) => {
+      this.isLoading = true
       console.log(dados)
       this.turmas = dados.turmas
       this.turmasFilter = this.turmas
@@ -91,4 +99,13 @@ export class TurmaPage implements OnInit {
     this.authService.logout
     this.router.navigate(['/login'])
   }
+
+  // async showLoading() {
+  //   const loading = await this.loadingCtrl.create({
+  //     message: 'Dismissing after 3 seconds...',
+  //     duration: 3000,
+  //   });
+
+  //   loading.present();
+  // }
 }

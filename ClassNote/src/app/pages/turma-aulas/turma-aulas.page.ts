@@ -33,7 +33,7 @@ export class TurmaAulasPage implements OnInit {
     console.log('Dados do formulário:', data);
   }
 
-
+  isLoaded: boolean = false
 
   id_turma: any
   nome_turma: any
@@ -75,6 +75,9 @@ export class TurmaAulasPage implements OnInit {
   }
 
   listar_aulas() {
+    setTimeout(() => {
+      this.isLoaded = false;
+    }, 200);
 
     if (this.id_turma && this.ensino) {
       console.log(this.dataSelected)
@@ -96,12 +99,14 @@ export class TurmaAulasPage implements OnInit {
         if (!dados.success || dados.success != 1) {
           this.aulas = [];
         }
+        this.isLoaded = true; // Definindo isLoaded como true após receber a resposta
       });
     } else {
       console.error('ID da turma não definido');
     }
     console.log(this.aulas)
   }
+
 
   selectAula(id: any, nome_turma: any) {
 

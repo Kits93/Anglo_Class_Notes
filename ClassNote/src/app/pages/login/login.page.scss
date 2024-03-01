@@ -106,3 +106,17 @@
     transform: translate(190px, 20px);
   }
 }
+
+.fade-in {
+  opacity: 0;
+  animation: fadeIn 1.8s forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
