@@ -11,6 +11,7 @@ import { IonicModule } from '@ionic/angular';
 import { AulaService } from 'src/app/services/aula/aula.service';
 import { DisciplinaService } from 'src/app/services/disciplina/disciplina.service';
 import { map, startWith } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-form-aula',
@@ -29,97 +30,86 @@ import { map, startWith } from 'rxjs/operators';
     ReactiveFormsModule
   ],
 })
-export class FormAulaComponent {
+export class FormAulaComponent implements OnInit {
+
   @Input() idAula: any;
   @Input() nomeTurma: any;
 
-  form!: FormGroup;
-  aulaSelecionada: any = {  }
-
-  disciplinas: any[] = []
-
-  filteredDisciplinas: any[] = [];
-
   constructor(private aulaService: AulaService, private disciplinaService: DisciplinaService) { }
 
-  ngOnInit() {
-    console.log(this.idAula, this.nomeTurma);
-    this.createFormEdit(this.idAula);
+  ngOnInit(): void {
     this.listDadosForm();
-    this.listDisciplinas(); // Chama o método para carregar as disciplinas
+    this.listDisciplinas();
   }
-  
 
-  submitForm() {
-    console.log(this.idAula, this.nomeTurma)
-    if (this.form.valid) {
-      console.log('Dados do formulário:', this.form.value);
-      // this.aulaService.update()
-    } else {
-      // Tratar o caso em que o formulário não é válido
-    }
-  }
+  formData = {
+    id_aula: '',
+    num_aula: '',
+    id_usuario: '',
+    username: '',
+    id_disciplina: '',
+    nome_disciplina: '',
+    conteudo: '',
+    nome: ''
+  };
+
+  aulaSelecionada: any = {};
 
   listDadosForm() {
     this.aulaService.readOnce(this.idAula).subscribe((dados: any) => {
-      console.log(dados)
+      console.log(dados);
 
-      this.aulaSelecionada = dados.aula
+      this.aulaSelecionada = dados.aula;
+
       if (!dados.success || dados.success != 1) {
-        this.aulaSelecionada = []
-        console.log(dados.message)
+        this.aulaSelecionada = {};
+        console.log(dados.message);
       }
-      console.log(this.aulaSelecionada)
-    })
+
+      // this.formData.num_aula = this.aulaSelecionada.num_aula;
+      this.formData.id_aula = this.idAula;
+      this.formData.num_aula = this.aulaSelecionada.num_aula;
+      this.formData.id_usuario = this.aulaSelecionada.fk_id_usuario;
+      this.formData.username = this.aulaSelecionada.username;
+      this.formData.id_disciplina = this.aulaSelecionada.fk_id_disciplina;
+      this.formData.id_disciplina = this.aulaSelecionada.fk_id_disciplina;
+      this.formData.conteudo = this.aulaSelecionada.conteudo;
+
+      console.log(this.aulaSelecionada);
+      console.log('Valor de id_disciplina:', this.formData.id_disciplina);
+    });
   }
+
+  disciplinaCtrl = new FormControl();
+  disciplinas: any[] = []
+  filteredDisciplinas: Observable<any[]> | undefined;
 
   listDisciplinas() {
     this.disciplinaService.read().subscribe((dados: any) => {
-      this.disciplinas = dados.disciplinas
+      this.disciplinas = dados.disciplinas;
       if (!dados.success || dados.success != 1) {
-        this.disciplinas = []
+        this.disciplinas = [];
       }
-      console.log(this.disciplinas)
-    })
+
+      this.filteredDisciplinas = this.disciplinaCtrl.valueChanges.pipe(
+        startWith(''),
+        map(value => this._filterDisciplinas(value))
+      );
+    });
   }
 
-  controlDisciplina: any= ''
-
-  digitou(e: any) {
-    this.controlDisciplina = (e.target as HTMLInputElement).value;
-    this.filteredDisciplinas = this._filter(this.controlDisciplina);
-    console.log(this.filteredDisciplinas)
-  }
-  
-  private _filter(nome_disciplina: string): any {
-    const filterValue = nome_disciplina.toLowerCase();
-    return this.disciplinas.filter(option => option.nome_disciplina.toLowerCase().includes(filterValue));
-  }
-  
-
-  selectOption(numAula: number): void {
-    this.aulaSelecionada.num_aula = numAula;
+  private _filterDisciplinas(value: string): any[] {
+    const filterValue = value.toLowerCase();
+    return this.disciplinas.filter(disciplina => disciplina.nome_disciplina.toLowerCase().includes(filterValue));
   }
 
+  submitForm() {
 
 
-  FormAula!: FormGroup
+    this.formData.id_aula = this.idAula
+    this.formData.id_disciplina = this.idAula
 
-  createFormEdit(id_aula: any) {
-		this.FormAula = new FormGroup({
-			id_aula: new FormControl(id_aula),
-			// disciplina: new FormControl(cliente.cliente_nome, Validators.compose([
-			// 	Validators.maxLength(10),
-			// 	Validators.required])),
-			// conteudo: new FormControl(cliente.cliente_tel, Validators.compose([
-			// 	Validators.maxLength(255),
-			// 	Validators.minLength(3),
-			// 	Validators.required])),
-		});
-	}
-
-  setDisciplina(id_disciplina: any){
-
+    console.log('Dados do formulário:', this.formData);
   }
 
 }
