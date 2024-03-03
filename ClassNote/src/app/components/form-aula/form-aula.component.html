@@ -46,14 +46,15 @@
         <ion-icon name="school" slot="start"></ion-icon>
         <mat-form-field appearance="fill">
           <mat-label>Disciplina</mat-label>
-          <input [formControl]="disciplinaControl" [value]="aulaSelecionada?.nome_disciplina" matInput type="text"
-            name="disciplina" [matAutocomplete]="auto">
-      
-            <mat-autocomplete #auto="matAutocomplete">
-              <mat-option *ngFor="let disciplina of filteredDisciplinas" [value]="disciplina.nome_disciplina">
-                {{disciplina.nome_disciplina}}
-              </mat-option>
-            </mat-autocomplete>
+          <input (input)="digitou($event)" [value]="aulaSelecionada?.nome_disciplina" matInput type="text" name="disciplina"
+            [matAutocomplete]="auto">
+
+          <mat-autocomplete #auto="matAutocomplete" [displayWith]="aulaSelecionada?.nome_disciplina">
+            <mat-option *ngFor="let disciplina of filteredDisciplinas" [value]="disciplina.nome_disciplina"
+              (click)="setDisciplina(disciplina.id_disciplina)">
+              {{disciplina.nome_disciplina}}
+            </mat-option>
+          </mat-autocomplete>
         </mat-form-field>
       </ion-item>
 

@@ -36,7 +36,6 @@ export class FormAulaComponent {
   form!: FormGroup;
   aulaSelecionada: any = {  }
 
-  disciplinaControl = new FormControl();
   disciplinas: any[] = []
 
   filteredDisciplinas: any[] = [];
@@ -44,25 +43,12 @@ export class FormAulaComponent {
   constructor(private aulaService: AulaService, private disciplinaService: DisciplinaService) { }
 
   ngOnInit() {
-
-    this.disciplinaControl.valueChanges.pipe(
-      startWith(''),
-      map(value => this.filterDisciplinas(value))
-    ).subscribe(filteredDisciplinas => {
-      this.filteredDisciplinas = filteredDisciplinas; // Certifique-se de que você está atualizando uma propriedade
-    });
-
     console.log(this.idAula, this.nomeTurma);
-    this.form = new FormGroup({
-      data: new FormControl(new Date()),
-      num_aula: new FormControl(null, Validators.required),
-      usuario: new FormControl(null, Validators.required),
-      disciplina: new FormControl(null, Validators.required),
-      conteudo: new FormControl('')
-    });
-
-    this.listDadosForm()
+    this.createFormEdit(this.idAula);
+    this.listDadosForm();
+    this.listDisciplinas(); // Chama o método para carregar as disciplinas
   }
+  
 
   submitForm() {
     console.log(this.idAula, this.nomeTurma)
@@ -97,13 +83,43 @@ export class FormAulaComponent {
     })
   }
 
-  filterDisciplinas(value: string): any[] {
-    const filterValue = value.toLowerCase();
-    return this.disciplinas.filter(disciplina => disciplina.nome_disciplina.toLowerCase().includes(filterValue));
+  controlDisciplina: any= ''
+
+  digitou(e: any) {
+    this.controlDisciplina = (e.target as HTMLInputElement).value;
+    this.filteredDisciplinas = this._filter(this.controlDisciplina);
+    console.log(this.filteredDisciplinas)
   }
+  
+  private _filter(nome_disciplina: string): any {
+    const filterValue = nome_disciplina.toLowerCase();
+    return this.disciplinas.filter(option => option.nome_disciplina.toLowerCase().includes(filterValue));
+  }
+  
 
   selectOption(numAula: number): void {
     this.aulaSelecionada.num_aula = numAula;
+  }
+
+
+
+  FormAula!: FormGroup
+
+  createFormEdit(id_aula: any) {
+		this.FormAula = new FormGroup({
+			id_aula: new FormControl(id_aula),
+			// disciplina: new FormControl(cliente.cliente_nome, Validators.compose([
+			// 	Validators.maxLength(10),
+			// 	Validators.required])),
+			// conteudo: new FormControl(cliente.cliente_tel, Validators.compose([
+			// 	Validators.maxLength(255),
+			// 	Validators.minLength(3),
+			// 	Validators.required])),
+		});
+	}
+
+  setDisciplina(id_disciplina: any){
+
   }
 
 }
