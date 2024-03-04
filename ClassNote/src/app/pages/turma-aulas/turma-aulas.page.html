@@ -12,7 +12,7 @@
 <ion-content>
   <ion-list>
     <div>
-      <app-calendar class="ion-margin" (dataEvent)="receiveDataFromChild($event)"
+      <app-calendar class="ion-margin" (dataEvent)="receiveDataFromCalendar($event)"
         style="display: flex; justify-content: end;"></app-calendar>
     </div>
     <div *ngFor="let aula of aulas">

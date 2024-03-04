@@ -27,7 +27,8 @@ export class TurmaAulasPage implements OnInit {
       componentProps: {
         idAula: id_aula,
         nomeTurma: nome_turma,
-      }
+      },
+      mode: 'ios'
 
     });
     await modal.present();
@@ -36,13 +37,20 @@ export class TurmaAulasPage implements OnInit {
     console.log('Dados do formulário:', data);
   }
 
+  onRefresh() {
+    this.listar_aulas();
+  }
+
+  onfecharModal() {
+    this.modalCtrl.dismiss();
+  }
+
   isLoaded: boolean = false
 
   id_turma: any
   nome_turma: any
   data_selecionada: any
   aulas: any[] = []
-
   ensino: any
 
 
@@ -65,7 +73,7 @@ export class TurmaAulasPage implements OnInit {
 
   dataSelected: any
 
-  receiveDataFromChild(data: string) {
+  receiveDataFromCalendar(data: string) {
     console.log('Dados recebidos do componente filho:', data);
     this.dataSelected = data;
 
