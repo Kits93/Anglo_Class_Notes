@@ -10,13 +10,14 @@ import { IonicModule, ModalController } from '@ionic/angular';
 
 import { AulaService } from 'src/app/services/aula/aula.service';
 import { DisciplinaService } from 'src/app/services/disciplina/disciplina.service';
+import { UsuarioService } from 'src/app/services/usuario/usuario.service';
 import { map, startWith } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
 @Component({
-  selector: 'app-form-aula',
-  templateUrl: './form-aula.component.html',
-  styleUrls: ['./form-aula.component.scss'],
+  selector: 'app-form-new-aula',
+  templateUrl: './form-new-aula.component.html',
+  styleUrls: ['./form-new-aula.component.scss'],
   standalone: true,
   providers: [provideNativeDateAdapter()],
   imports: [
@@ -30,9 +31,13 @@ import { Observable } from 'rxjs';
     ReactiveFormsModule
   ],
 })
-export class FormAulaComponent implements OnInit {
+export class FormNewAulaComponent implements OnInit {
+
   @Input() idAula: any;
+  @Input() idUsuario: any;
   @Input() nomeTurma: any;
+  @Input() numAula: any;
+  @Input() dataAula: any;
 
   FormData!: FormGroup;
 
@@ -40,59 +45,37 @@ export class FormAulaComponent implements OnInit {
     private modalCtrl: ModalController,
     private aulaService: AulaService,
     private disciplinaService: DisciplinaService,
+    private usuarioService: UsuarioService,
     private formBuilder: FormBuilder
   ) { }
 
   ngOnInit(): void {
     this.FormData = this.formBuilder.group({
-      id_aula: ['', Validators.required],
+      id_turma: ['', Validators.required],
       num_aula: ['', Validators.required],
       id_usuario: ['', Validators.required],
       username: ['', Validators.required],
       id_disciplina: ['', Validators.required],
       nome_disciplina: ['', Validators.required],
-      conteudo: ['', Validators.required]
+      conteudo: ['', Validators.required],
+      data_aula: ['', Validators.required]
     });
 
-    this.listDadosForm();
     this.listDisciplinas();
+    this.listUsuarios()
   }
 
   aulaSelecionada: any = {};
   disciplinaCtrl = new FormControl();
   disciplinas: any[] = [];
+  usuarios: any[] = [];
   filteredDisciplinas: Observable<any[]> | undefined;
-
-  listDadosForm() {
-    this.aulaService.readOnce(this.idAula).subscribe((dados: any) => {
-      console.log(dados);
-
-      this.aulaSelecionada = dados.aula;
-
-      if (!dados.success || dados.success != 1) {
-        this.aulaSelecionada = {};
-        console.log(dados.message);
-      }
-
-      this.FormData.patchValue({
-        id_aula: this.idAula,
-        num_aula: this.aulaSelecionada.num_aula,
-        id_usuario: this.aulaSelecionada.fk_id_usuario,
-        username: this.aulaSelecionada.username,
-        id_disciplina: this.aulaSelecionada.fk_id_disciplina,
-        nome_disciplina: this.aulaSelecionada.nome_disciplina,
-        conteudo: this.aulaSelecionada.conteudo,
-      });
-
-      console.log(this.aulaSelecionada);
-      console.log('Valor de FormData:', this.FormData.value);
-    });
-  }
 
   listDisciplinas() {
     this.disciplinaService.read().subscribe((dados: any) => {
-      this.disciplinas = dados.disciplinas;
-      if (!dados.success || dados.success != 1) {
+      if (Array.isArray(dados.disciplinas)) {
+        this.disciplinas = dados.disciplinas;
+      } else {
         this.disciplinas = [];
       }
 
@@ -100,6 +83,22 @@ export class FormAulaComponent implements OnInit {
         startWith(''),
         map(value => this._filterDisciplinas(value))
       );
+    });
+  }
+
+  listUsuarios() {
+    console.log(this.idUsuario);
+    this.usuarioService.readOne(this.idUsuario).subscribe((dados: any) => {
+      if (Array.isArray(dados.usuario)) {
+        this.usuarios = dados.usuario;
+        this.FormData.patchValue({
+          id_usuario: this.usuarios[0].id_usuario,
+          username: this.usuarios[0].username
+        });
+      } else {
+        this.usuarios = [];
+      }
+      console.log(this.usuarios);
     });
   }
 
@@ -127,15 +126,15 @@ export class FormAulaComponent implements OnInit {
     console.log('Dados do formulário:', form.value);
     if (form.valid) {
 
-      this.aulaService.update(form.value).subscribe((dados) => {
-        console.log(dados)
+      // this.aulaService.update(form).subscribe((dados) => {
+      //   console.log(dados)
 
-      })
+      // })
       this.fecharModal()
     }
   }
 
-  fecharModal(){
+  fecharModal() {
     this.modalCtrl.dismiss()
   }
 }

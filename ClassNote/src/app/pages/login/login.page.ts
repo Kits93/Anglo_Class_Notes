@@ -9,6 +9,7 @@ import { LoginService } from 'src/app/services/login/login.service';
 
 import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
 import { ChangePasswordComponent } from 'src/app/components/change-password/change-password.component';
+import { state } from '@angular/animations';
 
 @Component({
   selector: 'app-login',
@@ -47,6 +48,7 @@ export class LoginPage implements OnInit {
       console.log(data);
       if (data.success == '1') {
         this.loginService.autorizarJwt(data.token);
+        console.log(data.id_usuario)
         this.presentToast('ok');
 
         this.authService.login(data.token)
@@ -56,7 +58,7 @@ export class LoginPage implements OnInit {
           this.router.navigate(['/home-admin', this.UserForm.value.username]);
         } else if (this.authService.isTeacher(data.token)) {
           console.log(this.UserForm.value.username)
-          this.router.navigate(['/turma', this.UserForm.value.username]);
+          this.router.navigate(['/turma'], { state: { id_usuario: data.id_usuario, username: this.UserForm.value.username } });
         } else {
           this.presentToast('error');
           console.log('Formulário inválido!');
@@ -105,5 +107,5 @@ export class LoginPage implements OnInit {
     });
     return await popover.present();
   }
-  
+
 }

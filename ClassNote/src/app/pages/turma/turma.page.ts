@@ -15,17 +15,23 @@ export class TurmaPage implements OnInit {
 
   constructor(private loadingCtrl: LoadingController, private authService: AuthenticationService, private router: Router, private route: ActivatedRoute, private turmasService: TurmaService) { }
 
+  id_usuario: any
   username: any
 
   ngOnInit() {
 
-    this.route.params.subscribe(params => {
-      this.username = params['username'].toUpperCase();
-      console.log(this.username)
-    });
+    if (window.history.state.id_usuario) {
+      this.id_usuario = window.history.state.id_usuario;
+      this.username = window.history.state.username;
+      console.log(this.id_usuario);
+      console.log(this.username);
+    } else {
+      console.error('ID da turma não definido');
+    }
 
-    this.filtrarTurmas()
     this.listar_turmas()
+    this.filtrarTurmas()
+
   }
 
   turmasFilter: any[] = []
@@ -41,12 +47,12 @@ export class TurmaPage implements OnInit {
   }
 
 
-isLoading: boolean = true
+  isLoading: boolean = true
   listar_turmas() {
     setTimeout(() => {
       this.isLoading = false
     }, 200);
-    
+
     this.turmasService.read().subscribe((dados: any) => {
       this.isLoading = true
       console.log(dados)
@@ -92,7 +98,7 @@ isLoading: boolean = true
   acessarTurma(id_turma: any, ensino: any) {
     console.log(id_turma);
     console.log(ensino);
-    this.router.navigate(['../turma-aulas'], { state: { id_turma: id_turma, ensino: ensino } });
+    this.router.navigate(['../turma-aulas'], { state: { id_turma: id_turma, ensino: ensino, id_usuario: this.id_usuario } });
   }
 
   logout() {

@@ -1,0 +1,30 @@
+.options-container {
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 4px;
+}
+
+.option {
+  width: 2em;
+  height: 2em;
+  border: 1px solid #1f80ffc2;
+  border-radius: 12px;
+  text-align: center;
+  cursor: pointer;
+  line-height: 2em;
+
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.selected {
+  background-color: #1f80ffee;
+  color: #fff;
+  opacity: 1;
+}
+
+mat-form-field{
+  width: 100%;
+}

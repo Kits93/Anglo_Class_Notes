@@ -16,7 +16,8 @@ export class CalendarComponent implements OnInit {
 
   @Output() dataEvent = new EventEmitter<string>();
 
-  todayformatted: any
+  todayformatted: any;
+
   constructor() {
     this.todayformatted = this.formatDate(new Date());
   }
@@ -43,11 +44,11 @@ export class CalendarComponent implements OnInit {
 
   dateFilter(date: Date | null): boolean {
     if (!date) return false; // Se não houver data, retorna false (bloqueia)
-    
+
     // Calcula a data de uma semana atrás
     const oneWeekAgo = new Date();
     oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
-    
+
     // Verifica se a data fornecida é um sábado (6), domingo (0) ou anterior a uma semana atrás
     const day = date.getDay();
     const isBeforeOneWeekAgo = date < oneWeekAgo;

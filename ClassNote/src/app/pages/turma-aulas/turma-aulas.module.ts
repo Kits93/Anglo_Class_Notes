@@ -8,6 +8,7 @@ import { TurmaAulasPage } from './turma-aulas.page';
 import { AulaService } from 'src/app/services/aula/aula.service';
 import { DisciplinaService } from 'src/app/services/disciplina/disciplina.service';
 import { TurmaService } from 'src/app/services/turma/turma.service';
+import { UsuarioService } from 'src/app/services/usuario/usuario.service';
 import { CalendarComponent } from 'src/app/components/calendar/calendar.component';
 import { FormAulaComponent } from 'src/app/components/form-aula/form-aula.component';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
@@ -28,7 +29,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     MatFormFieldModule,
     MatDatepickerModule
   ],
-  providers: [AulaService, TurmaService, DisciplinaService],
+  providers: [AulaService, TurmaService, DisciplinaService, UsuarioService],
   declarations: [TurmaAulasPage]
 })
 export class TurmaAulasPageModule { }

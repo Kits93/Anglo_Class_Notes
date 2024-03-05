@@ -6,6 +6,7 @@ import { TurmaService } from 'src/app/services/turma/turma.service';
 import { ModalController } from '@ionic/angular';
 
 import { FormAulaComponent } from 'src/app/components/form-aula/form-aula.component';
+import { FormNewAulaComponent } from 'src/app/components/form-new-aula/form-new-aula.component';
 
 @Component({
   selector: 'app-turma-aulas',
@@ -34,40 +35,56 @@ export class TurmaAulasPage implements OnInit {
     await modal.present();
 
     const { data } = await modal.onDidDismiss();
+    this.listar_aulas()
     console.log('Dados do formulário:', data);
   }
 
-  onRefresh() {
-    this.listar_aulas();
-  }
+  async openNewFormModal(id_usuario: any, id_turma: any, nome_turma: any, num_aula: any, data_aula: any) {
 
-  onfecharModal() {
-    this.modalCtrl.dismiss();
+    console.log(id_usuario, nome_turma, num_aula, data_aula)
+
+    const modal = await this.modalCtrl.create({
+      component: FormNewAulaComponent,
+      componentProps: {
+        idUsuario: id_usuario,
+        idTurma: id_turma,
+        nomeTurma: nome_turma,
+        numAula: num_aula,
+        dataAula: data_aula,
+      },
+      mode: 'ios'
+
+    });
+    await modal.present();
+
+    const { data } = await modal.onDidDismiss();
+    this.listar_aulas()
+    console.log('Dados do formulário:', data);
   }
 
   isLoaded: boolean = false
 
   id_turma: any
+  id_usuario: any
   nome_turma: any
-  data_selecionada: any
   aulas: any[] = []
   ensino: any
 
-
-
+  hoje: any
 
   ngOnInit(): void {
 
     if (window.history.state.id_turma) {
       this.id_turma = window.history.state.id_turma;
+      this.id_usuario = window.history.state.id_usuario;
       this.ensino = window.history.state.ensino;
       console.log(this.id_turma);
+      console.log(this.id_usuario);
       console.log(this.ensino);
     } else {
       console.error('ID da turma não definido');
     }
-
-    this.data_selecionada = "2024-02-26";
+    
     this.listar_aulas();
   }
 
@@ -79,7 +96,6 @@ export class TurmaAulasPage implements OnInit {
 
     this.listar_aulas();
   }
-
 
   goBack() {
     this.location.back()
@@ -119,12 +135,13 @@ export class TurmaAulasPage implements OnInit {
   }
 
 
-  selectAula(id: any, nome_turma: any) {
+  selectAula(id: any, nome_turma: any, num_aula: any) {
 
     if (id) {
       this.openFormModal(id, nome_turma)
     } else {
-      alert("olá alteravel")
+      this.openNewFormModal(this.id_usuario, this.id_turma, nome_turma, num_aula, this.dataSelected)
+      // passar num_aula, id_usuario, id_turma, data_aula/
     }
   }
 
