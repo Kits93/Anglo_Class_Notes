@@ -102,7 +102,7 @@ export class TurmaAulasPage implements OnInit {
   listar_aulas() {
     setTimeout(() => {
       this.isLoaded = false;
-    }, 100);
+    }, 200);
 
     if (this.id_turma && this.ensino) {
       console.log(this.dataSelected)

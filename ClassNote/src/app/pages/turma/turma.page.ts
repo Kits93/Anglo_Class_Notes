@@ -27,6 +27,7 @@ export class TurmaPage implements OnInit {
 
     console.log(this.usuario)
 
+    this.listar_turmas()
     this.filtrarTurmas()
 
   }
@@ -48,7 +49,7 @@ export class TurmaPage implements OnInit {
   listar_turmas() {
     setTimeout(() => {
       this.isLoading = false
-    }, 101);
+    }, 200);
     
     this.turmasService.read().subscribe((dados: any) => {
       this.isLoading = true
@@ -95,20 +96,11 @@ export class TurmaPage implements OnInit {
   acessarTurma(id_turma: any, ensino: any) {
     console.log(id_turma);
     console.log(ensino);
-    this.router.navigate(['../turma-aulas'], { state: { id_turma: id_turma, ensino: ensino, id_usuario: this.id_usuario } });
+    this.router.navigate(['../turma-aulas'], { state: { id_turma: id_turma, ensino: ensino} });
   }
 
   logout() {
     this.authService.logout
     this.router.navigate(['/login'])
   }
-
-  // async showLoading() {
-  //   const loading = await this.loadingCtrl.create({
-  //     message: 'Dismissing after 3 seconds...',
-  //     duration: 3000,
-  //   });
-
-  //   loading.present();
-  // }
 }

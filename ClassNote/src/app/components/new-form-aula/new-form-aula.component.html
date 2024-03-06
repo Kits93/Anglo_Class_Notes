@@ -17,9 +17,6 @@
           <mat-label>Professor</mat-label>
           <input minlength="3" matInput placeholder="Selecione o professor" formControlName="username" readonly>
           <mat-autocomplete #auto="matAutocomplete">
-            <mat-option *ngFor="let disciplina of filteredDisciplinas | async" [value]="disciplina">
-              {{ disciplina.username }}
-            </mat-option>
           </mat-autocomplete>
         </mat-form-field>
       </ion-item>
@@ -44,7 +41,7 @@
       <ion-item>
         <ion-icon name="document-text" slot="start"></ion-icon>
         <ion-label position="floating">Conteúdo</ion-label>
-        <ion-textarea type="text" rows="4" name="conteudo" formControlName="conteudo" required></ion-textarea>
+        <ion-textarea minLength="3" type="text" rows="4" name="conteudo" formControlName="conteudo" required></ion-textarea>
       </ion-item>
 
     </ion-list>

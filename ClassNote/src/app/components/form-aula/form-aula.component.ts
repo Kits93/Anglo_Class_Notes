@@ -130,7 +130,6 @@ export class FormAulaComponent implements OnInit {
       this.aulaService.update(form.value).subscribe((dados) => {
         console.log(dados)
       })
-      this.fecharModal()
     }
     this.modalCtrl.dismiss()
   }

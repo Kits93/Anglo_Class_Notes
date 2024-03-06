@@ -65,6 +65,8 @@ export class NewFormAulaComponent implements OnInit {
       data_aula: ['', Validators.required]
     });
 
+    
+
     this.FormData.patchValue({
       num_aula: this.numAula,
       id_turma: this.idTurma,
@@ -150,7 +152,10 @@ export class NewFormAulaComponent implements OnInit {
       this.aulaService.create(form.value).subscribe((dados) => {
         console.log(dados)
       })
+      this.modalCtrl.dismiss()
     }
-    this.modalCtrl.dismiss()
+    else {
+      console.log("algum dado incorreto!")
+    }
   }
 }
