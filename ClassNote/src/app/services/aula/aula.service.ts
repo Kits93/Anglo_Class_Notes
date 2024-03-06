@@ -13,7 +13,7 @@ export class AulaService {
   constructor(private httpClient: HttpClient) { }
 
   create(form: any){
-    return this.httpClient.post(this.API + `usuario/create_usuario.php`, form).pipe(
+    return this.httpClient.post(this.API + `aula/create_aula.php`, form).pipe(
       tap(aula => {
         console.log(aula);
       })
