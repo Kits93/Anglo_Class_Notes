@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { tap, catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
+import { UserData } from 'src/app/models/user-data.model';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class UsuarioService {
   constructor(private httpClient: HttpClient) { }
 
   read() {
-    return this.httpClient.get(this.API + 'usuario/read_usuario.php').pipe(
+    return this.httpClient.get<UserData[]>(this.API + 'usuario/read_usuario.php').pipe(
       tap(usuarios => {
         console.log(usuarios);
       })

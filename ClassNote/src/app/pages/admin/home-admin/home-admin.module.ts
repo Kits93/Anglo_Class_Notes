@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { MatTableModule } from '@angular/material/table';
 
 import { IonicModule } from '@ionic/angular';
 
@@ -24,6 +25,7 @@ import { HttpClientModule } from '@angular/common/http';
     FormsModule,
     IonicModule,
     HttpClientModule,
+    MatTableModule,
     HomeAdminPageRoutingModule
   ],
   providers: [UsuarioService],
