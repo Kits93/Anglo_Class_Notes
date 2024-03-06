@@ -6,7 +6,7 @@ import { TurmaService } from 'src/app/services/turma/turma.service';
 import { ModalController } from '@ionic/angular';
 
 import { FormAulaComponent } from 'src/app/components/form-aula/form-aula.component';
-import { FormNewAulaComponent } from 'src/app/components/form-new-aula/form-new-aula.component';
+import { NewFormAulaComponent } from 'src/app/components/new-form-aula/new-form-aula.component';
 
 @Component({
   selector: 'app-turma-aulas',
@@ -39,17 +39,15 @@ export class TurmaAulasPage implements OnInit {
     console.log('Dados do formulário:', data);
   }
 
-  async openNewFormModal(id_usuario: any, id_turma: any, nome_turma: any, num_aula: any, data_aula: any) {
 
-    console.log(id_usuario, nome_turma, num_aula, data_aula)
+  async openNewFormModal(num_aula: any, id_turma: any, nome_turma: any, data_aula: any) {
 
     const modal = await this.modalCtrl.create({
-      component: FormNewAulaComponent,
+      component: NewFormAulaComponent,
       componentProps: {
-        idUsuario: id_usuario,
+        numAula: num_aula,
         idTurma: id_turma,
         nomeTurma: nome_turma,
-        numAula: num_aula,
         dataAula: data_aula,
       },
       mode: 'ios'
@@ -104,7 +102,7 @@ export class TurmaAulasPage implements OnInit {
   listar_aulas() {
     setTimeout(() => {
       this.isLoaded = false;
-    }, 200);
+    }, 100);
 
     if (this.id_turma && this.ensino) {
       console.log(this.dataSelected)
@@ -135,13 +133,12 @@ export class TurmaAulasPage implements OnInit {
   }
 
 
-  selectAula(id: any, nome_turma: any, num_aula: any) {
+  selectAula(id: any, num_aula: any, nome_turma: any) {
 
     if (id) {
       this.openFormModal(id, nome_turma)
     } else {
-      this.openNewFormModal(this.id_usuario, this.id_turma, nome_turma, num_aula, this.dataSelected)
-      // passar num_aula, id_usuario, id_turma, data_aula/
+      this.openNewFormModal(num_aula, this.id_turma, nome_turma, this.dataSelected)
     }
   }
 

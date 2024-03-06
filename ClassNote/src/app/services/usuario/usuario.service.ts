@@ -22,8 +22,7 @@ export class UsuarioService {
   }
 
   readOne(id_user: any) {
-    // Modificado para usar HttpClient.get() com parâmetro na URL
-    return this.httpClient.get(this.API + `usuario/readOne_usuario.php?id_user=${id_user}`).pipe(
+    return this.httpClient.post(this.API + `usuario/readOne_usuario.php`, id_user).pipe(
       tap(usuario => {
         console.log(usuario);
       })

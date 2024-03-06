@@ -48,17 +48,17 @@ export class LoginPage implements OnInit {
       console.log(data);
       if (data.success == '1') {
         this.loginService.autorizarJwt(data.token);
-        console.log(data.id_usuario)
+        localStorage.setItem('usuario', JSON.stringify(data.usuario))
         this.presentToast('ok');
 
         this.authService.login(data.token)
 
         if (this.authService.isAdmin(data.token)) {
           console.log(this.UserForm.value.username)
-          this.router.navigate(['/home-admin', this.UserForm.value.username]);
+          this.router.navigate(['/home-admin']);
         } else if (this.authService.isTeacher(data.token)) {
           console.log(this.UserForm.value.username)
-          this.router.navigate(['/turma'], { state: { id_usuario: data.id_usuario, username: this.UserForm.value.username } });
+          this.router.navigate(['/turma']);
         } else {
           this.presentToast('error');
           console.log('Formulário inválido!');

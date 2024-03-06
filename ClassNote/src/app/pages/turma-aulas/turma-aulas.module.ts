@@ -14,6 +14,7 @@ import { FormAulaComponent } from 'src/app/components/form-aula/form-aula.compon
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { UsuarioService } from 'src/app/services/usuario/usuario.service';
 
 
 @NgModule({

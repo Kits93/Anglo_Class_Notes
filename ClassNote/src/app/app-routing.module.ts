@@ -32,7 +32,7 @@ const routes: Routes = [
     loadChildren: () => import('./pages/cadastro-aula/cadastro-aula.module').then(m => m.CadastroAulaPageModule), canActivate: [AccessPermissionGuard, CheckTeacherTypeGuard]
   },
   {
-    path: 'home-admin/:username',
+    path: 'home-admin',
     loadChildren: () => import('./pages/admin/home-admin/home-admin.module').then(m => m.HomeAdminPageModule), canActivate: [AccessPermissionGuard, CheckAdminTypeGuard]
   },
   {
@@ -48,7 +48,7 @@ const routes: Routes = [
     loadChildren: () => import('./pages/admin/gerenciar-usuarios/gerenciar-usuarios.module').then(m => m.GerenciarUsuariosPageModule), canActivate: [AccessPermissionGuard, CheckAdminTypeGuard]
   },
   {
-    path: 'usuario/:id_user',
+    path: 'usuario/',
     loadChildren: () => import('./pages/admin/usuario/usuario.module').then(m => m.UsuarioPageModule), canActivate: [AccessPermissionGuard, CheckAdminTypeGuard]
   },
   {

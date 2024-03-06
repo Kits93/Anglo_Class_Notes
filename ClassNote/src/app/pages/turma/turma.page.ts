@@ -15,21 +15,18 @@ export class TurmaPage implements OnInit {
 
   constructor(private loadingCtrl: LoadingController, private authService: AuthenticationService, private router: Router, private route: ActivatedRoute, private turmasService: TurmaService) { }
 
-  id_usuario: any
-  username: any
+  objLocal: any
+  usuario: any = []
 
   ngOnInit() {
 
-    if (window.history.state.id_usuario) {
-      this.id_usuario = window.history.state.id_usuario;
-      this.username = window.history.state.username;
-      console.log(this.id_usuario);
-      console.log(this.username);
-    } else {
-      console.error('ID da turma não definido');
-    }
+    
 
-    this.listar_turmas()
+    this.objLocal = (localStorage.getItem('usuario'))
+    this.usuario = this.objLocal ? JSON.parse(this.objLocal) : []
+
+    console.log(this.usuario)
+
     this.filtrarTurmas()
 
   }
@@ -51,8 +48,8 @@ export class TurmaPage implements OnInit {
   listar_turmas() {
     setTimeout(() => {
       this.isLoading = false
-    }, 200);
-
+    }, 101);
+    
     this.turmasService.read().subscribe((dados: any) => {
       this.isLoading = true
       console.log(dados)

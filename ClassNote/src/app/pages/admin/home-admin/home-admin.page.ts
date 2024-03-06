@@ -22,18 +22,24 @@ export class HomeAdminPage implements OnInit {
 
   constructor(private authService: AuthenticationService, private router: Router, private route: ActivatedRoute, private platform: Platform) { }
 
-  ngOnInit(): void {
+  objLocal: any
+  usuario: any = []
+
+  ngOnInit() {
+    this.objLocal = (localStorage.getItem('usuario'))
+    this.usuario = this.objLocal ? JSON.parse(this.objLocal) : []
+
+    console.log(this.usuario)
+
+
     this.onResize(null); // Executa a verificação inicial de tamanho da tela
 
-    this.route.params.subscribe(params => {
-      this.username = params['username'].toUpperCase();
-      console.log(this.username)
-    });
+
   }
 
   selectedItem: any
 
-  setItemMenu(item: any){
+  setItemMenu(item: any) {
     this.selectedItem = item
   }
 
