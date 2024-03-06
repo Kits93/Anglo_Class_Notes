@@ -15,14 +15,17 @@ export class TurmaPage implements OnInit {
 
   constructor(private loadingCtrl: LoadingController, private authService: AuthenticationService, private router: Router, private route: ActivatedRoute, private turmasService: TurmaService) { }
 
-  username: any
+  objLocal: any
+  usuario: any = []
 
   ngOnInit() {
 
-    this.route.params.subscribe(params => {
-      this.username = params['username'].toUpperCase();
-      console.log(this.username)
-    });
+    
+
+    this.objLocal = (localStorage.getItem('usuario'))
+    this.usuario = this.objLocal ? JSON.parse(this.objLocal) : []
+
+    console.log(this.usuario)
 
     this.filtrarTurmas()
     this.listar_turmas()
@@ -45,7 +48,7 @@ isLoading: boolean = true
   listar_turmas() {
     setTimeout(() => {
       this.isLoading = false
-    }, 200);
+    }, 101);
     
     this.turmasService.read().subscribe((dados: any) => {
       this.isLoading = true

@@ -16,7 +16,7 @@
         style="display: flex; justify-content: end;"></app-calendar>
     </div>
     <div *ngFor="let aula of aulas">
-      <ion-item (click)="selectAula(aula.id_aula, nome_turma)" style="cursor: pointer;">
+      <ion-item (click)="selectAula(aula.id_aula, aula.num_aula, nome_turma)" style="cursor: pointer;">
 
         <ion-label *ngIf="isLoaded">
           <ion-skeleton-text [animated]="true" style="width: 40px"></ion-skeleton-text>

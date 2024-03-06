@@ -12,8 +12,12 @@ export class AulaService {
 
   constructor(private httpClient: HttpClient) { }
 
-  create(aula: any[]) {
-    return this.httpClient.post(this.API + 'aula/create_aula.php', aula);
+  create(form: any){
+    return this.httpClient.post(this.API + `usuario/create_usuario.php`, form).pipe(
+      tap(aula => {
+        console.log(aula);
+      })
+    );
   }
 
   read(data: any) {
@@ -27,6 +31,5 @@ export class AulaService {
   update(aula: any[]) {
     return this.httpClient.put(this.API + 'aula/update_aula.php', aula);
   }
-
 
 }
