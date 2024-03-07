@@ -6,6 +6,7 @@ import { DisciplinasComponent } from 'src/app/components/home-admin/disciplinas/
 import { InicioComponent } from 'src/app/components/home-admin/inicio/inicio.component';
 import { TurmasComponent } from 'src/app/components/home-admin/turmas/turmas.component';
 import { UsuariosComponent } from 'src/app/components/home-admin/usuarios/usuarios.component';
+import { MyAccountComponent } from 'src/app/components/home-admin/my-account/my-account.component';
 
 const routes: Routes = [
   {
@@ -16,6 +17,7 @@ const routes: Routes = [
       { path: 'turmas', component: TurmasComponent },
       { path: 'disciplinas', component: DisciplinasComponent },
       { path: 'usuarios', component: UsuariosComponent },
+      { path: 'my-account', component: MyAccountComponent },
       { path: '', redirectTo: 'inicio', pathMatch: 'full' }
     ]
   }

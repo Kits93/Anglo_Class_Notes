@@ -125,12 +125,11 @@ export class NewFormAulaComponent implements OnInit {
   }
 
   private _filterDisciplinas(value: string): any[] {
-    console.log(value)
-    return this.disciplinas.filter(disciplina => disciplina.nome_disciplina);
+    const filterValue = value.toLowerCase();
+    return this.disciplinas.filter(disciplina => disciplina.nome_disciplina.toLowerCase().includes(filterValue));
   }
 
   displayFn(disciplina: any): string {
-    console.log(disciplina)
     return disciplina && disciplina.nome_disciplina ? disciplina.nome_disciplina : '';
   }
 
@@ -151,8 +150,8 @@ export class NewFormAulaComponent implements OnInit {
 
       this.aulaService.create(form.value).subscribe((dados) => {
         console.log(dados)
+        this.modalCtrl.dismiss()
       })
-      this.modalCtrl.dismiss()
     }
     else {
       console.log("algum dado incorreto!")

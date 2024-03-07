@@ -1,5 +1,57 @@
-<p>
-  turmas works!
-</p>
+<ion-content>
+  <ion-row>
+    <ion-col mode="md" size="12" class="ion-justify-content-center ion-text-center">
+      <ion-row>
+        <ion-col>
+          <ion-title>Turmas</ion-title>
+        </ion-col>
+      </ion-row>
 
+      <ion-row>
+        <ion-col>
+          <ion-accordion-group>
+            <ng-container *ngFor="let ensino of ensinos">
+              <ion-accordion [value]="ensino.tipo_ensino" [ngClass]="getAccordionEnsinoClass(ensino.tipo_ensino)">
+                <ion-item slot="header">
+                  <ion-title>{{ ensino.tipo_ensino }}</ion-title>
+                </ion-item>
+                <div class="ion-padding" slot="content">
+                  <ion-list lines="none">
+                    <ion-item *ngFor="let turma of ensino.turmas">
+
+                      <ion-card style="width: 100%;" [ngClass]="getEnsinoClass(ensino.tipo_ensino)">
+                        <ion-card-header>
+                          <ion-card-title>
+                            {{ turma.nome_turma }}
+                          </ion-card-title>
+                        </ion-card-header>
+                        <ion-card-content>
+                          {{ turma.ensino }}
+                          -
+                          {{ turma.turno }}
+                        </ion-card-content>
+                      </ion-card>
+
+                    </ion-item>
+                  </ion-list>
+                </div>
+              </ion-accordion>
+            </ng-container>
+          </ion-accordion-group>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <ion-fab>
+            <ion-fab-button style="display: flex; position: fixed; bottom: 10px; right: 10px;">
+              <ion-icon name="add-outline"></ion-icon>
+            </ion-fab-button>
+          </ion-fab>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+  </ion-row>
+
+</ion-content>
 <router-outlet></router-outlet>

@@ -24,13 +24,15 @@ export class UsuariosComponent implements OnInit {
     this.usuarioService.read().subscribe((dados: any) => {
       if (dados && dados.success === 1 && dados.usuarios) {
         this.usuariosListados = dados.usuarios;
-        this.dataSource.data = this.usuariosListados; // Atribui os dados ao dataSource
+        this.dataSource.data = this.usuariosListados;
       } else {
         this.usuariosListados = [];
-        this.dataSource.data = []; // Atualiza o dataSource com um array vazio
-        // Aqui você pode adicionar uma mensagem de erro
+        this.dataSource.data = [];
         console.error('Erro ao carregar usuários.');
       }
     });
   }
+
+  
+
 }

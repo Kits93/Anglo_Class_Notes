@@ -9,7 +9,7 @@ ion-list-header {
   font-size: 18px;
 }
 
-ion-item:hover {
+.menu-item-active {
   transition: 0.5s;
   outline: 1px solid var(--ion-color-primary);
   color: #269bdf;
