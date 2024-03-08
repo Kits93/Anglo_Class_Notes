@@ -1,0 +1,14 @@
+.table-row:hover {
+  transition: 0.2s;
+  background: #8a8a8a2c;
+  cursor: pointer;
+
+  .table-icon{
+    color: var(--ion-color-primary);
+  }
+}
+
+.custom-modal {
+  max-height: 100%;
+  width: 90%;
+}

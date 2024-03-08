@@ -1,0 +1,75 @@
+<ion-content style="height: 100%; justify-content: center; align-items: center;">
+  <ion-row>
+    <ion-col size="12" class="ion-text-center">
+      <form [formGroup]="form" (ngSubmit)="createUser(form)">
+
+        <ion-list lines="none">
+          <div style="display: flex; justify-content: center; align-items: center;">
+            <ion-avatar style="width: 100px; height: 100px; margin-bottom: 10px;"
+              *ngIf="form.get('username')?.value !== null">
+              <ion-img [src]="'https://ui-avatars.com/api/?name=' + gerarSVG(form.get('username')?.value)"></ion-img>
+            </ion-avatar>
+          </div>
+
+          <!-- Username -->
+          <div>
+            <mat-form-field style="width: 60%;" class="example-full-width">
+              <mat-label>Username</mat-label>
+              <input matInput placeholder="Digite seu nome e sobrenome" formControlName="username">
+              <mat-error *ngIf="form.get('username')?.hasError('required')">Username é obrigatório</mat-error>
+            </mat-form-field>
+          </div>
+
+          <!-- E-mail -->
+          <div>
+            <mat-form-field style="width: 60%;" class="example-full-width">
+              <mat-label>E-mail</mat-label>
+              <input matInput placeholder="Digite seu e-mail" formControlName="email">
+              <mat-error *ngIf="form.get('email')?.hasError('required')">E-mail é obrigatório</mat-error>
+              <mat-error *ngIf="form.get('email')?.hasError('email')">E-mail inválido</mat-error>
+            </mat-form-field>
+          </div>
+
+          <!-- Password -->
+          <div>
+            <mat-form-field style="width: 60%;" class="example-full-width">
+              <mat-label>Password</mat-label>
+              <input matInput placeholder="Digite sua senha" type="password" formControlName="password">
+              <mat-error *ngIf="form.get('password')?.hasError('required')">Senha é obrigatória</mat-error>
+              <mat-error *ngIf="form.get('password')?.hasError('minlength')">Senha deve ter pelo menos 8
+                caracteres</mat-error>
+            </mat-form-field>
+          </div>
+
+          <!-- Confirm Password -->
+          <div>
+            <mat-form-field style="width: 60%;" class="example-full-width">
+              <mat-label>Confirm Password</mat-label>
+              <input matInput placeholder="Confirmar senha" type="password" formControlName="confirmPassword">
+              <mat-error *ngIf="form.get('confirmPassword')?.hasError('required')">Confirmação de senha é
+                obrigatória</mat-error>
+              <mat-error *ngIf="form.get('confirmPassword')?.hasError('passwordMismatch')">
+                Senhas não correspondentes
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div>
+            <mat-radio-group formControlName="role" style="width: 60%; text-align: justify;" aria-label="Select an option">
+              <mat-radio-button value="admin">Admin</mat-radio-button>
+              <mat-radio-button value="professor">Professor</mat-radio-button>
+              <mat-radio-button value="monitor">Monitor</mat-radio-button>
+            </mat-radio-group>
+          </div>
+          
+
+          <!-- Botão de Enviar -->
+          <div>
+            <ion-button type="submit" [disabled]="form.invalid">Enviar</ion-button>
+          </div>
+        </ion-list>
+
+      </form>
+    </ion-col>
+  </ion-row>
+</ion-content>

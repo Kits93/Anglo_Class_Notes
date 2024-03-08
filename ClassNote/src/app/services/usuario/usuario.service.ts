@@ -14,6 +14,10 @@ export class UsuarioService {
 
   constructor(private httpClient: HttpClient) { }
 
+  create(usuario: any){
+    return this.httpClient.post(this.API + 'usuario/create_usuario.php', usuario)
+  }
+
   read() {
     return this.httpClient.get<UserData[]>(this.API + 'usuario/read_usuario.php').pipe(
       tap(usuarios => {
@@ -34,8 +38,13 @@ export class UsuarioService {
     return this.httpClient.put(this.API + `usuario/update_usuario.php`, userData);
   }
 
-  changePassword(){
-    
+  generateInitials(name: string): string {
+    const words = name.split(' ');
+    if (words.length === 1) {
+      return words[0].charAt(0).toUpperCase();
+    }
+    const initials = words[0].charAt(0) + words[words.length - 1].charAt(0);
+    return initials.toUpperCase();
   }
-  
+
 }

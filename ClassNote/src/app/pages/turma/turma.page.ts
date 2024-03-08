@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { TurmaService } from 'src/app/services/turma/turma.service';
 import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
 import { LoadingController } from '@ionic/angular';
+import { UsuarioService } from 'src/app/services/usuario/usuario.service';
 
 @Component({
   selector: 'app-turma',
@@ -13,7 +14,7 @@ export class TurmaPage implements OnInit {
 
   turmas: any[] = []
 
-  constructor(private loadingCtrl: LoadingController, private authService: AuthenticationService, private router: Router, private route: ActivatedRoute, private turmasService: TurmaService) { }
+  constructor(private loadingCtrl: LoadingController, private authService: AuthenticationService, private router: Router, private route: ActivatedRoute, private turmasService: TurmaService, private usuarioService: UsuarioService) { }
 
   objLocal: any
   usuario: any = []
@@ -103,4 +104,10 @@ export class TurmaPage implements OnInit {
     this.authService.logout
     this.router.navigate(['/login'])
   }
+
+  gerarSVG(username: any) {
+    const initials = this.usuarioService.generateInitials(username)
+    return initials
+  }
+
 }

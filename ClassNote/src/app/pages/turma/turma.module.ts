@@ -9,6 +9,7 @@ import { TurmaPageRoutingModule } from './turma-routing.module';
 
 import { TurmaPage } from './turma.page';
 import { TurmaService } from 'src/app/services/turma/turma.service';
+import { UsuarioService } from 'src/app/services/usuario/usuario.service';
 
 @NgModule({
   imports: [
@@ -18,7 +19,7 @@ import { TurmaService } from 'src/app/services/turma/turma.service';
     TurmaPageRoutingModule,
     HttpClientModule
   ],
-  providers: [TurmaService],
+  providers: [TurmaService, UsuarioService],
   declarations: [TurmaPage]
 })
 export class TurmaPageModule { }

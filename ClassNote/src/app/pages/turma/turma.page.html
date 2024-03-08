@@ -7,7 +7,9 @@
     <ion-toolbar>
       <ion-row>
         <ion-col size="3">
-          <img src=".././../../../assets/img/logo-anglo-tatui.png" alt="logo-anglo-tatui">
+          <ion-avatar style="width: 45px; height: 45px; margin: 5px;" *ngIf="usuario.username">
+            <ion-img [src]="'https://ui-avatars.com/api/?name=' + gerarSVG(usuario.username)"></ion-img>
+          </ion-avatar>
         </ion-col>
         <ion-col style="margin: auto;" size="9">Bem vindo, {{usuario.username}}</ion-col>
       </ion-row>

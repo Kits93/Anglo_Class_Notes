@@ -2,7 +2,7 @@ import { Component, OnInit, HostListener } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Platform } from '@ionic/angular';
 import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
-
+import { UsuarioService } from 'src/app/services/usuario/usuario.service';
 
 @Component({
   selector: 'app-home-admin',
@@ -20,7 +20,7 @@ export class HomeAdminPage implements OnInit {
 
   username: any
 
-  constructor(private authService: AuthenticationService, private router: Router, private route: ActivatedRoute, private platform: Platform) { }
+  constructor(private authService: AuthenticationService, private usuarioService: UsuarioService, private router: Router, private route: ActivatedRoute, private platform: Platform) { }
 
   objLocal: any
   usuario: any = []
@@ -46,6 +46,11 @@ export class HomeAdminPage implements OnInit {
   logout() {
     this.authService.logout
     this.router.navigate(['/login'])
+  }
+
+  gerarSVG(username: any) {
+    const initials = this.usuarioService.generateInitials(username)
+    return initials
   }
 
 }
