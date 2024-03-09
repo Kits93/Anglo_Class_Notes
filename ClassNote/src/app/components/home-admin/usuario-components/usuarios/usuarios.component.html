@@ -24,14 +24,21 @@
         <td mat-cell *matCellDef="let element">{{element.username}}</td>
       </ng-container>
 
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef>e-mail</th>
+        <td mat-cell *matCellDef="let element"> email.email.com </td>
+      </ng-container>
+
       <ng-container matColumnDef="role">
         <th mat-header-cell *matHeaderCellDef>role</th>
         <td mat-cell *matCellDef="let element">{{element.role}}</td>
       </ng-container>
 
-      <ng-container matColumnDef="password">
-        <th mat-header-cell *matHeaderCellDef>password</th>
-        <td mat-cell *matCellDef="let element"> ******** </td>
+      <ng-container matColumnDef="delete">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let element">
+          <ion-icon class="delete-icon" name="person-remove-outline"></ion-icon>
+        </td>
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

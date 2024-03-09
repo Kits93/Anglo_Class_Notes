@@ -27,6 +27,7 @@ export class FormEditUsuarioComponent implements OnInit {
 
   form!: FormGroup;
   changePassword: boolean = false;
+  password: any
 
   constructor(private fb: FormBuilder, private usuarioService: UsuarioService) { }
 
@@ -35,8 +36,11 @@ export class FormEditUsuarioComponent implements OnInit {
       username: [this.Usuario.username, Validators.minLength(3)],
       email: [this.Usuario.username, [Validators.required, Validators.email]],
       password: [this.Usuario.password, Validators.minLength(8)],
-      confirmPassword: ['', Validators.minLength(8)]
+      new: ['', Validators.minLength(8)],
+      confirmNewPassword: ['', Validators.minLength(8)]
     });
+
+    this.password = this.form.value.password
   }
 
   createUser(form: any) {

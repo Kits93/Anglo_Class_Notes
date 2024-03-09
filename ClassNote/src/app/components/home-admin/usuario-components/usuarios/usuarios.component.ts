@@ -13,7 +13,7 @@ import { FormEditUsuarioComponent } from '../form-edit-usuario/form-edit-usuario
 })
 export class UsuariosComponent implements OnInit {
   dataSource!: MatTableDataSource<UserData>;
-  displayedColumns: string[] = ['action', 'username', 'role', 'password'];
+  displayedColumns: string[] = ['action', 'username', 'email', 'role', 'delete'];
   usuariosListados: UserData[] = [];
 
   constructor(private usuarioService: UsuarioService, private modalCtrl: ModalController) { }

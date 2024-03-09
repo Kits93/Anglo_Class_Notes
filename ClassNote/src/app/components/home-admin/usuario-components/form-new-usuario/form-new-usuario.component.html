@@ -5,7 +5,7 @@
 
         <ion-list lines="none">
           <div style="display: flex; justify-content: center; align-items: center;">
-            <ion-avatar style="width: 100px; height: 100px; margin-bottom: 10px;"
+            <ion-avatar style="width: 100px; height: 100px; margin-bottom: 10px; margin-top: 10px;"
               *ngIf="form.get('username')?.value !== null">
               <ion-img [src]="'https://ui-avatars.com/api/?name=' + gerarSVG(form.get('username')?.value)"></ion-img>
             </ion-avatar>
