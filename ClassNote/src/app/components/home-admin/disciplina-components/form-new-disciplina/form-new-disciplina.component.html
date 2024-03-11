@@ -1,0 +1,17 @@
+<ion-content>
+  <ion-row>
+    <ion-col>
+
+      <form [formGroup]="formNewDisciplina">
+        <div>
+          <mat-form-field style="width: 60%;" class="example-full-width">
+            <mat-label>Username</mat-label>
+            <input matInput placeholder="Digite seu nome e sobrenome" formControlName="username">
+            <mat-error *ngIf="form.get('username')?.hasError('required')">Username é obrigatório</mat-error>
+          </mat-form-field>
+        </div>
+      </form>
+
+    </ion-col>
+  </ion-row>
+</ion-content>

@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
+import { PopoverController } from '@ionic/angular';
 import { Disciplina } from 'src/app/models/disciplina.model';
 import { DisciplinaService } from 'src/app/services/disciplina/disciplina.service';
+import { FormNewDisciplinaComponent } from '../form-new-disciplina/form-new-disciplina.component';
 
 @Component({
   selector: 'app-disciplinas',
@@ -13,7 +15,7 @@ export class DisciplinasComponent implements OnInit {
   displayedColumns: string[] = ['Disciplina', 'edit_create', 'delete'];
   disciplinasListadas: Disciplina[] = [];
 
-  constructor(private disciplinaService: DisciplinaService) { }
+  constructor(private disciplinaService: DisciplinaService, private popoverCtrl: PopoverController) { }
 
   ngOnInit() {
     this.dataSource = new MatTableDataSource<Disciplina>([]); // Inicializa com um array vazio de UserData
@@ -33,6 +35,14 @@ export class DisciplinasComponent implements OnInit {
     });
   }
 
+  async openNewFormPopover(ev: any) {
+    const popover = await this.popoverCtrl.create({
+      component: FormNewDisciplinaComponent,
+      event: ev,
+      translucent: true
+    });
+    return await popover.present();
+  }
 
 
 }

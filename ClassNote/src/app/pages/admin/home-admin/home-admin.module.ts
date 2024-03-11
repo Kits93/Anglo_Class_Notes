@@ -11,7 +11,7 @@ import { HomeAdminPageRoutingModule } from './home-admin-routing.module';
 import { HomeAdminPage } from './home-admin.page';
 
 import { InicioComponent } from 'src/app/components/home-admin/inicio/inicio.component';
-import { DisciplinasComponent } from 'src/app/components/home-admin/disciplinas/disciplinas.component';
+import { DisciplinasComponent } from 'src/app/components/home-admin/disciplina-components/disciplinas/disciplinas.component';
 import { TurmasComponent } from 'src/app/components/home-admin/turmas/turmas.component';
 import { MyAccountComponent } from 'src/app/components/home-admin/my-account/my-account.component';
 import { UsuarioService } from 'src/app/services/usuario/usuario.service';

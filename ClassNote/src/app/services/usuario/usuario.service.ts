@@ -14,7 +14,7 @@ export class UsuarioService {
 
   constructor(private httpClient: HttpClient) { }
 
-  create(usuario: any){
+  create(usuario: any) {
     return this.httpClient.post(this.API + 'usuario/create_usuario.php', usuario)
   }
 
@@ -37,6 +37,10 @@ export class UsuarioService {
   update(userData: any) {
     return this.httpClient.put(this.API + `usuario/update_usuario.php`, userData);
   }
+
+  delete(id_user: any) {
+    return this.httpClient.delete(this.API + `usuario/delete_usuario.php?id_usuario=${id_user}`);
+  }  
 
   generateInitials(name: string): string {
     const words = name.split(' ');

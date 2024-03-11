@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { UsuarioService } from 'src/app/services/usuario/usuario.service';
 import { UserData } from 'src/app/models/user-data.model';
-import { ModalController } from '@ionic/angular';
+import { AlertController, ModalController } from '@ionic/angular';
 import { FormNewUsuarioComponent } from '../form-new-usuario/form-new-usuario.component';
 import { FormEditUsuarioComponent } from '../form-edit-usuario/form-edit-usuario.component';
 
@@ -16,10 +16,10 @@ export class UsuariosComponent implements OnInit {
   displayedColumns: string[] = ['action', 'username', 'email', 'role', 'delete'];
   usuariosListados: UserData[] = [];
 
-  constructor(private usuarioService: UsuarioService, private modalCtrl: ModalController) { }
+  constructor(private usuarioService: UsuarioService, private modalCtrl: ModalController, private alertCtrl: AlertController) { }
 
   ngOnInit() {
-    this.dataSource = new MatTableDataSource<UserData>([]); // Inicializa com um array vazio de UserData
+    this.dataSource = new MatTableDataSource<UserData>([]);
     this.listarUsuarios();
   }
 
@@ -36,13 +36,47 @@ export class UsuariosComponent implements OnInit {
     });
   }
 
+  handleRowClick(event: MouseEvent, row: UserData) {
+    const target = event.target as HTMLElement;
+    if (!target.classList.contains('delete-icon')) {
+      this.inspectUser(row);
+    }
+  }
+
   inspectUser(row: UserData) {
     console.log(row)
     this.openEditUsuarioForm(row)
   }
+
   createUser() {
-    console.log()
     this.openNewUsuarioForm()
+  }
+
+  async deleteUser(id_user: any) {
+    console.log(id_user)
+    const alert = await this.alertCtrl.create({
+      header: 'Confirmação',
+      message: 'Tem certeza que deseja excluir este usuário?',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          handler: () => {
+            console.log('Exclusão cancelada');
+          }
+        },
+        {
+          text: 'Excluir',
+          handler: () => {
+            this.usuarioService.delete(id_user).subscribe(() => {
+              this.listarUsuarios(); // Atualiza a lista de usuários após a exclusão
+            });
+          }
+        }
+      ]
+    });
+
+    await alert.present();
   }
 
   async openNewUsuarioForm() {
@@ -50,8 +84,12 @@ export class UsuariosComponent implements OnInit {
       component: FormNewUsuarioComponent,
       cssClass: 'custom-modal',
       mode: 'ios',
-      
     });
+
+    modal.onDidDismiss().then(() => {
+      console.log('Modal de novo usuário fechado')
+    })
+
     await modal.present();
   }
 
@@ -61,11 +99,14 @@ export class UsuariosComponent implements OnInit {
       componentProps: { Usuario: usuario },
       cssClass: 'custom-modal',
       mode: 'ios',
-      
     });
+
+    modal.onDidDismiss().then(() => {
+      console.log('Modal de edição de usuário fechado')
+    })
+
     await modal.present();
   }
-
 
   gerarSVG(username: any) {
     const initials = this.usuarioService.generateInitials(username)

@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { IonicModule } from '@ionic/angular';
+import { IonicModule, ModalController } from '@ionic/angular';
 import { UsuarioService } from 'src/app/services/usuario/usuario.service';
 import { MatRadioModule } from '@angular/material/radio';
 
@@ -27,13 +27,13 @@ export class FormNewUsuarioComponent implements OnInit {
 
   form!: FormGroup;
 
-  constructor(private fb: FormBuilder, private usuarioService: UsuarioService) { }
+  constructor(private fb: FormBuilder, private usuarioService: UsuarioService, private modalCtrl: ModalController) { }
 
   ngOnInit() {
     this.form = this.fb.group({
       username: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(8)]],
+      password: ['', [Validators.required, Validators.minLength(3)]],
       confirmPassword: ['', Validators.required],
       role: ['', Validators.required]
     }, {
@@ -59,7 +59,9 @@ export class FormNewUsuarioComponent implements OnInit {
     }
   }
 
-
+  back() {
+    this.modalCtrl.dismiss()
+  }
 
   gerarSVG(username: any) {
     const initials = this.usuarioService.generateInitials(username)

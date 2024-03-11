@@ -12,8 +12,8 @@ export class DisciplinaService {
 
   constructor(private httpClient: HttpClient) { }
 
-  post(disciplina:any){
-  return this.httpClient.post(this.API + 'disciplina/create_disciplina.php', disciplina[0]);
+  create(disciplina:any){
+  return this.httpClient.post(this.API + 'disciplina/create_disciplina.php', disciplina);
   }
 
   read() {

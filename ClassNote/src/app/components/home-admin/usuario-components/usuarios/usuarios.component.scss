@@ -3,7 +3,7 @@
   background: #8a8a8a2c;
   cursor: pointer;
 
-  .table-icon{
+  .table-icon {
     color: var(--ion-color-primary);
   }
 }
@@ -13,15 +13,16 @@
   width: 90%;
 }
 
-.delete-icon{
+.delete-icon {
+  display: inline-block;
   padding: 8px;
   border-radius: 20px;
   opacity: 0.5;
 }
 
-.delete-icon:hover{
-  transition: 0.5s;
+.delete-icon:hover {
+  transition: 0.5s all ease;
+  opacity: 1;
   color: #fff;
-  background-color: red;
+  background-color: rgba(255, 0, 0, 0.589);
 }
-
