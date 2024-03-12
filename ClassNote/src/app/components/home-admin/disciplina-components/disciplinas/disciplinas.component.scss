@@ -2,3 +2,47 @@
   display: flex;
   align-items: center;
 }
+
+.delete-icon {
+  display: inline-block;
+  padding: 8px;
+  border-radius: 20px;
+  opacity: 0.5;
+}
+
+.delete-icon:hover {
+  transition: 0.5s all ease;
+  opacity: 1;
+  color: #fff;
+  background-color: rgba(255, 0, 0, 0.589);
+}
+
+.edit-icon {
+  display: inline-block;
+  padding: 8px;
+  border-radius: 20px;
+  opacity: 0.5;
+}
+
+.edit-icon:hover {
+  transition: 0.5s all ease;
+  opacity: 1;
+  color: #fff;
+  background-color: rgba(0, 153, 255, 0.589);
+}
+
+.table-container {
+  border-radius: 20px;
+  max-height: 40em;
+  overflow-y: auto;
+}
+
+.table-row:hover {
+  transition: 0.3s;
+  background: #8a8a8a2c;
+  cursor: pointer;
+
+  .table-icon {
+    color: var(--ion-color-primary);
+  }
+}

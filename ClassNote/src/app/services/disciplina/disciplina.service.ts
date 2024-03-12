@@ -17,4 +17,12 @@ export class DisciplinaService {
   read() {
     return this.httpClient.get(this.API + 'disciplina/read_disciplina.php');
   }
+
+  update(disciplina: any) {
+    return this.httpClient.put(this.API + `disciplina/update_disciplina.php`, disciplina)
+  }
+  
+  delete(id_disciplina: any) {
+    return this.httpClient.delete(this.API + `disciplina/delete_disciplina.php?id_disciplina=${id_disciplina}`)
+  }
 }

@@ -9,6 +9,7 @@ import { MatInputModule } from '@angular/material/input';
 import { IonicModule, ModalController } from '@ionic/angular';
 import { Observable, startWith, map } from 'rxjs';
 import { AulaService } from 'src/app/services/aula/aula.service';
+import { ComunicationService } from 'src/app/services/comunication/comunication.service';
 import { DisciplinaService } from 'src/app/services/disciplina/disciplina.service';
 import { UsuarioService } from 'src/app/services/usuario/usuario.service';
 
@@ -42,7 +43,8 @@ export class NewFormAulaComponent implements OnInit {
     private aulaService: AulaService,
     private usuarioService: UsuarioService,
     private disciplinaService: DisciplinaService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private comunicationService: ComunicationService
   ) { }
 
   objLocal: any
@@ -84,32 +86,6 @@ export class NewFormAulaComponent implements OnInit {
   disciplinas: any[] = [];
   filteredDisciplinas: Observable<any[]> | undefined;
 
-  // listDadosForm() {
-  //   this.aulaService.readOnce(this.idAula).subscribe((dados: any) => {
-  //     console.log(dados);
-
-  //     this.aulaSelecionada = dados.aula;
-
-  //     if (!dados.success || dados.success != 1) {
-  //       this.aulaSelecionada = {};
-  //       console.log(dados.message);
-  //     }
-
-  //     this.FormData.patchValue({
-  //       id_aula: this.idAula,
-  //       num_aula: this.aulaSelecionada.num_aula,
-  //       id_usuario: this.aulaSelecionada.fk_id_usuario,
-  //       username: this.aulaSelecionada.username,
-  //       id_disciplina: this.aulaSelecionada.fk_id_disciplina,
-  //       nome_disciplina: this.aulaSelecionada.nome_disciplina,
-  //       conteudo: this.aulaSelecionada.conteudo,
-  //     });
-
-  //     console.log(this.aulaSelecionada);
-  //     console.log('Valor de FormData:', this.FormData.value);
-  //   });
-  // }
-
   listDisciplinas() {
     this.disciplinaService.read().subscribe((dados: any) => {
       this.disciplinas = dados.disciplinas;
@@ -150,11 +126,16 @@ export class NewFormAulaComponent implements OnInit {
 
       this.aulaService.create(form.value).subscribe((dados) => {
         console.log(dados)
-        this.modalCtrl.dismiss()
       })
+      this.comunicationService.fecharModal();
+        this.back();
     }
     else {
       console.log("algum dado incorreto!")
     }
+  }
+
+  back(){
+    this.modalCtrl.dismiss()
   }
 }

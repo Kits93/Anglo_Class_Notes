@@ -4,8 +4,9 @@ import { FormGroup, FormBuilder, Validators, ReactiveFormsModule } from '@angula
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { MatRadioButton } from '@angular/material/radio';
+import { MatRadioModule } from '@angular/material/radio';
 import { IonicModule, ModalController } from '@ionic/angular';
+import { ComunicationService } from 'src/app/services/comunication/comunication.service';
 import { UsuarioService } from 'src/app/services/usuario/usuario.service';
 
 @Component({
@@ -17,21 +18,22 @@ import { UsuarioService } from 'src/app/services/usuario/usuario.service';
   imports: [
     CommonModule,
     MatFormFieldModule,
-    MatRadioButton,
+    MatRadioModule,
     MatInputModule,
     ReactiveFormsModule,
-    IonicModule // Adicione IonicModule aos imports
+    IonicModule
   ],
 })
 export class FormEditUsuarioComponent implements OnInit {
 
-  @Input() Usuario: any
+  @Input() Usuario: any;
 
   form!: FormGroup;
   changePassword: boolean = false;
-  password: any
+  password: any;
+  role: any;
 
-  constructor(private fb: FormBuilder, private usuarioService: UsuarioService, private modalCtrl: ModalController) { }
+  constructor(private fb: FormBuilder, private usuarioService: UsuarioService, private comunicationService: ComunicationService, private modalCtrl: ModalController) { }
 
   ngOnInit() {
     this.form = this.fb.group({
@@ -44,29 +46,33 @@ export class FormEditUsuarioComponent implements OnInit {
       role: [this.Usuario.role, Validators.required]
     });
     this.password = this.form.value.password;
+    this.role = this.form.value.role;
   }
 
-
-  UpdateUser(form: any) {
-    if (form.valid) {
-      console.log(this.form.value);
-      this.usuarioService.update(form);
+  UpdateUser() {
+    if (this.form.valid) {
+      const formEdit = this.form.value;
+      console.log(formEdit);
+      this.usuarioService.update(formEdit).subscribe((dados: any) => {
+        console.log(dados);
+      });
+      this.comunicationService.fecharModal();
+      this.back()
     } else {
       console.log('Formulário inválido');
     }
   }
 
   gerarSVG(username: any) {
-    const initials = this.usuarioService.generateInitials(username)
-    return initials
+    return this.usuarioService.generateInitials(username);
   }
 
   back() {
-    this.modalCtrl.dismiss()
+    this.modalCtrl.dismiss();
   }
 
   toggleChangePassword() {
-    this.changePassword = !this.changePassword; // Inverte o estado de changePassword
+    this.changePassword = !this.changePassword;
   }
 
 }

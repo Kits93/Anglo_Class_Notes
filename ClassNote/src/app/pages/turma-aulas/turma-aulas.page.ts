@@ -7,6 +7,8 @@ import { ModalController } from '@ionic/angular';
 
 import { FormAulaComponent } from 'src/app/components/form-aula/form-aula.component';
 import { NewFormAulaComponent } from 'src/app/components/new-form-aula/new-form-aula.component';
+import { Subscription } from 'rxjs';
+import { ComunicationService } from 'src/app/services/comunication/comunication.service';
 
 @Component({
   selector: 'app-turma-aulas',
@@ -15,49 +17,12 @@ import { NewFormAulaComponent } from 'src/app/components/new-form-aula/new-form-
 })
 export class TurmaAulasPage implements OnInit {
 
+  private fecharModalSubscription: Subscription;
 
-  constructor(private modalCtrl: ModalController, private turmaService: TurmaService, private aulaService: AulaService, private route: ActivatedRoute, private router: Router, private location: Location) {
-  }
-
-  async openFormModal(id_aula: any, nome_turma: any) {
-
-    console.log(id_aula, nome_turma)
-
-    const modal = await this.modalCtrl.create({
-      component: FormAulaComponent,
-      componentProps: {
-        idAula: id_aula,
-        nomeTurma: nome_turma,
-      },
-      mode: 'ios'
-
+  constructor(private modalCtrl: ModalController, private turmaService: TurmaService, private aulaService: AulaService, private comunicationService: ComunicationService, private location: Location) {
+    this.fecharModalSubscription = this.comunicationService.fecharModal$.subscribe(() => {
+      this.listar_aulas();
     });
-    await modal.present();
-
-    const { data } = await modal.onDidDismiss();
-    this.listar_aulas()
-    console.log('Dados do formulário:', data);
-  }
-
-
-  async openNewFormModal(num_aula: any, id_turma: any, nome_turma: any, data_aula: any) {
-
-    const modal = await this.modalCtrl.create({
-      component: NewFormAulaComponent,
-      componentProps: {
-        numAula: num_aula,
-        idTurma: id_turma,
-        nomeTurma: nome_turma,
-        dataAula: data_aula,
-      },
-      mode: 'ios'
-
-    });
-    await modal.present();
-
-    const { data } = await modal.onDidDismiss();
-    this.listar_aulas()
-    console.log('Dados do formulário:', data);
   }
 
   isLoaded: boolean = false
@@ -82,9 +47,54 @@ export class TurmaAulasPage implements OnInit {
     } else {
       console.error('ID da turma não definido');
     }
-    
-    this.listar_aulas();
+
   }
+
+  ngOnDestroy() {
+    this.fecharModalSubscription.unsubscribe();
+  }
+
+  async openFormModal(id_aula: any, nome_turma: any) {
+
+    console.log(id_aula, nome_turma)
+
+    const modal = await this.modalCtrl.create({
+      component: FormAulaComponent,
+      componentProps: {
+        idAula: id_aula,
+        nomeTurma: nome_turma,
+      },
+      mode: 'ios'
+
+    });
+    await modal.present();
+
+    const { data } = await modal.onDidDismiss();
+    console.log('Dados do formulário:', data);
+  }
+
+
+  async openNewFormModal(num_aula: any, id_turma: any, nome_turma: any, data_aula: any) {
+
+    const modal = await this.modalCtrl.create({
+      component: NewFormAulaComponent,
+      componentProps: {
+        numAula: num_aula,
+        idTurma: id_turma,
+        nomeTurma: nome_turma,
+        dataAula: data_aula,
+      },
+      mode: 'ios'
+
+    });
+    await modal.present();
+
+    const { data } = await modal.onDidDismiss();
+    console.log('Dados do formulário:', data);
+  }
+
+
+
 
   dataSelected: any
 

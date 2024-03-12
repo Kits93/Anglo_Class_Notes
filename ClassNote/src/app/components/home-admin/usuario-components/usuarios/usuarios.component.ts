@@ -1,26 +1,38 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { UsuarioService } from 'src/app/services/usuario/usuario.service';
 import { UserData } from 'src/app/models/user-data.model';
 import { AlertController, ModalController } from '@ionic/angular';
 import { FormNewUsuarioComponent } from '../form-new-usuario/form-new-usuario.component';
 import { FormEditUsuarioComponent } from '../form-edit-usuario/form-edit-usuario.component';
+import { ComunicationService } from 'src/app/services/comunication/comunication.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-usuarios',
   templateUrl: './usuarios.component.html',
   styleUrls: ['./usuarios.component.scss'],
 })
-export class UsuariosComponent implements OnInit {
+export class UsuariosComponent implements OnInit, OnDestroy {
   dataSource!: MatTableDataSource<UserData>;
   displayedColumns: string[] = ['action', 'username', 'email', 'role', 'delete'];
   usuariosListados: UserData[] = [];
 
-  constructor(private usuarioService: UsuarioService, private modalCtrl: ModalController, private alertCtrl: AlertController) { }
+  private fecharModalSubscription: Subscription;
+
+  constructor(private usuarioService: UsuarioService, private comunicationService: ComunicationService, private modalCtrl: ModalController, private alertCtrl: AlertController) {
+    this.fecharModalSubscription = this.comunicationService.fecharModal$.subscribe(() => {
+      this.listarUsuarios();
+    });
+  }
 
   ngOnInit() {
     this.dataSource = new MatTableDataSource<UserData>([]);
     this.listarUsuarios();
+  }
+
+  ngOnDestroy() {
+    this.fecharModalSubscription.unsubscribe();
   }
 
   listarUsuarios() {
@@ -55,7 +67,7 @@ export class UsuariosComponent implements OnInit {
   async deleteUser(id_user: any) {
     console.log(id_user)
     const alert = await this.alertCtrl.create({
-      header: 'Confirmação',
+      header: 'Atenção!',
       message: 'Tem certeza que deseja excluir este usuário?',
       buttons: [
         {
@@ -69,7 +81,7 @@ export class UsuariosComponent implements OnInit {
           text: 'Excluir',
           handler: () => {
             this.usuarioService.delete(id_user).subscribe(() => {
-              this.listarUsuarios(); // Atualiza a lista de usuários após a exclusão
+              this.listarUsuarios();
             });
           }
         }

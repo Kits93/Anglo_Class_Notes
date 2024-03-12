@@ -12,6 +12,7 @@ import { AulaService } from 'src/app/services/aula/aula.service';
 import { DisciplinaService } from 'src/app/services/disciplina/disciplina.service';
 import { map, startWith } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { ComunicationService } from 'src/app/services/comunication/comunication.service';
 
 @Component({
   selector: 'app-form-aula',
@@ -40,7 +41,8 @@ export class FormAulaComponent implements OnInit {
     private modalCtrl: ModalController,
     private aulaService: AulaService,
     private disciplinaService: DisciplinaService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private comunicationService: ComunicationService
   ) { }
 
   ngOnInit(): void {
@@ -128,8 +130,13 @@ export class FormAulaComponent implements OnInit {
 
       this.aulaService.update(form.value).subscribe((dados) => {
         console.log(dados)
-        this.modalCtrl.dismiss()
       })
+      this.comunicationService.fecharModal();
+      this.back()
     }
+  }
+
+  back() {
+    this.modalCtrl.dismiss()
   }
 }

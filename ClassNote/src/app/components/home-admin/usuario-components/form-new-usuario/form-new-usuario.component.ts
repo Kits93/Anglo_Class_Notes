@@ -7,6 +7,7 @@ import { MatInputModule } from '@angular/material/input';
 import { IonicModule, ModalController } from '@ionic/angular';
 import { UsuarioService } from 'src/app/services/usuario/usuario.service';
 import { MatRadioModule } from '@angular/material/radio';
+import { ComunicationService } from 'src/app/services/comunication/comunication.service';
 
 @Component({
   selector: 'app-form-new-usuario',
@@ -27,7 +28,7 @@ export class FormNewUsuarioComponent implements OnInit {
 
   form!: FormGroup;
 
-  constructor(private fb: FormBuilder, private usuarioService: UsuarioService, private modalCtrl: ModalController) { }
+  constructor(private fb: FormBuilder, private usuarioService: UsuarioService, private comunicationService: ComunicationService, private modalCtrl: ModalController) { }
 
   ngOnInit() {
     this.form = this.fb.group({
@@ -43,17 +44,17 @@ export class FormNewUsuarioComponent implements OnInit {
 
   createUser(form: any) {
     if (form.valid) {
-      console.log(form.value); // Exibirá os valores do formulário no console
+      console.log(form.value);
       this.usuarioService.create(form.value).subscribe(
         (response) => {
           console.log('Usuário criado com sucesso:', response);
-          // Faça algo com a resposta, como redirecionar para outra página
         },
         (error) => {
           console.error('Erro ao criar usuário:', error);
-          // Trate o erro de alguma forma adequada, como exibir uma mensagem de erro para o usuário
         }
       );
+      this.comunicationService.fecharModal();
+      this.back()
     } else {
       console.log('Formulário inválido');
     }

@@ -1,0 +1,26 @@
+<ion-content>
+  <ion-row>
+    <ion-col>
+      <form [formGroup]="formEditDisciplina" (ngSubmit)="submitEditDisciplina()">
+
+        <div>
+          <mat-form-field style="width: 100%" class="example-full-width">
+            <mat-label>Disciplina</mat-label>
+            <input matInput placeholder="Digite a nova disciplina" formControlName="nome_disciplina" />
+            <mat-error *ngIf="
+                formEditDisciplina.get('nome_disciplina')?.hasError('required')
+              ">
+              Nome da disciplina é obrigatório
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <ion-row>
+          <ion-col>
+            <ion-button type="submit" fill="outline">Adicionar</ion-button>
+          </ion-col>
+        </ion-row>
+      </form>
+    </ion-col>
+  </ion-row>
+</ion-content>

@@ -11,7 +11,8 @@ import { provideNativeDateAdapter } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatRadioModule } from '@angular/material/radio';
-import { IonicModule } from '@ionic/angular';
+import { IonicModule, PopoverController } from '@ionic/angular';
+import { ComunicationService } from 'src/app/services/comunication/comunication.service';
 
 @Component({
   selector: 'app-form-new-disciplina',
@@ -31,10 +32,7 @@ import { IonicModule } from '@ionic/angular';
 export class FormNewDisciplinaComponent implements OnInit {
   formNewDisciplina!: FormGroup;
 
-  constructor(
-    private fb: FormBuilder,
-    private disciplinaService: DisciplinaService
-  ) {}
+  constructor(private fb: FormBuilder, private disciplinaService: DisciplinaService, private comuinicationService: ComunicationService, private popoverCtrl: PopoverController) { }
 
   ngOnInit() {
     this.formNewDisciplina = this.fb.group({
@@ -48,6 +46,12 @@ export class FormNewDisciplinaComponent implements OnInit {
       this.disciplinaService.create(form.value).subscribe((dados: any) => {
         console.log(dados);
       });
+      this.comuinicationService.fecharModal()
+      this.back()
     }
+  }
+
+  back() {
+    this.popoverCtrl.dismiss()
   }
 }
