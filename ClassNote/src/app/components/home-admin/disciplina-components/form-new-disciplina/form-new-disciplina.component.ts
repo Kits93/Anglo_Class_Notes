@@ -1,6 +1,12 @@
+import { DisciplinaService } from './../../../../services/disciplina/disciplina.service';
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -19,13 +25,29 @@ import { IonicModule } from '@ionic/angular';
     MatInputModule,
     ReactiveFormsModule,
     MatRadioModule,
-    IonicModule // Adicione IonicModule aos imports
+    IonicModule,
   ],
 })
-export class FormNewDisciplinaComponent  implements OnInit {
+export class FormNewDisciplinaComponent implements OnInit {
+  formNewDisciplina!: FormGroup;
 
-  constructor() { }
+  constructor(
+    private fb: FormBuilder,
+    private disciplinaService: DisciplinaService
+  ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.formNewDisciplina = this.fb.group({
+      nome_disciplina: ['', Validators.required],
+    });
+  }
 
+  submitNewDisciplina(form: FormGroup) {
+    if (form.valid) {
+      console.log(form.value);
+      this.disciplinaService.create(form.value).subscribe((dados: any) => {
+        console.log(dados);
+      });
+    }
+  }
 }

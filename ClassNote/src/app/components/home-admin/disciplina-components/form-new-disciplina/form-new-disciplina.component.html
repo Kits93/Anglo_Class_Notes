@@ -1,17 +1,35 @@
 <ion-content>
   <ion-row>
     <ion-col>
-
-      <form [formGroup]="formNewDisciplina">
+      <form
+        [formGroup]="formNewDisciplina"
+        (ngSubmit)="submitNewDisciplina(formNewDisciplina)"
+      >
+        <!-- Use formNewDisciplina aqui -->
         <div>
-          <mat-form-field style="width: 60%;" class="example-full-width">
-            <mat-label>Username</mat-label>
-            <input matInput placeholder="Digite seu nome e sobrenome" formControlName="username">
-            <mat-error *ngIf="form.get('username')?.hasError('required')">Username é obrigatório</mat-error>
+          <mat-form-field style="width: 100%" class="example-full-width">
+            <mat-label>Disciplina</mat-label>
+            <input
+              matInput
+              placeholder="Digite a nova disciplina"
+              formControlName="nome_disciplina"
+            />
+            <mat-error
+              *ngIf="
+                formNewDisciplina.get('nome_disciplina')?.hasError('required')
+              "
+            >
+              Nome da disciplina é obrigatório
+            </mat-error>
           </mat-form-field>
         </div>
-      </form>
 
+        <ion-row>
+          <ion-col>
+            <ion-button type="submit" fill="outline">Adicionar</ion-button>
+          </ion-col>
+        </ion-row>
+      </form>
     </ion-col>
   </ion-row>
 </ion-content>
