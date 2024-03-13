@@ -19,16 +19,19 @@
                   <ion-list lines="none">
                     <ion-item *ngFor="let turma of ensino.turmas">
 
-                      <ion-card style="width: 100%;" [ngClass]="getEnsinoClass(ensino.tipo_ensino)">
+                      <ion-card style="width: 100%;" [ngClass]="getEnsinoClass(ensino.tipo_ensino)"
+                        [routerLink]="'../aulas'" (click)="accessTurma(turma)">
                         <ion-card-header>
                           <ion-card-title>
                             {{ turma.nome_turma }}
                           </ion-card-title>
                         </ion-card-header>
                         <ion-card-content>
+
                           {{ turma.ensino }}
                           -
                           {{ turma.turno }}
+
                         </ion-card-content>
                       </ion-card>
 

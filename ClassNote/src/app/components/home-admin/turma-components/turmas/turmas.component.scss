@@ -19,6 +19,12 @@
   box-shadow: 3px 3px 0 3px rgba(0, 110, 255, 0.644);
 }
 
+ion-accordion:hover {
+  transition: 0.5s;
+  transform: scale(0.98);
+  animation: alternate 2s;
+}
+
 ion-card:hover {
   transition: 0.5s;
   transform: scale(0.98);

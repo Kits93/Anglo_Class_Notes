@@ -1,11 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { TurmaService } from 'src/app/services/turma/turma.service';
 import { Turma } from 'src/app/models/turmas.model';
+import { Routes } from '@angular/router';
+import { AulasComponent } from '../aulas/aulas.component';
 
 interface Ensino {
   tipo_ensino: string;
   turmas: Turma[];
 }
+
+const routes: Routes = [
+  { path: '../aulas', component: AulasComponent },
+];
 
 @Component({
   selector: 'app-turmas',
@@ -15,7 +21,7 @@ interface Ensino {
 export class TurmasComponent implements OnInit {
   ensinos: Ensino[] = [];
 
-  constructor(private turmaService: TurmaService) {}
+  constructor(private turmaService: TurmaService) { }
 
   ngOnInit() {
     this.listarTurmas();
@@ -44,7 +50,7 @@ export class TurmasComponent implements OnInit {
     return Object.values(ensinos);
   }
 
-  getEnsinoClass(ensino: any){
+  getEnsinoClass(ensino: any) {
     switch (ensino) {
       case 'Ensino Fundamental I':
         return 'EFI';
@@ -57,7 +63,7 @@ export class TurmasComponent implements OnInit {
     }
   }
 
-  getAccordionEnsinoClass(ensino: any){
+  getAccordionEnsinoClass(ensino: any) {
     switch (ensino) {
       case 'Ensino Fundamental I':
         return 'accordion-EFI';
@@ -68,5 +74,10 @@ export class TurmasComponent implements OnInit {
       default:
         return '';
     }
+  }
+
+  accessTurma(turma: Turma) {
+    console.log(turma)
+    localStorage.setItem('turma', JSON.stringify(turma))
   }
 }

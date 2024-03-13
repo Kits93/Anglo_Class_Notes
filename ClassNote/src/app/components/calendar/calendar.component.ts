@@ -28,6 +28,7 @@ export class CalendarComponent implements OnInit {
 
     // Emitir o evento com a data de hoje
     this.dataEvent.emit(this.formatDate(today));
+    console.log(this.formatDate(today))
   }
 
   sendDataToParent(event: any) {
@@ -36,23 +37,20 @@ export class CalendarComponent implements OnInit {
   }
 
   formatDate(date: Date): string {
-    // Formatar a data como string no formato 'YYYY-MM-DD'
     return date.toISOString().slice(0, 10);
   }
 
   events: any;
 
   dateFilter(date: Date | null): boolean {
-    if (!date) return false; // Se não houver data, retorna false (bloqueia)
+    if (!date) return false; 
 
-    // Calcula a data de uma semana atrás
     const oneWeekAgo = new Date();
     oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
 
-    // Verifica se a data fornecida é um sábado (6), domingo (0) ou anterior a uma semana atrás
     const day = date.getDay();
     const isBeforeOneWeekAgo = date < oneWeekAgo;
-    return (day !== 6 && day !== 0) && !isBeforeOneWeekAgo; // Retorna true se não for sábado, domingo ou anterior a uma semana atrás
+    return (day !== 6 && day !== 0) && !isBeforeOneWeekAgo;
   }
 
   addEvent(type: string, event: MatDatepickerInputEvent<Date>) {
