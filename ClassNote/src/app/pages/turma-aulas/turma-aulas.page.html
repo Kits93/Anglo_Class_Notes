@@ -17,28 +17,53 @@
     </div>
     <div *ngFor="let aula of aulas">
       <ion-item (click)="selectAula(aula.id_aula, aula.num_aula, nome_turma)" style="cursor: pointer;">
+        <ion-card style="width: 100%;">
+          <ion-card-header color="light" style="opacity: 0.3;">
+            <ion-row>
+              <ion-col class="ion-text-start">
+                <h2>Aula {{ aula.num_aula }}</h2>
+              </ion-col>
+              <ion-col class="ion-text-end">
+                <h2>{{ dataSelected }}</h2>
+              </ion-col>
+            </ion-row>
+          </ion-card-header>
 
-        <ion-label *ngIf="isLoaded">
-          <ion-skeleton-text [animated]="true" style="width: 40px"></ion-skeleton-text>
-          <ion-skeleton-text [animated]="true" style="width: 170px"></ion-skeleton-text>
-          <ion-skeleton-text [animated]="true" style="width: 120px"></ion-skeleton-text>
-          <ion-skeleton-text [animated]="true" style="width: 200px"></ion-skeleton-text>
-        </ion-label>
+          <ion-card-content *ngIf="isLoaded">
+            <ion-row>
+              <ion-col size="8" class="ion-text-start" style="display: flex; flex-direction: column; font-size: 1.3em;">
+                <ion-skeleton-text [animated]="true" style="height: 15px; width: 40px"></ion-skeleton-text>
+                <ion-skeleton-text [animated]="true" style="height: 15px; width: 170px"></ion-skeleton-text>
+              </ion-col>
 
-        <ion-label *ngIf="aula.id_aula != null && !isLoaded">
-          <h2>Aula {{aula.num_aula}}</h2>
-          <p>Disciplina: {{aula.nome_disciplina}}</p>
-          <p>Professor: {{aula.username}}</p>
-          <p>Conteúdo: {{aula.conteudo}}</p>
-        </ion-label>
+              <ion-col size="4" class="ion-text-center ion-justify-content-center">
+                <ion-skeleton-text [animated]="true" style="height: 15px; width: 115px"></ion-skeleton-text>
+                <ion-skeleton-text [animated]="true" style="height: 15px; width: 200px"></ion-skeleton-text>
+              </ion-col>
+            </ion-row>
+          </ion-card-content>
 
-        <ion-label *ngIf="aula.id_aula == null && !isLoaded">
-          <h2>Aula {{aula.num_aula}}</h2>
-          <p>{{aula.nome_disciplina}}</p>
-        </ion-label>
+          <ion-card-content *ngIf="!isLoaded">
+            <ion-row>
+              <ion-col size="8" class="ion-text-start" style="display: flex; flex-direction: column; font-size: 1.3em;">
+                <label style="padding: 15px;">
+                  <ion-icon name="person"></ion-icon>
+                  Prof. {{ aula.username }}
+                </label>
+                <label style="padding: 15px;">
+                  <ion-icon name="book"></ion-icon>
+                  {{ aula.nome_disciplina }}
+                </label>
+              </ion-col>
 
+              <ion-col size="4" class="ion-text-center">
+                <h3 style="font-weight: bold;">Conteúdo</h3>
+                <p>{{ aula.conteudo }}</p>
+              </ion-col>
+            </ion-row>
+          </ion-card-content>
+        </ion-card>
       </ion-item>
     </div>
-
   </ion-list>
 </ion-content>

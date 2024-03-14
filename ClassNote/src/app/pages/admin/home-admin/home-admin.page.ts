@@ -53,4 +53,10 @@ export class HomeAdminPage implements OnInit {
     return initials
   }
 
+  menuActive: boolean = false
+  ativarMenu(){
+    this.menuActive = !this.menuActive
+    console.log(this.menuActive)
+  }
+
 }

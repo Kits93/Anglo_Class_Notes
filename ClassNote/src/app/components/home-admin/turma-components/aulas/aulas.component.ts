@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
-import { FormAulaComponent } from 'src/app/components/form-aula/form-aula.component';
-import { NewFormAulaComponent } from 'src/app/components/new-form-aula/new-form-aula.component';
+import { FormAulaComponent } from 'src/app/components/teacher/form-aula/form-aula.component';
+import { NewFormAulaComponent } from 'src/app/components/teacher/new-form-aula/new-form-aula.component';
 import { AulaService } from 'src/app/services/aula/aula.service';
 import { ComunicationService } from 'src/app/services/comunication/comunication.service';
 import { TurmaService } from 'src/app/services/turma/turma.service';
+
 
 @Component({
   selector: 'app-aulas',
@@ -150,5 +151,4 @@ export class AulasComponent implements OnInit {
       this.openNewFormModal(num_aula, this.id_turma, nome_turma, this.dataSelected)
     }
   }
-
 }

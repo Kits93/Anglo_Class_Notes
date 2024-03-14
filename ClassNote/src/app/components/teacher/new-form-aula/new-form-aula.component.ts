@@ -67,7 +67,7 @@ export class NewFormAulaComponent implements OnInit {
       data_aula: ['', Validators.required]
     });
 
-    
+
 
     this.FormData.patchValue({
       num_aula: this.numAula,
@@ -79,12 +79,51 @@ export class NewFormAulaComponent implements OnInit {
 
     // this.listDadosForm();
     this.listDisciplinas();
+    this.listUsuarios();
   }
 
   aulaSelecionada: any = {};
-  disciplinaCtrl = new FormControl();
+
   disciplinas: any[] = [];
+  disciplinaCtrl = new FormControl();
   filteredDisciplinas: Observable<any[]> | undefined;
+
+  usuarios: any[] = [];
+  usuarioCtrl = new FormControl();
+  filteredUsuarios: Observable<any[]> | undefined;
+
+  listUsuarios() {
+    this.usuarioService.read().subscribe((dados: any) => {
+      this.usuarios = dados.usuarios;
+      if (!dados.success || dados.success != 1) {
+        this.usuarios = [];
+      }
+
+      this.filteredUsuarios = this.usuarioCtrl.valueChanges.pipe(
+        startWith(''),
+        map(value => this._filterUsuarios(value))
+      );
+    });
+  }
+
+  private _filterUsuarios(value: string): any[] {
+    const filterValue = value.toLowerCase();
+    return this.usuarios.filter(usuario => usuario.username.toLowerCase().includes(filterValue));
+  }
+
+  displayFnUser(usuario: any): string {
+    return usuario && usuario.username ? usuario.username : '';
+  }
+
+  onUsuarioSelected(event: MatAutocompleteSelectedEvent) {
+    const selectedUsuario = event.option.value;
+    console.log(selectedUsuario);
+
+    this.FormData.patchValue({
+      id_usuario: selectedUsuario.id_usuario,
+      username: selectedUsuario.username,
+    });
+  }
 
   listDisciplinas() {
     this.disciplinaService.read().subscribe((dados: any) => {
@@ -105,7 +144,7 @@ export class NewFormAulaComponent implements OnInit {
     return this.disciplinas.filter(disciplina => disciplina.nome_disciplina.toLowerCase().includes(filterValue));
   }
 
-  displayFn(disciplina: any): string {
+  displayFnDisc(disciplina: any): string {
     return disciplina && disciplina.nome_disciplina ? disciplina.nome_disciplina : '';
   }
 
@@ -121,21 +160,21 @@ export class NewFormAulaComponent implements OnInit {
 
   submitForm(form: any) {
     console.log('Dados do formulário:', form.value);
-    
+
     if (form.valid) {
 
       this.aulaService.create(form.value).subscribe((dados) => {
         console.log(dados)
       })
       this.comunicationService.fecharModal();
-        this.back();
+      this.back();
     }
     else {
       console.log("algum dado incorreto!")
     }
   }
 
-  back(){
+  back() {
     this.modalCtrl.dismiss()
   }
 }

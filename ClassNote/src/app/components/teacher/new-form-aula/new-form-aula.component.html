@@ -11,7 +11,23 @@
 
     <ion-list>
       <!-- Mat-Autocomplete para Usuários -->
-      <ion-item>
+      <ion-item *ngIf="usuario.role == 'admin'">
+        <ion-icon name="person" slot="start"></ion-icon>
+        <mat-form-field appearance="fill">
+          <mat-label>Professor</mat-label>
+          <input minlength="3" [value]="aulaSelecionada.username" matInput placeholder="Selecione o professor"
+            [formControl]="usuarioCtrl" [matAutocomplete]="auto1">
+
+          <mat-autocomplete #auto1="matAutocomplete" (optionSelected)="onUsuarioSelected($event)"
+            [displayWith]="displayFnUser">
+            <mat-option *ngFor="let usuario of filteredUsuarios | async" [value]="usuario">
+              {{ usuario.username }}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+      </ion-item>
+
+      <ion-item *ngIf="usuario.role == 'teacher'">
         <ion-icon name="person" slot="start"></ion-icon>
         <mat-form-field style="opacity: 0.6;" appearance="fill">
           <mat-label>Professor</mat-label>
@@ -30,7 +46,7 @@
             [formControl]="disciplinaCtrl" [matAutocomplete]="auto2">
 
           <mat-autocomplete #auto2="matAutocomplete" (optionSelected)="onDisciplinaSelected($event)"
-            [displayWith]="displayFn">
+            [displayWith]="displayFnDisc">
             <mat-option *ngFor="let disciplina of filteredDisciplinas | async" [value]="disciplina">
               {{ disciplina.nome_disciplina }}
             </mat-option>

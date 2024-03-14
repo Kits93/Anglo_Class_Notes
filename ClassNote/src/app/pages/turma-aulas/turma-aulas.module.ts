@@ -10,7 +10,7 @@ import { DisciplinaService } from 'src/app/services/disciplina/disciplina.servic
 import { TurmaService } from 'src/app/services/turma/turma.service';
 import { UsuarioService } from 'src/app/services/usuario/usuario.service';
 import { CalendarComponent } from 'src/app/components/calendar/calendar.component';
-import { FormAulaComponent } from 'src/app/components/form-aula/form-aula.component';
+import { FormAulaComponent } from 'src/app/components/teacher/form-aula/form-aula.component';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDatepickerModule } from '@angular/material/datepicker';

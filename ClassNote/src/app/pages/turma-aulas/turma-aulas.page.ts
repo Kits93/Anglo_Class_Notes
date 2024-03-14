@@ -4,11 +4,10 @@ import { Location } from '@angular/common';
 import { AulaService } from 'src/app/services/aula/aula.service';
 import { TurmaService } from 'src/app/services/turma/turma.service';
 import { ModalController } from '@ionic/angular';
-
-import { FormAulaComponent } from 'src/app/components/form-aula/form-aula.component';
-import { NewFormAulaComponent } from 'src/app/components/new-form-aula/new-form-aula.component';
 import { Subscription } from 'rxjs';
 import { ComunicationService } from 'src/app/services/comunication/comunication.service';
+import { FormAulaComponent } from 'src/app/components/teacher/form-aula/form-aula.component';
+import { NewFormAulaComponent } from 'src/app/components/teacher/new-form-aula/new-form-aula.component';
 
 @Component({
   selector: 'app-turma-aulas',
