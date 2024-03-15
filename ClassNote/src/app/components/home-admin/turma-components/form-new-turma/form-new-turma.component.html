@@ -1,0 +1,54 @@
+<ion-content style="height: 100%; justify-content: center; align-items: center;">
+  <ion-row>
+    <ion-col size="12" class="ion-text-center ion-align-items-center ion-padding">
+      <form [formGroup]="form" (ngSubmit)="createTurma(form)">
+        <ion-list lines="none" style="margin-top: 3em;">
+
+          <h2>Cadastrar nova turma</h2>
+
+          <!-- nome da turma -->
+          <ion-item>
+            <mat-form-field appearance="fill" style="width: 100%;">
+              <mat-label>Nome da Turma</mat-label>
+              <input matInput formControlName="nome_turma" type="text">
+            </mat-form-field>
+          </ion-item>
+
+          <!-- ensino -->
+          <ion-item>
+            <ion-label position="floating">Ensino</ion-label>
+            <ion-select interface="popover" formControlName="ensino">
+              <ion-select-option value="Ensino Fundamental I">Fundamental I</ion-select-option>
+              <ion-select-option value="Ensino Fundamental II">Fundamental II</ion-select-option>
+              <ion-select-option value="Ensino Médio">Médio</ion-select-option>
+            </ion-select>
+          </ion-item>
+
+          <!-- turno -->
+          <ion-item>
+            <ion-label position="floating">Turno</ion-label>
+            <ion-select interface="popover" formControlName="turno">
+              <ion-select-option value="manha">Manhã</ion-select-option>
+              <ion-select-option value="tarde">Tarde</ion-select-option>
+            </ion-select>
+          </ion-item>
+
+          <!-- Botão de Enviar -->
+          <ion-item class="ion-text-center"> <!-- Adicionando classe para centralizar -->
+            <ion-button type="submit" [disabled]="form.invalid">Enviar</ion-button>
+          </ion-item>
+
+        </ion-list>
+
+      </form>
+
+      <ion-row style="position: absolute; top: 0%;">
+        <ion-col (click)="back()" class="ion-margin ion-text-start voltar" style="opacity: 0.7; font-size: 1.2em;">
+          <ion-icon name="return-up-back-outline"></ion-icon>
+          Voltar
+        </ion-col>
+      </ion-row>
+
+    </ion-col>
+  </ion-row>
+</ion-content>

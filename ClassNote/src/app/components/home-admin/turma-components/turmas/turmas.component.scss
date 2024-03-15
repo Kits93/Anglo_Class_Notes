@@ -35,3 +35,18 @@ ion-item {
   border-radius: 8px;
   transition: background-color 0.3s, color 0.3s;
 }
+
+.delete-icon {
+  font-size: 1.8em;
+  padding: 5px;
+  border-radius: 30px;
+  margin-right: 10px;
+  color: red;
+}
+
+.delete-icon:hover {
+  transition: 0.3s;
+  background-color: red;
+  opacity: 0.6;
+  color: white;
+}

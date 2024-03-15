@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 import { FormAulaComponent } from 'src/app/components/teacher/form-aula/form-aula.component';
@@ -6,6 +7,8 @@ import { NewFormAulaComponent } from 'src/app/components/teacher/new-form-aula/n
 import { AulaService } from 'src/app/services/aula/aula.service';
 import { ComunicationService } from 'src/app/services/comunication/comunication.service';
 import { TurmaService } from 'src/app/services/turma/turma.service';
+import { TurmasComponent } from '../turmas/turmas.component';
+import { Location } from '@angular/common';
 
 
 @Component({
@@ -17,7 +20,7 @@ export class AulasComponent implements OnInit {
 
   private fecharModalSubscription: Subscription;
 
-  constructor(private modalCtrl: ModalController, private turmaService: TurmaService, private aulaService: AulaService, private comunicationService: ComunicationService) {
+  constructor(private modalCtrl: ModalController, private turmaService: TurmaService, private aulaService: AulaService, private comunicationService: ComunicationService, private router: Router, private location:Location) {
     this.fecharModalSubscription = this.comunicationService.fecharModal$.subscribe(() => {
       this.listar_aulas();
     });
@@ -142,6 +145,9 @@ export class AulasComponent implements OnInit {
     console.log(this.aulas)
   }
 
+  back(){
+    this.location.back()
+  }
 
   selectAula(id: any, num_aula: any, nome_turma: any) {
 

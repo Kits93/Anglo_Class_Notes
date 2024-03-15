@@ -6,7 +6,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatAutocompleteModule, MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { CommonModule } from '@angular/common';
-import { IonicModule, ModalController } from '@ionic/angular';
+import { IonicModule, ModalController, ToastController } from '@ionic/angular';
 
 import { AulaService } from 'src/app/services/aula/aula.service';
 import { DisciplinaService } from 'src/app/services/disciplina/disciplina.service';
@@ -37,12 +37,7 @@ export class FormAulaComponent implements OnInit {
 
   FormData!: FormGroup;
 
-  constructor(
-    private modalCtrl: ModalController,
-    private aulaService: AulaService,
-    private disciplinaService: DisciplinaService,
-    private formBuilder: FormBuilder,
-    private comunicationService: ComunicationService
+  constructor(private modalCtrl: ModalController, private aulaService: AulaService, private disciplinaService: DisciplinaService, private formBuilder: FormBuilder, private comunicationService: ComunicationService, private toastCtrl: ToastController
   ) { }
 
   ngOnInit(): void {
@@ -128,15 +123,33 @@ export class FormAulaComponent implements OnInit {
     console.log('Dados do formulário:', form.value);
     if (form.valid) {
 
-      this.aulaService.update(form.value).subscribe((dados) => {
-        console.log(dados)
+      this.aulaService.update(form.value).subscribe((dados: any) => {
+        if (dados.success === 1) {
+          this.presentToast(dados.message, 'checkmark', 'success');
+
+          this.comunicationService.fecharModal();
+          this.back();
+        } else {
+          this.presentToast(dados.message, 'close', 'danger')
+        }
       })
-      this.comunicationService.fecharModal();
-      this.back()
+    } else {
+      this.presentToast('Formulário de edição dos dados da aula inválido', 'alert-circle', 'danger');
     }
   }
 
   back() {
     this.modalCtrl.dismiss()
+  }
+
+  async presentToast(message: any, icon: any, color: any) {
+    const toast = await this.toastCtrl.create({
+      icon: icon,
+      message: message,
+      duration: 3000,
+      position: 'bottom',
+      color: color,
+    });
+    await toast.present();
   }
 }

@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { AlertController, PopoverController } from '@ionic/angular';
+import { AlertController, PopoverController, ToastController } from '@ionic/angular';
 import { Disciplina } from 'src/app/models/disciplina.model';
 import { DisciplinaService } from 'src/app/services/disciplina/disciplina.service';
 import { FormNewDisciplinaComponent } from '../form-new-disciplina/form-new-disciplina.component';
@@ -20,11 +20,7 @@ export class DisciplinasComponent implements OnInit, OnDestroy {
 
   private fecharModalSubscription: Subscription;
 
-  constructor(
-    private disciplinaService: DisciplinaService,
-    private comunicationService: ComunicationService,
-    private popoverCtrl: PopoverController,
-    private alertCtrl: AlertController
+  constructor(private disciplinaService: DisciplinaService, private comunicationService: ComunicationService, private popoverCtrl: PopoverController, private alertCtrl: AlertController, private toastCtrl: ToastController
   ) {
     this.fecharModalSubscription = this.comunicationService.fecharModal$.subscribe(() => {
       this.listarDisciplinas();
@@ -91,8 +87,14 @@ export class DisciplinasComponent implements OnInit, OnDestroy {
         {
           text: 'Excluir',
           handler: () => {
-            this.disciplinaService.delete(id_disciplina).subscribe(() => {
-              this.listarDisciplinas();
+            this.disciplinaService.delete(id_disciplina).subscribe((dados: any) => {
+              if (dados.success == 1) {
+                this.presentToast(dados.message, 'success', 'checkmark')
+                this.listarDisciplinas();
+              } else {
+                this.presentToast(dados.message, 'danger', 'close')
+              }
+
             });
           }
         }
@@ -100,5 +102,17 @@ export class DisciplinasComponent implements OnInit, OnDestroy {
     });
 
     await alert.present();
+  }
+
+
+  async presentToast(message: any, icon: any, color: any) {
+    const toast = await this.toastCtrl.create({
+      icon: icon,
+      message: message,
+      duration: 3000,
+      position: 'bottom',
+      color: color,
+    });
+    await toast.present();
   }
 }

@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatTableModule } from '@angular/material/table';
 
-
 import { IonicModule } from '@ionic/angular';
 
 import { HomeAdminPageRoutingModule } from './home-admin-routing.module';
@@ -22,9 +21,13 @@ import { DisciplinaService } from 'src/app/services/disciplina/disciplina.servic
 import { UsuariosComponent } from 'src/app/components/home-admin/usuario-components/usuarios/usuarios.component';
 import { AulasComponent } from 'src/app/components/home-admin/turma-components/aulas/aulas.component';
 import { CalendarComponent } from 'src/app/components/calendar/calendar.component';
+import { RouterModule } from '@angular/router';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   imports: [
+    RouterModule,
+    MatSelectModule,
     CommonModule,
     FormsModule,
     IonicModule,

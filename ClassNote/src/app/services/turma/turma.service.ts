@@ -14,6 +14,10 @@ export class TurmaService {
 
   constructor(private httpClient: HttpClient) { }
 
+  create(turma: any) {
+    return this.httpClient.post(this.API + 'turma/create_turma.php', turma);
+  }
+
   read() {
     return this.httpClient.get(this.API + 'turma/read_turma.php').pipe(
       tap(turmas => {
@@ -26,5 +30,9 @@ export class TurmaService {
   readOne(fk_id_turma: any) {
     return this.httpClient.post(this.API + 'turma/readOne_turma.php' , fk_id_turma)
   }
+
+  delete(id_turma: any) {
+    return this.httpClient.delete(this.API + `turma/delete_turma.php?id_turma=${id_turma}`);
+  }  
 
 }

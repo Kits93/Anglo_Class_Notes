@@ -21,11 +21,19 @@
 
                       <ion-card style="width: 100%;" [ngClass]="getEnsinoClass(ensino.tipo_ensino)"
                         [routerLink]="'../aulas'" (click)="accessTurma(turma)">
+                        <ion-row style="position: absolute; right: 0;">
+                          <ion-col class="ion-text-end">
+                            <ion-icon (click)="deleteTurma(turma.id_turma)" class="delete-icon" name="remove-circle-outline"></ion-icon>
+                          </ion-col>
+                        </ion-row>
+
                         <ion-card-header>
                           <ion-card-title>
                             {{ turma.nome_turma }}
                           </ion-card-title>
+                          
                         </ion-card-header>
+
                         <ion-card-content>
 
                           {{ turma.ensino }}
@@ -47,7 +55,8 @@
       <ion-row>
         <ion-col>
           <ion-fab>
-            <ion-fab-button style="display: flex; position: fixed; bottom: 10px; right: 10px;">
+            <ion-fab-button style="display: flex; position: fixed; bottom: 10px; right: 10px;"
+              (click)="openNewTurmaForm()">
               <ion-icon name="add-outline"></ion-icon>
             </ion-fab-button>
           </ion-fab>

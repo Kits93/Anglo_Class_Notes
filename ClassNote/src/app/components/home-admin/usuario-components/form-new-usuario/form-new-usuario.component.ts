@@ -3,8 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
-import { IonicModule, ModalController } from '@ionic/angular';
+import { IonicModule, ModalController, ToastController } from '@ionic/angular';
 import { UsuarioService } from 'src/app/services/usuario/usuario.service';
 import { MatRadioModule } from '@angular/material/radio';
 import { ComunicationService } from 'src/app/services/comunication/comunication.service';
@@ -18,6 +19,7 @@ import { ComunicationService } from 'src/app/services/comunication/comunication.
   imports: [
     CommonModule,
     MatFormFieldModule,
+    MatSelectModule,
     MatInputModule,
     ReactiveFormsModule,
     MatRadioModule,
@@ -28,7 +30,7 @@ export class FormNewUsuarioComponent implements OnInit {
 
   form!: FormGroup;
 
-  constructor(private fb: FormBuilder, private usuarioService: UsuarioService, private comunicationService: ComunicationService, private modalCtrl: ModalController) { }
+  constructor(private fb: FormBuilder, private usuarioService: UsuarioService, private comunicationService: ComunicationService, private modalCtrl: ModalController, private toastCtrl: ToastController) { }
 
   ngOnInit() {
     this.form = this.fb.group({
@@ -45,18 +47,20 @@ export class FormNewUsuarioComponent implements OnInit {
   createUser(form: any) {
     if (form.valid) {
       console.log(form.value);
-      this.usuarioService.create(form.value).subscribe(
-        (response) => {
-          console.log('Usuário criado com sucesso:', response);
-        },
-        (error) => {
-          console.error('Erro ao criar usuário:', error);
+      this.usuarioService.create(form.value).subscribe((dados: any) => {
+        if (dados.success === 1) {
+          this.presentToast(dados.message, 'checkmark', 'success');
+
+          this.comunicationService.fecharModal();
+          this.back();
+        } else {
+          this.presentToast(dados.message, 'close', 'danger');
         }
-      );
+      });
       this.comunicationService.fecharModal();
       this.back()
     } else {
-      console.log('Formulário inválido');
+      this.presentToast('Formulário de cadastro de usuário inválido', 'alert-circle', 'danger');
     }
   }
 
@@ -75,4 +79,17 @@ export class FormNewUsuarioComponent implements OnInit {
     const confirmPassword = form.get('confirmPassword')?.value;
     return password === confirmPassword ? null : { passwordMismatch: true };
   }
+
+  async presentToast(message: any, icon: any, color: any) {
+    const toast = await this.toastCtrl.create({
+      icon: icon,
+      message: message,
+      duration: 3000,
+      position: 'bottom',
+      color: color,
+    });
+
+    await toast.present();
+  }
+
 }

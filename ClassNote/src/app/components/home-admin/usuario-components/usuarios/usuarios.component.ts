@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { UsuarioService } from 'src/app/services/usuario/usuario.service';
 import { UserData } from 'src/app/models/user-data.model';
-import { AlertController, ModalController } from '@ionic/angular';
+import { AlertController, ModalController, ToastController } from '@ionic/angular';
 import { FormNewUsuarioComponent } from '../form-new-usuario/form-new-usuario.component';
 import { FormEditUsuarioComponent } from '../form-edit-usuario/form-edit-usuario.component';
 import { ComunicationService } from 'src/app/services/comunication/comunication.service';
@@ -20,7 +20,7 @@ export class UsuariosComponent implements OnInit, OnDestroy {
 
   private fecharModalSubscription: Subscription;
 
-  constructor(private usuarioService: UsuarioService, private comunicationService: ComunicationService, private modalCtrl: ModalController, private alertCtrl: AlertController) {
+  constructor(private usuarioService: UsuarioService, private comunicationService: ComunicationService, private modalCtrl: ModalController, private alertCtrl: AlertController, private toastCtrl: ToastController) {
     this.fecharModalSubscription = this.comunicationService.fecharModal$.subscribe(() => {
       this.listarUsuarios();
     });
@@ -80,8 +80,14 @@ export class UsuariosComponent implements OnInit, OnDestroy {
         {
           text: 'Excluir',
           handler: () => {
-            this.usuarioService.delete(id_user).subscribe(() => {
-              this.listarUsuarios();
+            this.usuarioService.delete(id_user).subscribe((dados: any) => {
+              if (dados.success === 1) {
+                this.presentToast(dados.message, 'checkmark', 'success')
+                this.listarUsuarios();
+              } else if (dados.success === 2) {
+                this.presentToast(dados.message, 'close', 'danger')
+              }
+
             });
           }
         }
@@ -89,6 +95,18 @@ export class UsuariosComponent implements OnInit, OnDestroy {
     });
 
     await alert.present();
+  }
+
+  async presentToast(message: any, icon: any, color: any) {
+    const toast = await this.toastCtrl.create({
+      icon: icon,
+      message: message,
+      duration: 3000,
+      position: 'bottom',
+      color: color,
+    });
+
+    await toast.present();
   }
 
   async openNewUsuarioForm() {

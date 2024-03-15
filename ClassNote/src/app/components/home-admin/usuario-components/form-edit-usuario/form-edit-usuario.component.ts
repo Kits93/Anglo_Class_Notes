@@ -5,7 +5,7 @@ import { provideNativeDateAdapter } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatRadioModule } from '@angular/material/radio';
-import { IonicModule, ModalController } from '@ionic/angular';
+import { IonicModule, ModalController, ToastController } from '@ionic/angular';
 import { ComunicationService } from 'src/app/services/comunication/comunication.service';
 import { UsuarioService } from 'src/app/services/usuario/usuario.service';
 
@@ -33,7 +33,7 @@ export class FormEditUsuarioComponent implements OnInit {
   password: any;
   role: any;
 
-  constructor(private fb: FormBuilder, private usuarioService: UsuarioService, private comunicationService: ComunicationService, private modalCtrl: ModalController) { }
+  constructor(private fb: FormBuilder, private usuarioService: UsuarioService, private comunicationService: ComunicationService, private modalCtrl: ModalController, private toastCtrl: ToastController) { }
 
   ngOnInit() {
     this.form = this.fb.group({
@@ -54,12 +54,18 @@ export class FormEditUsuarioComponent implements OnInit {
       const formEdit = this.form.value;
       console.log(formEdit);
       this.usuarioService.update(formEdit).subscribe((dados: any) => {
-        console.log(dados);
+        if (dados.success === 1) {
+          this.presentToast(dados.message, 'checkmark', 'success');
+
+          this.comunicationService.fecharModal();
+          this.back();
+        } else {
+          this.presentToast(dados.message, 'close', 'danger');
+        }
       });
-      this.comunicationService.fecharModal();
-      this.back()
+
     } else {
-      console.log('Formulário inválido');
+      this.presentToast('Formulário de edição de usuário inválido', 'alert-circle', 'danger');
     }
   }
 
@@ -73,6 +79,18 @@ export class FormEditUsuarioComponent implements OnInit {
 
   toggleChangePassword() {
     this.changePassword = !this.changePassword;
+  }
+
+  async presentToast(message: any, icon: any, color: any) {
+    const toast = await this.toastCtrl.create({
+      icon: icon,
+      message: message,
+      duration: 3000,
+      position: 'bottom',
+      color: color,
+    });
+
+    await toast.present();
   }
 
 }

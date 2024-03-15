@@ -6,7 +6,7 @@ import { provideNativeDateAdapter } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { IonicModule, ModalController } from '@ionic/angular';
+import { IonicModule, ModalController, ToastController } from '@ionic/angular';
 import { Observable, startWith, map } from 'rxjs';
 import { AulaService } from 'src/app/services/aula/aula.service';
 import { ComunicationService } from 'src/app/services/comunication/comunication.service';
@@ -38,13 +38,7 @@ export class NewFormAulaComponent implements OnInit {
 
   FormData!: FormGroup;
 
-  constructor(
-    private modalCtrl: ModalController,
-    private aulaService: AulaService,
-    private usuarioService: UsuarioService,
-    private disciplinaService: DisciplinaService,
-    private formBuilder: FormBuilder,
-    private comunicationService: ComunicationService
+  constructor(private modalCtrl: ModalController, private aulaService: AulaService, private usuarioService: UsuarioService, private disciplinaService: DisciplinaService, private formBuilder: FormBuilder, private comunicationService: ComunicationService, private toastCtrl: ToastController
   ) { }
 
   objLocal: any
@@ -163,18 +157,33 @@ export class NewFormAulaComponent implements OnInit {
 
     if (form.valid) {
 
-      this.aulaService.create(form.value).subscribe((dados) => {
-        console.log(dados)
+      this.aulaService.create(form.value).subscribe((dados: any) => {
+        if (dados.success === 1) {
+          this.presentToast(dados.message, 'checkmark', 'success');
+
+          this.comunicationService.fecharModal();
+          this.back();
+        } else {
+          this.presentToast(dados.message, 'close', 'danger')
+        }
       })
-      this.comunicationService.fecharModal();
-      this.back();
-    }
-    else {
-      console.log("algum dado incorreto!")
+    } else {
+      this.presentToast('Formulário de cadastro de aula inválido', 'alert-circle', 'danger');
     }
   }
 
   back() {
     this.modalCtrl.dismiss()
+  }
+
+  async presentToast(message: any, icon: any, color: any) {
+    const toast = await this.toastCtrl.create({
+      icon: icon,
+      message: message,
+      duration: 3000,
+      position: 'bottom',
+      color: color,
+    });
+    await toast.present();
   }
 }
