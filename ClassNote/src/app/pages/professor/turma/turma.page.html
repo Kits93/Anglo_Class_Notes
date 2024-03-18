@@ -30,7 +30,7 @@
           <ion-grid>
             <ion-row wrap>
               <ion-col class="turma" size="12" size-md="6" size-lg="4" *ngFor="let turma of turmasFilter">
-                <ion-card (click)="acessarTurma(turma.id_turma, turma.ensino)" [ngClass]="defineColor(turma.ensino)"
+                <ion-card (click)="accessTurma(turma)" [ngClass]="defineColor(turma.ensino)"
                   *ngIf="!isLoading">
                   <ion-card-header>
                     <ion-card-title>{{ turma.nome_turma }}</ion-card-title>

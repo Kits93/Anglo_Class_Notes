@@ -4,6 +4,7 @@ import { TurmaService } from 'src/app/services/turma/turma.service';
 import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
 import { LoadingController } from '@ionic/angular';
 import { UsuarioService } from 'src/app/services/usuario/usuario.service';
+import { Turma } from 'src/app/models/turmas.model';
 
 @Component({
   selector: 'app-turma',
@@ -21,7 +22,7 @@ export class TurmaPage implements OnInit {
 
   ngOnInit() {
 
-    
+    localStorage.removeItem('turma')
 
     this.objLocal = (localStorage.getItem('usuario'))
     this.usuario = this.objLocal ? JSON.parse(this.objLocal) : []
@@ -94,10 +95,9 @@ export class TurmaPage implements OnInit {
     }
   }
 
-  acessarTurma(id_turma: any, ensino: any) {
-    console.log(id_turma);
-    console.log(ensino);
-    this.router.navigate(['../turma-aulas'], { state: { id_turma: id_turma, ensino: ensino} });
+  accessTurma(turma: Turma) {
+    console.log(turma)
+    localStorage.setItem('turma', JSON.stringify(turma))
   }
 
   logout() {

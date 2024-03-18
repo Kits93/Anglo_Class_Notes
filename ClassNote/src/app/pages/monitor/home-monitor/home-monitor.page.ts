@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { LoadingController } from '@ionic/angular';
+import { Turma } from 'src/app/models/turmas.model';
 import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
 import { TurmaService } from 'src/app/services/turma/turma.service';
 import { UsuarioService } from 'src/app/services/usuario/usuario.service';
@@ -21,7 +22,7 @@ export class HomeMonitorPage implements OnInit {
 
   ngOnInit() {
 
-    
+    localStorage.removeItem('turma')
 
     this.objLocal = (localStorage.getItem('usuario'))
     this.usuario = this.objLocal ? JSON.parse(this.objLocal) : []
@@ -94,10 +95,9 @@ export class HomeMonitorPage implements OnInit {
     }
   }
 
-  acessarTurma(id_turma: any, ensino: any) {
-    console.log(id_turma);
-    console.log(ensino);
-    this.router.navigate(['../monitor-aulas'], { state: { id_turma: id_turma, ensino: ensino} });
+  accessTurma(turma: Turma) {
+    console.log(turma)
+    localStorage.setItem('turma', JSON.stringify(turma))
   }
 
   logout() {

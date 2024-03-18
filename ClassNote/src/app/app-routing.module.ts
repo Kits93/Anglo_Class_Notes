@@ -29,12 +29,13 @@ const routes: Routes = [
   },
   {
     path: 'home-monitor',
-    loadChildren: () => import('./pages/monitor/home-monitor/home-monitor.module').then( m => m.HomeMonitorPageModule), canActivate: [AccessPermissionGuard, CheckMonitorTypeGuard]
-  },
-  {
+    loadChildren: () => import('./pages/monitor/home-monitor/home-monitor.module').then
+      (m => m.HomeMonitorPageModule), canActivate: [AccessPermissionGuard, CheckMonitorTypeGuard]
+  },  {
     path: 'monitor-aulas',
-    loadChildren: () => import('./pages/monitor/monitor-aulas/monitor-aulas.module').then( m => m.MonitorAulasPageModule), canActivate: [AccessPermissionGuard, CheckMonitorTypeGuard]
+    loadChildren: () => import('./pages/monitor/monitor-aulas/monitor-aulas.module').then( m => m.MonitorAulasPageModule)
   },
+
 
 ];
 

@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
+import { AulaService } from 'src/app/services/aula/aula.service';
+import { TurmaService } from 'src/app/services/turma/turma.service';
 import { ModalController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
+import { ComunicationService } from 'src/app/services/comunication/comunication.service';
 import { FormAulaComponent } from 'src/app/components/teacher/form-aula/form-aula.component';
 import { NewFormAulaComponent } from 'src/app/components/teacher/new-form-aula/new-form-aula.component';
-import { AulaService } from 'src/app/services/aula/aula.service';
-import { ComunicationService } from 'src/app/services/comunication/comunication.service';
-import { TurmaService } from 'src/app/services/turma/turma.service';
-import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-monitor-aulas',
@@ -23,28 +23,34 @@ export class MonitorAulasPage implements OnInit {
     });
   }
 
-  isLoaded: boolean = false
+  isLoaded: boolean = false;
 
-  id_turma: any
-  id_usuario: any
-  nome_turma: any
-  aulas: any[] = []
-  ensino: any
+  id_turma: any;
+  id_usuario: any;
+  nome_turma: any;
 
-  hoje: any
+
+  turma: any
+  usuario: any
+  aulas: any[] = [];
+  ensino: any;
+
+  hoje: any;
 
   ngOnInit(): void {
 
-    if (window.history.state.id_turma) {
-      this.id_turma = window.history.state.id_turma;
-      this.id_usuario = window.history.state.id_usuario;
-      this.ensino = window.history.state.ensino;
-      console.log(this.id_turma);
-      console.log(this.id_usuario);
-      console.log(this.ensino);
-    } else {
-      console.error('ID da turma não definido');
-    }
+    this.turma = localStorage.getItem('turma')
+    this.turma = JSON.parse(this.turma)
+
+    this.usuario = localStorage.getItem('usuario')
+    this.usuario = JSON.parse(this.usuario)
+
+    this.id_turma = this.turma.id_turma
+    this.nome_turma = this.turma.nome_turma
+    this.ensino = this.turma.ensino
+    this.id_usuario = this.usuario.id_usuario
+
+    console.log(this.id_turma, this.id_usuario, this.nome_turma, this.ensino)
 
   }
 
@@ -52,44 +58,10 @@ export class MonitorAulasPage implements OnInit {
     this.fecharModalSubscription.unsubscribe();
   }
 
-  async openFormModal(id_aula: any, nome_turma: any) {
-
-    console.log(id_aula, nome_turma)
-
-    const modal = await this.modalCtrl.create({
-      component: FormAulaComponent,
-      componentProps: {
-        idAula: id_aula,
-        nomeTurma: nome_turma,
-      },
-      mode: 'ios'
-
-    });
-    await modal.present();
-
-    const { data } = await modal.onDidDismiss();
-    console.log('Dados do formulário:', data);
-  }
 
 
-  async openNewFormModal(num_aula: any, id_turma: any, nome_turma: any, data_aula: any) {
 
-    const modal = await this.modalCtrl.create({
-      component: NewFormAulaComponent,
-      componentProps: {
-        numAula: num_aula,
-        idTurma: id_turma,
-        nomeTurma: nome_turma,
-        dataAula: data_aula,
-      },
-      mode: 'ios'
 
-    });
-    await modal.present();
-
-    const { data } = await modal.onDidDismiss();
-    console.log('Dados do formulário:', data);
-  }
 
 
 
@@ -103,9 +75,7 @@ export class MonitorAulasPage implements OnInit {
     this.listar_aulas();
   }
 
-  goBack() {
-    this.location.back()
-  }
+
 
   listar_aulas() {
     setTimeout(() => {
@@ -138,16 +108,6 @@ export class MonitorAulasPage implements OnInit {
       console.error('ID da turma não definido');
     }
     console.log(this.aulas)
-  }
-
-
-  selectAula(id: any, num_aula: any, nome_turma: any) {
-
-    if (id) {
-      this.openFormModal(id, nome_turma)
-    } else {
-      this.openNewFormModal(num_aula, this.id_turma, nome_turma, this.dataSelected)
-    }
   }
 
 }
