@@ -1,12 +1,12 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { TurmaPage } from './turma.page';
+import { HomeMonitorPage } from './home-monitor.page';
 
-describe('TurmaPage', () => {
-  let component: TurmaPage;
-  let fixture: ComponentFixture<TurmaPage>;
+describe('HomeMonitorPage', () => {
+  let component: HomeMonitorPage;
+  let fixture: ComponentFixture<HomeMonitorPage>;
 
   beforeEach(async(() => {
-    fixture = TestBed.createComponent(TurmaPage);
+    fixture = TestBed.createComponent(HomeMonitorPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

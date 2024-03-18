@@ -104,40 +104,6 @@ export class TurmasComponent implements OnInit {
     localStorage.setItem('turma', JSON.stringify(turma))
   }
 
-
-  async deleteTurma(id_turma: any) {
-    console.log(id_turma)
-    const alert = await this.alertCtrl.create({
-      header: 'Atenção!',
-      message: 'Tem certeza que deseja excluir esta turma?',
-      buttons: [
-        {
-          text: 'Cancelar',
-          role: 'cancel',
-          handler: () => {
-            console.log('Exclusão cancelada');
-          }
-        },
-        {
-          text: 'Excluir',
-          handler: () => {
-            this.turmaService.delete(id_turma).subscribe((dados: any) => {
-              if (dados.success === 1) {
-                this.presentToast(dados.message, 'checkmark', 'success')
-                this.listarTurmas();
-              } else if (dados.success === 2) {
-                this.presentToast(dados.message, 'close', 'danger')
-              }
-
-            });
-          }
-        }
-      ]
-    });
-
-    await alert.present();
-  }
-
   async presentToast(message: any, icon: any, color: any) {
     const toast = await this.toastCtrl.create({
       icon: icon,

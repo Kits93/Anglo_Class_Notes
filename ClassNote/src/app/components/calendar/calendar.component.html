@@ -1,6 +1,6 @@
 <mat-form-field>
   <mat-label>Selecione a Data</mat-label>
-  <input matInput [matDatepicker]="picker" [matDatepickerFilter]="dateFilter" [value]="todayformatted" (dateInput)="addEvent('input', $event)" 
+  <input matInput [matDatepicker]="picker" [matDatepickerFilter]="dateFilter" [value]="selectedDate" (dateInput)="addEvent('input', $event)" 
     (dateChange)="addEvent('change', $event)">
   <mat-hint>MM/DD/YYYY</mat-hint>
   <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>

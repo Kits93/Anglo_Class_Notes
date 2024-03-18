@@ -3,7 +3,7 @@ import { PreloadAllModules, RouterModule, Routes, CanActivate } from '@angular/r
 import { AccessPermissionGuard } from './guard/access-permission/access-permission.guard';
 import { CheckAdminTypeGuard } from './guard/check-admin-type/check-admin-type.guard';
 import { CheckTeacherTypeGuard } from './guard/check-teacher-type/check-teacher-type.guard';
-
+import { CheckMonitorTypeGuard } from './guard/check-monitor-type/check-monitor-type.guard';
 
 const routes: Routes = [
   {
@@ -17,16 +17,25 @@ const routes: Routes = [
   },
   {
     path: 'turma',
-    loadChildren: () => import('./pages/turma/turma.module').then(m => m.TurmaPageModule), canActivate: [AccessPermissionGuard, CheckTeacherTypeGuard]
+    loadChildren: () => import('./pages/professor/turma/turma.module').then(m => m.TurmaPageModule), canActivate: [AccessPermissionGuard, CheckTeacherTypeGuard]
   },
   {
     path: 'turma-aulas',
-    loadChildren: () => import('./pages/turma-aulas/turma-aulas.module').then(m => m.TurmaAulasPageModule), canActivate: [AccessPermissionGuard, CheckTeacherTypeGuard]
+    loadChildren: () => import('./pages/professor/turma-aulas/turma-aulas.module').then(m => m.TurmaAulasPageModule), canActivate: [AccessPermissionGuard, CheckTeacherTypeGuard]
   },
   {
     path: 'home-admin',
     loadChildren: () => import('./pages/admin/home-admin/home-admin.module').then(m => m.HomeAdminPageModule), canActivate: [AccessPermissionGuard, CheckAdminTypeGuard]
   },
+  {
+    path: 'home-monitor',
+    loadChildren: () => import('./pages/monitor/home-monitor/home-monitor.module').then( m => m.HomeMonitorPageModule), canActivate: [AccessPermissionGuard, CheckMonitorTypeGuard]
+  },
+  {
+    path: 'monitor-aulas',
+    loadChildren: () => import('./pages/monitor/monitor-aulas/monitor-aulas.module').then( m => m.MonitorAulasPageModule), canActivate: [AccessPermissionGuard, CheckMonitorTypeGuard]
+  },
+
 ];
 
 @NgModule({

@@ -10,6 +10,7 @@ import { TurmaPageRoutingModule } from './turma-routing.module';
 import { TurmaPage } from './turma.page';
 import { TurmaService } from 'src/app/services/turma/turma.service';
 import { UsuarioService } from 'src/app/services/usuario/usuario.service';
+import { SideMenuProfessorComponent } from 'src/app/components/side-menu-professor/side-menu-professor.component';
 
 @NgModule({
   imports: [
@@ -20,6 +21,6 @@ import { UsuarioService } from 'src/app/services/usuario/usuario.service';
     HttpClientModule
   ],
   providers: [TurmaService, UsuarioService],
-  declarations: [TurmaPage]
+  declarations: [TurmaPage, SideMenuProfessorComponent]
 })
 export class TurmaPageModule { }

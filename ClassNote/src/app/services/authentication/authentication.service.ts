@@ -53,6 +53,10 @@ export class AuthenticationService {
   }
   isTeacher(token: string): boolean {
     const userRole = this.getUserRole(token);
-    return userRole === 'teacher';
+    return userRole === 'professor';
+  }
+  isMonitor(token: string): boolean {
+    const userRole = this.getUserRole(token);
+    return userRole === 'monitor';
   }
 }

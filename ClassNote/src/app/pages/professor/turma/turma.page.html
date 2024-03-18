@@ -1,58 +1,12 @@
-<ion-menu side="start" contentId="main-content">
-  <ion-header>
-    <ion-toolbar>
-      <ion-title>Class Notes</ion-title>
-    </ion-toolbar>
-
-    <ion-toolbar>
-      <ion-row>
-        <ion-col size="3">
-          <ion-avatar style="width: 45px; height: 45px; margin: 5px;" *ngIf="usuario.username">
-            <ion-img [src]="'https://ui-avatars.com/api/?name=' + gerarSVG(usuario.username)"></ion-img>
-          </ion-avatar>
-        </ion-col>
-        <ion-col style="margin: auto;" size="9">Bem vindo, {{usuario.username}}</ion-col>
-      </ion-row>
-    </ion-toolbar>
-  </ion-header>
-
-  <ion-content style="height: 100%;" class="ion-no-padding ion-no-margin">
-
-    <ion-list lines="none">
-      <ion-list-header mode="ios">
-        <ion-label>Conta</ion-label>
-      </ion-list-header>
-      <ion-item (click)="logout()" class="logout">
-        <ion-label>Sair</ion-label>
-        <ion-icon name="log-out"></ion-icon>
-      </ion-item>
-    </ion-list>
-  </ion-content>
-</ion-menu>
-
-<ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <!-- Botão do menu de hambúrguer -->
-      <ion-menu-toggle auto-hide="false">
-        <ion-button>
-          <ion-icon slot="icon-only" name="menu"></ion-icon>
-        </ion-button>
-      </ion-menu-toggle>
-    </ion-buttons>
-    <ion-title>
-      Turmas
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
+<app-side-menu-professor></app-side-menu-professor>
 
 <ion-content id="main-content" [fullscreen]="true" mode="md">
   <div class="main-content">
     <ion-row class="ion-justify-content-start ion-text-center">
       <ion-col class="ion-margin" size="11">
         <ng-container>
-          <ion-row>
-            <ion-col size="9">
+          <ion-row class="ion-justify-content-center">
+            <ion-col size="12">
               <ion-select class="select" interface="popover" placeholder="Ensino" [(ngModel)]="ensinoSelected"
                 (ionChange)="filtrarTurmas()">
                 <ion-select-option value="">Todos</ion-select-option>

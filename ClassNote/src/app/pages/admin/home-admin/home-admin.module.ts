@@ -23,6 +23,9 @@ import { AulasComponent } from 'src/app/components/home-admin/turma-components/a
 import { CalendarComponent } from 'src/app/components/calendar/calendar.component';
 import { RouterModule } from '@angular/router';
 import { MatSelectModule } from '@angular/material/select';
+import { SideMenuComponent } from 'src/app/components/side-menu/side-menu.component';
+import { MenuController } from '@ionic/angular';
+
 
 @NgModule({
   imports: [
@@ -37,7 +40,7 @@ import { MatSelectModule } from '@angular/material/select';
     ReactiveFormsModule,
     CalendarComponent,
   ],
-  providers: [UsuarioService, TurmaService, AulaService, DisciplinaService],
-  declarations: [HomeAdminPage, InicioComponent, DisciplinasComponent, TurmasComponent, AulasComponent, MyAccountComponent, UsuariosComponent, AulasComponent]
+  providers: [UsuarioService, MenuController, TurmaService, AulaService, DisciplinaService],
+  declarations: [HomeAdminPage, SideMenuComponent, InicioComponent, DisciplinasComponent, TurmasComponent, AulasComponent, MyAccountComponent, UsuariosComponent, AulasComponent]
 })
 export class HomeAdminPageModule { }

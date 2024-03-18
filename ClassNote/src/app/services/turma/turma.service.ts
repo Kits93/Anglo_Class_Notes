@@ -31,8 +31,4 @@ export class TurmaService {
     return this.httpClient.post(this.API + 'turma/readOne_turma.php' , fk_id_turma)
   }
 
-  delete(id_turma: any) {
-    return this.httpClient.delete(this.API + `turma/delete_turma.php?id_turma=${id_turma}`);
-  }  
-
 }

@@ -1,15 +1,17 @@
-import { Component, OnInit, HostListener } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Component, HostListener, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Platform } from '@ionic/angular';
 import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
 import { UsuarioService } from 'src/app/services/usuario/usuario.service';
+import { MenuController } from '@ionic/angular';
 
 @Component({
-  selector: 'app-home-admin',
-  templateUrl: './home-admin.page.html',
-  styleUrls: ['./home-admin.page.scss'],
+  selector: 'app-side-menu',
+  templateUrl: './side-menu.component.html',
+  styleUrls: ['./side-menu.component.scss'],
 })
-export class HomeAdminPage implements OnInit {
+export class SideMenuComponent implements OnInit {
+
 
   exibirMenu: boolean = true; // Inicialmente, o menu será exibido
 
@@ -18,9 +20,7 @@ export class HomeAdminPage implements OnInit {
     this.exibirMenu = this.platform.width() <= 768; // Altere 768 para a largura desejada para ocultar o menu em desktop
   }
 
-  username: any
-
-  constructor(private authService: AuthenticationService, private usuarioService: UsuarioService, private router: Router, private route: ActivatedRoute, private platform: Platform) { }
+  constructor(private platform: Platform, private authService: AuthenticationService, private usuarioService: UsuarioService, private router: Router, private menuCtrl: MenuController) { }
 
   objLocal: any
   usuario: any = []
@@ -31,13 +31,12 @@ export class HomeAdminPage implements OnInit {
 
     console.log(this.usuario)
 
-
-    this.onResize(null); // Executa a verificação inicial de tamanho da tela
-
+    this.onResize(null);
 
   }
 
   logout() {
+    this.fecharMenu()
     this.authService.logout
     this.router.navigate(['/login'])
   }
@@ -45,6 +44,10 @@ export class HomeAdminPage implements OnInit {
   gerarSVG(username: any) {
     const initials = this.usuarioService.generateInitials(username)
     return initials
+  }
+
+  fecharMenu(){
+    this.menuCtrl.close()
   }
 
 }

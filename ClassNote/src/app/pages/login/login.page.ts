@@ -58,6 +58,9 @@ export class LoginPage implements OnInit {
         } else if (this.authService.isTeacher(data.token)) {
           console.log(this.UserForm.value.username)
           this.router.navigate(['/turma']);
+        } else if (this.authService.isMonitor(data.token)) {
+          console.log(this.UserForm.value.username)
+          this.router.navigate(['/home-monitor']);
         } else {
           this.presentToast('error');
           console.log('Formulário inválido!');

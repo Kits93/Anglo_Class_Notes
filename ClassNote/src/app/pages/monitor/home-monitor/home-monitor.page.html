@@ -1,0 +1,81 @@
+<app-side-menu-monitor></app-side-menu-monitor>
+
+<ion-content id="main-content" [fullscreen]="true" mode="md">
+  <div class="main-content">
+    <ion-row class="ion-justify-content-start ion-text-center">
+      <ion-col class="ion-margin" size="11">
+        <ng-container>
+          <ion-row class="ion-justify-content-center">
+            <ion-col size="12">
+              <ion-select class="select" interface="popover" placeholder="Ensino" [(ngModel)]="ensinoSelected"
+                (ionChange)="filtrarTurmas()">
+                <ion-select-option value="">Todos</ion-select-option>
+                <ion-select-option value="Ensino Fundamental I">Ensino Fundamental I</ion-select-option>
+                <ion-select-option value="Ensino Fundamental II">Ensino Fundamental II</ion-select-option>
+                <ion-select-option value="Ensino Médio">Ensino Médio</ion-select-option>
+              </ion-select>
+            </ion-col>
+          </ion-row>
+        </ng-container>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="ion-text-center ion-justify-content-center ion-align-items-center spinner_cont" size="12"
+        *ngIf="this.isLoading">
+        <ion-spinner style="margin: 0 auto;" class="spinner" color="danger" name="dots"></ion-spinner>
+      </ion-col>
+      <ion-col>
+        <ion-col size="10">
+
+          <ion-grid>
+            <ion-row wrap>
+              <ion-col class="turma" size="12" size-md="6" size-lg="4" *ngFor="let turma of turmasFilter">
+                <ion-card (click)="acessarTurma(turma.id_turma, turma.ensino)" [ngClass]="defineColor(turma.ensino)"
+                  *ngIf="!isLoading">
+                  <ion-card-header>
+                    <ion-card-title>{{ turma.nome_turma }}</ion-card-title>
+
+                    <svg style="position: absolute; right: 1.5em; top: 0;" width="38" height="100" viewBox="0 0 218 529"
+                      fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M0 0H218V529L109 439L0 529V0Z" [ngStyle]="getGradientStyle(turma.ensino)" />
+                      <defs>
+                        <linearGradient id="paint0_linear_red" x1="218" y1="0" x2="1.09733e-05" y2="529"
+                          gradientUnits="userSpaceOnUse">
+                          <stop stop-color="#741515" />
+                          <stop offset="1" stop-color="#C22929" />
+                        </linearGradient>
+                      </defs>
+                      <defs>
+                        <linearGradient id="paint0_linear_blue" x1="218" y1="0" x2="1.09733e-05" y2="529"
+                          gradientUnits="userSpaceOnUse">
+                          <stop stop-color="#1C2BB6" />
+                          <stop offset="1" stop-color="#2871DF" />
+                        </linearGradient>
+                      </defs>
+                      <defs>
+                        <linearGradient id="paint0_linear_yellow" x1="218" y1="0" x2="1.09733e-05" y2="529"
+                          gradientUnits="userSpaceOnUse">
+                          <stop stop-color="#EDAD07" />
+                          <stop offset="1" stop-color="#FFF61A" />
+                        </linearGradient>
+                      </defs>
+                    </svg>
+
+                  </ion-card-header>
+                  <ion-card-content>
+                    {{ turma.ensino }} - {{turma.turno}}
+                  </ion-card-content>
+                  <ion-row class="ion-align-items-center ion-justify-content-end">
+                    <ion-col size="auto">
+                      <ion-icon class="ion-margin icon" name="caret-down-outline"></ion-icon>
+                    </ion-col>
+                  </ion-row>
+                </ion-card>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-col>
+      </ion-col>
+    </ion-row>
+  </div>
+</ion-content>
