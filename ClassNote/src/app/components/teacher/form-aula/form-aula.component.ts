@@ -13,6 +13,7 @@ import { DisciplinaService } from 'src/app/services/disciplina/disciplina.servic
 import { map, startWith } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { ComunicationService } from 'src/app/services/comunication/comunication.service';
+import { UsuarioService } from 'src/app/services/usuario/usuario.service';
 
 @Component({
   selector: 'app-form-aula',
@@ -37,10 +38,15 @@ export class FormAulaComponent implements OnInit {
 
   FormData!: FormGroup;
 
-  constructor(private modalCtrl: ModalController, private aulaService: AulaService, private disciplinaService: DisciplinaService, private formBuilder: FormBuilder, private comunicationService: ComunicationService, private toastCtrl: ToastController
+  constructor(private modalCtrl: ModalController, private aulaService: AulaService, private disciplinaService: DisciplinaService, private usuarioService: UsuarioService, private formBuilder: FormBuilder, private comunicationService: ComunicationService, private toastCtrl: ToastController
   ) { }
+  objLocal: any
+  usuario: any = []
 
-  ngOnInit(): void {
+  ngOnInit() {
+    this.objLocal = (localStorage.getItem('usuario'))
+    this.usuario = this.objLocal ? JSON.parse(this.objLocal) : []
+
     this.FormData = this.formBuilder.group({
       id_aula: ['', Validators.required],
       num_aula: ['', Validators.required],
@@ -53,6 +59,7 @@ export class FormAulaComponent implements OnInit {
 
     this.listDadosForm();
     this.listDisciplinas();
+    this.listUsuarios();
   }
 
   aulaSelecionada: any = {};
@@ -83,6 +90,44 @@ export class FormAulaComponent implements OnInit {
 
       console.log(this.aulaSelecionada);
       console.log('Valor de FormData:', this.FormData.value);
+    });
+  }
+
+
+  usuarios: any[] = [];
+  usuarioCtrl = new FormControl();
+  filteredUsuarios: Observable<any[]> | undefined;
+
+  listUsuarios() {
+    this.usuarioService.read().subscribe((dados: any) => {
+      this.usuarios = dados.usuarios;
+      if (!dados.success || dados.success != 1) {
+        this.usuarios = [];
+      }
+
+      this.filteredUsuarios = this.usuarioCtrl.valueChanges.pipe(
+        startWith(''),
+        map(value => this._filterUsuarios(value))
+      );
+    });
+  }
+
+  private _filterUsuarios(value: string): any[] {
+    const filterValue = value.toLowerCase();
+    return this.usuarios.filter(usuario => usuario.username.toLowerCase().includes(filterValue));
+  }
+
+  displayFnUser(usuario: any): string {
+    return usuario && usuario.username ? usuario.username : '';
+  }
+
+  onUsuarioSelected(event: MatAutocompleteSelectedEvent) {
+    const selectedUsuario = event.option.value;
+    console.log(selectedUsuario);
+
+    this.FormData.patchValue({
+      id_usuario: selectedUsuario.id_usuario,
+      username: selectedUsuario.username,
     });
   }
 

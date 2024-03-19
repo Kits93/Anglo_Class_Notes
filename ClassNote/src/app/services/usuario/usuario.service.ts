@@ -40,7 +40,11 @@ export class UsuarioService {
 
   delete(id_user: any) {
     return this.httpClient.delete(this.API + `usuario/delete_usuario.php?id_usuario=${id_user}`);
-  }  
+  }
+
+  changePassword(password: any){
+    return this.httpClient.put(this.API + 'usuario/changePassword_usuario.php', password);
+  }
 
   generateInitials(name: string): string {
     const words = name.split(' ');

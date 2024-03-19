@@ -23,28 +23,34 @@ export class TurmaAulasPage implements OnInit {
     });
   }
 
-  isLoaded: boolean = false
+  isLoaded: boolean = false;
 
-  id_turma: any
-  id_usuario: any
-  nome_turma: any
-  aulas: any[] = []
-  ensino: any
+  id_turma: any;
+  id_usuario: any;
+  nome_turma: any;
 
-  hoje: any
+
+  turma: any
+  usuario: any
+  aulas: any[] = [];
+  ensino: any;
+
+  hoje: any;
 
   ngOnInit(): void {
 
-    if (window.history.state.id_turma) {
-      this.id_turma = window.history.state.id_turma;
-      this.id_usuario = window.history.state.id_usuario;
-      this.ensino = window.history.state.ensino;
-      console.log(this.id_turma);
-      console.log(this.id_usuario);
-      console.log(this.ensino);
-    } else {
-      console.error('ID da turma não definido');
-    }
+    this.turma = localStorage.getItem('turma')
+    this.turma = JSON.parse(this.turma)
+
+    this.usuario = localStorage.getItem('usuario')
+    this.usuario = JSON.parse(this.usuario)
+
+    this.id_turma = this.turma.id_turma
+    this.nome_turma = this.turma.nome_turma
+    this.ensino = this.turma.ensino
+    this.id_usuario = this.usuario.id_usuario
+
+    console.log(this.id_turma, this.id_usuario, this.nome_turma, this.ensino)
 
   }
 

@@ -33,25 +33,8 @@
             </mat-form-field>
           </div>
 
-          <div *ngIf="changePassword">
-            <div>
-              <mat-form-field class="example-full-width">
-                <mat-label>Nova Senha</mat-label>
-                <input matInput placeholder="Nova senha" type="password" formControlName="newPassword">
-              </mat-form-field>
-            </div>
-
-            <div>
-              <mat-form-field class="example-full-width">
-                <mat-label>Confirmar Senha</mat-label>
-                <input matInput placeholder="Confirmar senha" type="password" formControlName="confirmNewPassword">
-              </mat-form-field>
-            </div>
-          </div>
-
           <div class="mudar-senha">
-            <p *ngIf="!changePassword" (click)="toggleChangePassword()">Alterar Senha</p>
-            <p *ngIf="changePassword" (click)="toggleChangePassword()">Cancelar</p>
+            <p *ngIf="!changePassword" (click)="presentPopover($event)">Alterar Senha</p>
           </div>
 
           <mat-radio-group formControlName="role" style="width: 60%; text-align: justify;"

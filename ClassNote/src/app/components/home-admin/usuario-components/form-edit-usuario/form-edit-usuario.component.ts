@@ -5,9 +5,11 @@ import { provideNativeDateAdapter } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatRadioModule } from '@angular/material/radio';
-import { IonicModule, ModalController, ToastController } from '@ionic/angular';
+import { IonicModule, ModalController, PopoverController, ToastController } from '@ionic/angular';
 import { ComunicationService } from 'src/app/services/comunication/comunication.service';
 import { UsuarioService } from 'src/app/services/usuario/usuario.service';
+import { ChangePasswordComponent } from '../change-password/change-password.component';
+import { style } from '@angular/animations';
 
 @Component({
   selector: 'app-form-edit-usuario',
@@ -33,16 +35,18 @@ export class FormEditUsuarioComponent implements OnInit {
   password: any;
   role: any;
 
-  constructor(private fb: FormBuilder, private usuarioService: UsuarioService, private comunicationService: ComunicationService, private modalCtrl: ModalController, private toastCtrl: ToastController) { }
+  constructor(private fb: FormBuilder, private usuarioService: UsuarioService, private comunicationService: ComunicationService, private modalCtrl: ModalController, private toastCtrl: ToastController, private popoverCtrl: PopoverController) { }
 
   ngOnInit() {
+    this.createForm()
+  }
+
+  createForm() {
     this.form = this.fb.group({
       id_usuario: [this.Usuario.id_usuario],
       username: [this.Usuario.username, Validators.minLength(3)],
       email: [this.Usuario.email, [Validators.required, Validators.email]],
       password: [this.Usuario.password],
-      newPassword: ['', Validators.minLength(8)],
-      confirmNewPassword: ['', Validators.minLength(8)],
       role: [this.Usuario.role, Validators.required]
     });
     this.password = this.form.value.password;
@@ -91,6 +95,23 @@ export class FormEditUsuarioComponent implements OnInit {
     });
 
     await toast.present();
+  }
+
+  async presentPopover(ev: any) {
+    const popover = await this.popoverCtrl.create({
+      component: ChangePasswordComponent,
+      componentProps: {
+        idUsuario: this.Usuario.id_usuario
+      },
+      event: ev,
+      translucent: true,
+      alignment: 'center',
+      cssClass: 'custom-popover',
+    });
+    await popover.present()
+  }
+  closePopover() {
+    this.popoverCtrl.dismiss()
   }
 
 }

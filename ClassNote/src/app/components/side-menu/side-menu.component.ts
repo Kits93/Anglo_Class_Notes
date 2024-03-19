@@ -13,11 +13,12 @@ import { MenuController } from '@ionic/angular';
 export class SideMenuComponent implements OnInit {
 
 
-  exibirMenu: boolean = true; // Inicialmente, o menu será exibido
+  exibirMenu: boolean = true; 
 
   @HostListener('window:resize', ['$event'])
   onResize(event: any) {
-    this.exibirMenu = this.platform.width() <= 768; // Altere 768 para a largura desejada para ocultar o menu em desktop
+    this.exibirMenu = this.platform.width() <= 768;
+    this.getUsuario()
   }
 
   constructor(private platform: Platform, private authService: AuthenticationService, private usuarioService: UsuarioService, private router: Router, private menuCtrl: MenuController) { }
@@ -26,13 +27,17 @@ export class SideMenuComponent implements OnInit {
   usuario: any = []
 
   ngOnInit() {
+    this.getUsuario()
+
+    this.onResize(null);
+
+  }
+
+  getUsuario(){
     this.objLocal = (localStorage.getItem('usuario'))
     this.usuario = this.objLocal ? JSON.parse(this.objLocal) : []
 
     console.log(this.usuario)
-
-    this.onResize(null);
-
   }
 
   logout() {
