@@ -119,7 +119,6 @@ export class FormEditUsuarioComponent implements OnInit {
   hidePassword: boolean = true;
 
   togglePasswordVisibility() {
-    this.createForm()
     this.hidePassword = !this.hidePassword;
   }
 
