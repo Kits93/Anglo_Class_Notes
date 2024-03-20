@@ -1,0 +1,36 @@
+/* Estilos CSS para a tela da turma */
+.turma-grid {
+    padding: 20px;
+  }
+  
+  .turma-title-row {
+    margin-bottom: 20px;
+  }
+  
+  .turma-title {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  .aula-data-row {
+    border-bottom: 2px solid #ccc;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .aula-col,
+  .data-col {
+    font-weight: bold;
+  }
+  
+  .prof-disc-conteudo-row {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+  }
+  
+  .prof-disc-conteudo-col p {
+    margin-bottom: 10px;
+  }
+  

@@ -26,12 +26,8 @@ export class UsuarioService {
     );
   }
 
-  readOne(id_user: any) {
-    return this.httpClient.post(this.API + `usuario/readOne_usuario.php`, id_user).pipe(
-      tap(usuario => {
-        console.log(usuario);
-      })
-    );
+  readProf() {
+    return this.httpClient.get(this.API + `usuario/read_prof_usuario.php`)
   }
 
   update(userData: any) {

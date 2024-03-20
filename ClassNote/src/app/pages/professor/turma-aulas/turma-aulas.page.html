@@ -10,14 +10,14 @@
 </ion-header>
 
 <ion-content>
-  <ion-list>
+  <ion-list lines="none">
     <div>
       <app-calendar class="ion-margin" (dataEvent)="receiveDataFromCalendar($event)"
         style="display: flex; justify-content: end;"></app-calendar>
     </div>
     <div *ngFor="let aula of aulas">
       <ion-item (click)="selectAula(aula.id_aula, aula.num_aula, nome_turma)" style="cursor: pointer;">
-        <ion-card style="width: 100%;">
+        <ion-card style="width: 100%; cursor: pointer;" [ngClass]="{'aula_nao_cadastrada': !aula.id_aula}">
           <ion-card-header color="light" style="opacity: 0.3;">
             <ion-row>
               <ion-col class="ion-text-start">

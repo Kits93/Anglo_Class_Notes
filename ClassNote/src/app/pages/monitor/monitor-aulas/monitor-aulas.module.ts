@@ -17,6 +17,7 @@ import { AulaService } from 'src/app/services/aula/aula.service';
 import { DisciplinaService } from 'src/app/services/disciplina/disciplina.service';
 import { TurmaService } from 'src/app/services/turma/turma.service';
 import { UsuarioService } from 'src/app/services/usuario/usuario.service';
+import { PrintAulaComponent } from 'src/app/components/monitor/print-aula/print-aula.component';
 
 @NgModule({
   imports: [
@@ -32,6 +33,6 @@ import { UsuarioService } from 'src/app/services/usuario/usuario.service';
     MatDatepickerModule
   ],
   providers: [AulaService, TurmaService, DisciplinaService, UsuarioService],
-  declarations: [MonitorAulasPage]
+  declarations: [MonitorAulasPage, PrintAulaComponent]
 })
 export class MonitorAulasPageModule {}

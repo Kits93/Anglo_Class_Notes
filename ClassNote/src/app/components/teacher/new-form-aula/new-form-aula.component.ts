@@ -87,7 +87,7 @@ export class NewFormAulaComponent implements OnInit {
   filteredUsuarios: Observable<any[]> | undefined;
 
   listUsuarios() {
-    this.usuarioService.read().subscribe((dados: any) => {
+    this.usuarioService.readProf().subscribe((dados: any) => {
       this.usuarios = dados.usuarios;
       if (!dados.success || dados.success != 1) {
         this.usuarios = [];

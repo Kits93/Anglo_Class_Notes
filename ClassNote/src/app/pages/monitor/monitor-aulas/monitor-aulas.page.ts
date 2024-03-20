@@ -5,6 +5,7 @@ import { TurmaService } from 'src/app/services/turma/turma.service';
 import { ModalController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 import { ComunicationService } from 'src/app/services/comunication/comunication.service';
+import { PrintAulaComponent } from 'src/app/components/monitor/print-aula/print-aula.component';
 
 @Component({
   selector: 'app-monitor-aulas',
@@ -94,12 +95,32 @@ export class MonitorAulasPage implements OnInit {
         if (!dados.success || dados.success != 1) {
           this.aulas = [];
         }
-        this.isLoaded = true; // Definindo isLoaded como true após receber a resposta
+        this.isLoaded = true;
       });
     } else {
       console.error('ID da turma não definido');
     }
     console.log(this.aulas)
   }
+
+
+  async open_print_modal(aula: any){
+    console.log(aula)
+    const modal = await this.modalCtrl.create({
+      component: PrintAulaComponent,
+      componentProps: {
+        Aula: aula,
+      },
+      mode: 'ios',
+    })
+
+    modal.onDidDismiss().then(() => {
+      console.log('Modal de print aula fechado')
+    })
+
+    await modal.present();
+  }
+
+  
 
 }

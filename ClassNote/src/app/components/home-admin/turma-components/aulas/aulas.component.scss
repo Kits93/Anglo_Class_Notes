@@ -1,0 +1,36 @@
+.desktop-table {
+    --ion-col-width: 25%;
+  }
+  
+  .mobile-table {
+    --ion-col-width: 50%;
+  }
+  
+  .infos {
+    border-radius: 8px 8px 0px 0px;
+    background: #4669DB;
+  }
+  
+  .infos ion-col {
+    color: #fff;
+    font-size: 13px;
+    padding: auto;
+    font-weight: bold;
+  }
+  
+  .aula-turma {
+    background: #bdccffb9;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #fff;
+  
+  }
+  
+  .aula-turma ion-col {
+    font-size: 12px;
+  }
+  
+  .aula_nao_cadastrada{
+    opacity: 0.5;
+  }
+  
