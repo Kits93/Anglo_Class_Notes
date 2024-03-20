@@ -186,4 +186,8 @@ export class NewFormAulaComponent implements OnInit {
     });
     await toast.present();
   }
+
+  goBack(){
+    this.modalCtrl.dismiss()
+  }
 }

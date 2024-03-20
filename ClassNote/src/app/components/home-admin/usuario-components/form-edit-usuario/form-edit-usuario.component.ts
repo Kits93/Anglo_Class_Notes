@@ -3,13 +3,14 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatRadioModule } from '@angular/material/radio';
 import { IonicModule, ModalController, PopoverController, ToastController } from '@ionic/angular';
 import { ComunicationService } from 'src/app/services/comunication/comunication.service';
 import { UsuarioService } from 'src/app/services/usuario/usuario.service';
 import { ChangePasswordComponent } from '../change-password/change-password.component';
-import { style } from '@angular/animations';
+import { MatIconButton } from '@angular/material/button';
 
 @Component({
   selector: 'app-form-edit-usuario',
@@ -23,7 +24,8 @@ import { style } from '@angular/animations';
     MatRadioModule,
     MatInputModule,
     ReactiveFormsModule,
-    IonicModule
+    IonicModule,
+    MatIconModule
   ],
 })
 export class FormEditUsuarioComponent implements OnInit {
@@ -112,6 +114,13 @@ export class FormEditUsuarioComponent implements OnInit {
   }
   closePopover() {
     this.popoverCtrl.dismiss()
+  }
+
+  hidePassword: boolean = true;
+
+  togglePasswordVisibility() {
+    this.createForm()
+    this.hidePassword = !this.hidePassword;
   }
 
 }

@@ -197,4 +197,8 @@ export class FormAulaComponent implements OnInit {
     });
     await toast.present();
   }
+
+  goBack(){
+    this.modalCtrl.dismiss()
+  }
 }

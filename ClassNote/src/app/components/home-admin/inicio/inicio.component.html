@@ -1,7 +1,68 @@
-<ion-content>
-  <ion-row class="ion-justify-content-center ion-align-items-center">
-    <ion-col class="ion-text-center">
-      Olá, bem vindo ao Início!
+<ion-content class="ion-padding">
+
+  <ion-card style="border-radius: 20px; padding: 5px;">
+    <ion-row>
+      <ion-col class="ion-text-center">
+        <h2>Bem Vindo, administrador!</h2>
+        <p>Aqui, você pode gerenciar o sistema do Anglo Class Notes, desde o gerenciamento de aulas de turmas até o
+          gerenciamento de professores e monitores que utilizam das ferramentas do sistema!</p>
+      </ion-col>
+    </ion-row>
+  </ion-card>
+
+
+  <ion-row>
+    <ion-col>
+      <ion-grid>
+        <ion-row>
+          <ion-col size="12" size-md="6">
+            <ion-card style="border-radius: 20px; padding: 5px;" class="ion-text-center card-function">
+              <ion-icon routerLink="../usuarios" name="albums-outline" class="ion-icon-top-right"></ion-icon>
+              <img style="border-radius: 20px;" alt="Professor dando aula"
+                src="https://images.pexels.com/photos/7092613/pexels-photo-7092613.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" />
+              <ion-card-header>
+                <ion-card-title>Gerenciamento de Usuários</ion-card-title>
+              </ion-card-header>
+              <ion-card-content style="text-align: justify;">
+                Gerencie perfis de administradores, professores e monitores, cadastrando, alterando e excluindo
+                informações dos usuários da sua unidade escolar.
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+
+          <ion-col size="12" size-md="6">
+            <ion-card style="border-radius: 20px; padding: 5px;" class="ion-text-center card-function">
+              <ion-icon routerLink="../disciplinas" name="albums-outline" class="ion-icon-top-right"></ion-icon>
+              <img style="border-radius: 20px;" alt="Livro de estudo de matemática"
+                src="https://images.pexels.com/photos/167682/pexels-photo-167682.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" />
+              <ion-card-header>
+                <ion-card-title>Gerenciamento de Disciplinas</ion-card-title>
+              </ion-card-header>
+              <ion-card-content style="text-align: justify;">
+                Tenha controle total sobre as disciplinas oferecidas em sua instituição, cadastrando novas disciplinas e
+                editando ou excluindo-as conforme o necessário, garantindo uma organização eficiente do currículo
+                escolar.
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+
+          <ion-col size="12" size-md="6">
+            <ion-card style="border-radius: 20px; padding: 5px;" class="ion-text-center card-function">
+              <ion-icon routerLink="../turmas" name="albums-outline" class="ion-icon-top-right"></ion-icon>
+              <img style="border-radius: 20px;" alt="Turmas em uma sala de aula"
+                src="https://images.pexels.com/photos/5212345/pexels-photo-5212345.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" />
+              <ion-card-header>
+                <ion-card-title>Gerenciamento de Turmas</ion-card-title>
+              </ion-card-header>
+              <ion-card-content style="text-align: justify;">
+                Gerencie turmas e aulas, acessando cada turma individualmente e filtrando as aulas por data. Cadastre,
+                edite e exclua informações, garantindo uma gestão eficaz das atividades escolares.
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+
+        </ion-row>
+      </ion-grid>
     </ion-col>
   </ion-row>
 </ion-content>

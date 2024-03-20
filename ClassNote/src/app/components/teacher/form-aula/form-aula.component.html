@@ -1,9 +1,13 @@
 <ion-col size="12">
   <ion-row>
-    <ion-col class="ion-text-start ion-align-items-center">
-      <ion-icon name="return-up-back" slot="start"></ion-icon>
-      <h2 class="ion-text-center">{{ nomeTurma }}</h2>
-    </ion-col>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-button (click)="goBack()">
+          <ion-icon style="position: relative;" slot="icon-only" name="arrow-back"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+      <ion-title class="ion-text-center">{{ nomeTurma }}</ion-title>
+    </ion-toolbar>
   </ion-row>
 
 

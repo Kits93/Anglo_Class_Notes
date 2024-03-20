@@ -25,20 +25,30 @@
             </mat-form-field>
           </div>
 
-          <div *ngIf="!changePassword">
+          <div *ngIf="!changePassword" class="password-field">
             <mat-form-field class="example-full-width">
               <mat-label>Password</mat-label>
-              <input matInput placeholder="Digite sua senha" type="password" [value]="password"
-                [disabled]="!changePassword">
+              <input matInput placeholder="Digite sua senha" [type]="hidePassword ? 'password' : 'text'" [value]="password" [disabled]="!changePassword">
+              <button mat-icon-button matSuffix type="button" (click)="togglePasswordVisibility()">
+                <mat-icon style="opacity: 0.5;">{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+              </button>
             </mat-form-field>
-          </div>
+          </div>          
+          
 
           <div class="mudar-senha">
             <p *ngIf="!changePassword" (click)="presentPopover($event)">Alterar Senha</p>
           </div>
 
-          <mat-radio-group formControlName="role" style="width: 60%; text-align: justify;"
-            aria-label="Selecione uma opção">
+          <mat-radio-group *ngIf="Usuario.role == 'admin'" formControlName="role"
+            style="width: 60%; text-align: justify;" aria-label="Selecione uma opção">
+            <mat-radio-button [disabled]="true" value="admin">Admin</mat-radio-button>
+            <mat-radio-button [disabled]="true" value="professor">Professor</mat-radio-button>
+            <mat-radio-button [disabled]="true" value="monitor">Monitor</mat-radio-button>
+          </mat-radio-group>
+
+          <mat-radio-group *ngIf="Usuario.role != 'admin'" formControlName="role"
+            style="width: 60%; text-align: justify;" aria-label="Selecione uma opção">
             <mat-radio-button value="admin">Admin</mat-radio-button>
             <mat-radio-button value="professor">Professor</mat-radio-button>
             <mat-radio-button value="monitor">Monitor</mat-radio-button>
