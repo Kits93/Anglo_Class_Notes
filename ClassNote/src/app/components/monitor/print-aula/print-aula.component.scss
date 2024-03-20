@@ -21,6 +21,7 @@
   .aula-col,
   .data-col {
     font-weight: bold;
+    font-size: 1em;
   }
   
   .prof-disc-conteudo-row {
@@ -33,4 +34,11 @@
   .prof-disc-conteudo-col p {
     margin-bottom: 10px;
   }
-  
+
+.prof-disc-conteudo-row {
+  margin-top: 20px;
+}
+
+ion-icon{
+  margin-right: 10px;
+}

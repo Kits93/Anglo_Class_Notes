@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { AulaService } from 'src/app/services/aula/aula.service';
 import { TurmaService } from 'src/app/services/turma/turma.service';
-import { ModalController } from '@ionic/angular';
+import { ModalController, ToastController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 import { ComunicationService } from 'src/app/services/comunication/comunication.service';
 import { FormAulaComponent } from 'src/app/components/teacher/form-aula/form-aula.component';
@@ -17,7 +17,7 @@ export class TurmaAulasPage implements OnInit {
 
   private fecharModalSubscription: Subscription;
 
-  constructor(private modalCtrl: ModalController, private turmaService: TurmaService, private aulaService: AulaService, private comunicationService: ComunicationService, private location: Location) {
+  constructor(private modalCtrl: ModalController, private turmaService: TurmaService, private aulaService: AulaService, private comunicationService: ComunicationService, private location: Location, private toastCtrl: ToastController) {
     this.fecharModalSubscription = this.comunicationService.fecharModal$.subscribe(() => {
       this.listar_aulas();
     });
@@ -58,23 +58,38 @@ export class TurmaAulasPage implements OnInit {
     this.fecharModalSubscription.unsubscribe();
   }
 
-  async openFormModal(id_aula: any, nome_turma: any) {
+  async openFormModal(id_aula: any, nome_turma: any, id_usuario: any) {
 
-    console.log(id_aula, nome_turma)
+    if (this.usuario.id_usuario === id_usuario) {
+      const modal = await this.modalCtrl.create({
+        component: FormAulaComponent,
+        componentProps: {
+          idAula: id_aula,
+          nomeTurma: nome_turma,
+        },
+        mode: 'ios'
 
-    const modal = await this.modalCtrl.create({
-      component: FormAulaComponent,
-      componentProps: {
-        idAula: id_aula,
-        nomeTurma: nome_turma,
-      },
-      mode: 'ios'
+      });
+      await modal.present();
 
+      const { data } = await modal.onDidDismiss();
+      console.log('Dados do formulário:', data);
+    } else {
+      this.presentToast('Apenas o professor relacionado a aula e o administrador do sistema podem alterar esta aula!', 'warning-outline', 'warning')
+    }
+
+  }
+
+  async presentToast(message: any, icon: any, color: any) {
+    const toast = await this.toastCtrl.create({
+      icon: icon,
+      message: message,
+      duration: 3000,
+      position: 'bottom',
+      color: color,
     });
-    await modal.present();
 
-    const { data } = await modal.onDidDismiss();
-    console.log('Dados do formulário:', data);
+    await toast.present();
   }
 
 
@@ -96,8 +111,6 @@ export class TurmaAulasPage implements OnInit {
     const { data } = await modal.onDidDismiss();
     console.log('Dados do formulário:', data);
   }
-
-
 
 
   dataSelected: any
@@ -147,10 +160,10 @@ export class TurmaAulasPage implements OnInit {
   }
 
 
-  selectAula(id: any, num_aula: any, nome_turma: any) {
+  selectAula(id: any, num_aula: any, nome_turma: any, fk_id_usuario: any) {
 
     if (id) {
-      this.openFormModal(id, nome_turma)
+      this.openFormModal(id, nome_turma, fk_id_usuario)
     } else {
       this.openNewFormModal(num_aula, this.id_turma, nome_turma, this.dataSelected)
     }

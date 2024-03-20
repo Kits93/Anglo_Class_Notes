@@ -5,7 +5,6 @@ import { Routes } from '@angular/router';
 import { AulasComponent } from '../aulas/aulas.component';
 import { Location } from '@angular/common';
 import { AlertController, ModalController, ToastController } from '@ionic/angular';
-import { FormNewTurmaComponent } from '../form-new-turma/form-new-turma.component';
 import { MatSelect } from '@angular/material/select';
 import { Subscription } from 'rxjs';
 import { ComunicationService } from 'src/app/services/comunication/comunication.service';
@@ -83,20 +82,6 @@ export class TurmasComponent implements OnInit {
       default:
         return '';
     }
-  }
-
-  async openNewTurmaForm() {
-    const modal = await this.modalCtrl.create({
-      component: FormNewTurmaComponent,
-      cssClass: 'turma-custom-modal',
-      mode: 'ios',
-    });
-
-    modal.onDidDismiss().then(() => {
-      console.log('Modal de novo usuário fechado')
-    })
-
-    await modal.present();
   }
 
   accessTurma(turma: Turma) {
