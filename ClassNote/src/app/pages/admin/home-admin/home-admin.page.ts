@@ -11,11 +11,12 @@ import { UsuarioService } from 'src/app/services/usuario/usuario.service';
 })
 export class HomeAdminPage implements OnInit {
 
-  exibirMenu: boolean = true; // Inicialmente, o menu será exibido
+  exibirMenu: boolean = true;
 
   @HostListener('window:resize', ['$event'])
   onResize(event: any) {
-    this.exibirMenu = this.platform.width() <= 768; // Altere 768 para a largura desejada para ocultar o menu em desktop
+    this.exibirMenu = this.platform.width() <= 768;
+    this.getUsuario()
   }
 
   username: any
@@ -26,21 +27,17 @@ export class HomeAdminPage implements OnInit {
   usuario: any = []
 
   ngOnInit() {
+    this.getUsuario()
+
+
+    this.onResize(null); // Executa a verificação inicial de tamanho da tela
+  }
+
+  getUsuario(){
     this.objLocal = (localStorage.getItem('usuario'))
     this.usuario = this.objLocal ? JSON.parse(this.objLocal) : []
 
     console.log(this.usuario)
-
-
-    this.onResize(null); // Executa a verificação inicial de tamanho da tela
-
-
-  }
-
-  selectedItem: any
-
-  setItemMenu(item: any) {
-    this.selectedItem = item
   }
 
   logout() {

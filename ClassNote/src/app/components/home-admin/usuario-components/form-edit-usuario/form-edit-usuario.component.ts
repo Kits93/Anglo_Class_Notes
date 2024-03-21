@@ -3,11 +3,14 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatRadioModule } from '@angular/material/radio';
-import { IonicModule, ModalController } from '@ionic/angular';
+import { IonicModule, ModalController, PopoverController, ToastController } from '@ionic/angular';
 import { ComunicationService } from 'src/app/services/comunication/comunication.service';
 import { UsuarioService } from 'src/app/services/usuario/usuario.service';
+import { ChangePasswordComponent } from '../change-password/change-password.component';
+import { MatIconButton } from '@angular/material/button';
 
 @Component({
   selector: 'app-form-edit-usuario',
@@ -21,7 +24,8 @@ import { UsuarioService } from 'src/app/services/usuario/usuario.service';
     MatRadioModule,
     MatInputModule,
     ReactiveFormsModule,
-    IonicModule
+    IonicModule,
+    MatIconModule
   ],
 })
 export class FormEditUsuarioComponent implements OnInit {
@@ -33,16 +37,18 @@ export class FormEditUsuarioComponent implements OnInit {
   password: any;
   role: any;
 
-  constructor(private fb: FormBuilder, private usuarioService: UsuarioService, private comunicationService: ComunicationService, private modalCtrl: ModalController) { }
+  constructor(private fb: FormBuilder, private usuarioService: UsuarioService, private comunicationService: ComunicationService, private modalCtrl: ModalController, private toastCtrl: ToastController, private popoverCtrl: PopoverController) { }
 
   ngOnInit() {
+    this.createForm()
+  }
+
+  createForm() {
     this.form = this.fb.group({
       id_usuario: [this.Usuario.id_usuario],
       username: [this.Usuario.username, Validators.minLength(3)],
       email: [this.Usuario.email, [Validators.required, Validators.email]],
       password: [this.Usuario.password],
-      newPassword: ['', Validators.minLength(8)],
-      confirmNewPassword: ['', Validators.minLength(8)],
       role: [this.Usuario.role, Validators.required]
     });
     this.password = this.form.value.password;
@@ -54,12 +60,18 @@ export class FormEditUsuarioComponent implements OnInit {
       const formEdit = this.form.value;
       console.log(formEdit);
       this.usuarioService.update(formEdit).subscribe((dados: any) => {
-        console.log(dados);
+        if (dados.success === 1) {
+          this.presentToast(dados.message, 'checkmark', 'success');
+
+          this.comunicationService.fecharModal();
+          this.back();
+        } else {
+          this.presentToast(dados.message, 'close', 'danger');
+        }
       });
-      this.comunicationService.fecharModal();
-      this.back()
+
     } else {
-      console.log('Formulário inválido');
+      this.presentToast('Formulário de edição de usuário inválido', 'alert-circle', 'danger');
     }
   }
 
@@ -73,6 +85,41 @@ export class FormEditUsuarioComponent implements OnInit {
 
   toggleChangePassword() {
     this.changePassword = !this.changePassword;
+  }
+
+  async presentToast(message: any, icon: any, color: any) {
+    const toast = await this.toastCtrl.create({
+      icon: icon,
+      message: message,
+      duration: 3000,
+      position: 'bottom',
+      color: color,
+    });
+
+    await toast.present();
+  }
+
+  async presentPopover(ev: any) {
+    const popover = await this.popoverCtrl.create({
+      component: ChangePasswordComponent,
+      componentProps: {
+        idUsuario: this.Usuario.id_usuario
+      },
+      event: ev,
+      translucent: true,
+      alignment: 'center',
+      cssClass: 'custom-popover',
+    });
+    await popover.present()
+  }
+  closePopover() {
+    this.popoverCtrl.dismiss()
+  }
+
+  hidePassword: boolean = true;
+
+  togglePasswordVisibility() {
+    this.hidePassword = !this.hidePassword;
   }
 
 }

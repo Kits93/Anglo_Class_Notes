@@ -1,0 +1,85 @@
+<ion-col size="12">
+  <ion-row>
+    <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="goBack()">
+        <ion-icon style="position: relative;" slot="icon-only" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center">{{ nomeTurma }}</ion-title>
+  </ion-toolbar>
+</ion-row>
+
+
+<form mode="md" (ngSubmit)="submitForm(FormData)" [formGroup]="FormData">
+
+  <ion-list>
+    <!-- Mat-Autocomplete para Usuários -->
+    <ion-item *ngIf="usuario.role == 'admin'">
+      <ion-icon name="person" slot="start"></ion-icon>
+      <mat-form-field appearance="fill">
+        <mat-label>Professor</mat-label>
+        <input minlength="3" [value]="aulaSelecionada.username" matInput placeholder="Selecione o professor"
+          [formControl]="usuarioCtrl" [matAutocomplete]="auto1">
+
+        <mat-autocomplete #auto1="matAutocomplete" (optionSelected)="onUsuarioSelected($event)"
+          [displayWith]="displayFnUser">
+          <mat-option *ngFor="let usuario of filteredUsuarios | async" [value]="usuario">
+            {{ usuario.username }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+    </ion-item>
+
+    <ion-item *ngIf="usuario.role == 'professor'">
+      <ion-icon name="person" slot="start"></ion-icon>
+      <mat-form-field style="opacity: 0.6;" appearance="fill">
+        <mat-label>Professor</mat-label>
+        <input minlength="3" matInput placeholder="Selecione o professor" formControlName="username" readonly>
+        <mat-autocomplete #auto="matAutocomplete">
+        </mat-autocomplete>
+      </mat-form-field>
+    </ion-item>
+
+    <!-- Mat-Autocomplete para Disciplinas -->
+    <ion-item>
+      <ion-icon name="school" slot="start"></ion-icon>
+      <mat-form-field appearance="fill">
+        <mat-label>Disciplina</mat-label>
+        <input minlength="3" [value]="aulaSelecionada.nome_disciplina" matInput placeholder="Selecione a disciplina"
+          [formControl]="disciplinaCtrl" [matAutocomplete]="auto2">
+
+        <mat-autocomplete #auto2="matAutocomplete" (optionSelected)="onDisciplinaSelected($event)"
+          [displayWith]="displayFnDisc">
+          <mat-option *ngFor="let disciplina of filteredDisciplinas | async" [value]="disciplina">
+            {{ disciplina.nome_disciplina }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+    </ion-item>
+
+    <ion-item>
+      <ion-icon name="document-text" slot="start"></ion-icon>
+      <ion-label position="floating">Conteúdo</ion-label>
+      <ion-textarea minLength="3" type="text" rows="4" name="conteudo" formControlName="conteudo"
+        required></ion-textarea>
+    </ion-item>
+
+    <ion-item>
+      <mat-form-field class="datepicker-field">
+        <mat-label>Selecione a Data</mat-label>
+        <input matInput [value]="dataAula" disabled>
+        <mat-datepicker-toggle matSuffix [for]="picker" disabled></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </ion-item>
+
+  </ion-list>
+  <ion-button
+    style="margin-bottom: 0; position: absolute; bottom: 0; left: 0; right: 0; margin-left: auto; margin-right: auto;"
+    mode="ios" type="submit" expand="full">
+    Adicionar
+    <ion-icon name="send-outline" slot="end"></ion-icon>
+  </ion-button>
+</form>
+</ion-col>

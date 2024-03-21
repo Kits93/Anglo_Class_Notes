@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="goBack()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Detalhes da Aula</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="print()">
+        <ion-icon name="print"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid class="turma-grid">
+    <ion-row class="turma-title-row" style="font-size: 1.5em;">
+      <ion-col size="12" class="ion-text-center">
+        <ion-title class="turma-title">{{Aula.nome_turma}}</ion-title>
+      </ion-col>
+    </ion-row>
+    <ion-row class="aula-data-row">
+      <ion-col class="aula-col ion-text-start"><ion-icon name="book-outline"></ion-icon> {{Aula.num_aula}}º aula</ion-col>
+      <ion-col class="data-col ion-text-end"><ion-icon name="calendar"></ion-icon> {{Aula.data_aula}}</ion-col>
+    </ion-row>
+    <ion-row class="prof-disc-conteudo-row ion-text-center">
+      <ion-col class="prof-disc-conteudo-col" style="font-size: 1.5em;">
+        <p><ion-icon name="school"></ion-icon><strong>Disciplina:</strong></p>
+        <p class="disciplina">{{Aula.nome_disciplina}}</p>
+        <p><ion-icon name="person"></ion-icon><strong>Professor:</strong></p>
+        <p class="username">{{Aula.username}}</p>
+        <p><ion-icon name="document"></ion-icon><strong>Conteúdo:</strong></p>
+        <p class="conteudo">{{Aula.conteudo}}</p>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

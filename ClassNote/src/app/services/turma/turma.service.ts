@@ -14,6 +14,10 @@ export class TurmaService {
 
   constructor(private httpClient: HttpClient) { }
 
+  create(turma: any) {
+    return this.httpClient.post(this.API + 'turma/create_turma.php', turma);
+  }
+
   read() {
     return this.httpClient.get(this.API + 'turma/read_turma.php').pipe(
       tap(turmas => {

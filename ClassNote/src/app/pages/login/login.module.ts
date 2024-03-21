@@ -4,13 +4,16 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { IonicModule } from '@ionic/angular';
 
+
 import { LoginPageRoutingModule } from './login-routing.module';
 
 import { LoginPage } from './login.page';
 import { LoginService } from 'src/app/services/login/login.service';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   imports: [
+    MatInputModule,
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
@@ -21,4 +24,4 @@ import { LoginService } from 'src/app/services/login/login.service';
   providers: [LoginService],
   declarations: [LoginPage]
 })
-export class LoginPageModule {}
+export class LoginPageModule { }

@@ -1,0 +1,89 @@
+
+
+.turma {
+  cursor: pointer;
+}
+
+.select {
+  border-radius: 8px;
+  padding-left: 20px;
+  background: #aaaaaa3a;
+}
+
+ion-card:hover {
+  transition: 0.5s;
+  transform: scale(0.95);
+  animation: alternate 2s;
+}
+
+.card-ensino-M:hover {
+  box-shadow: 3px 3px 0 3px rgba(177, 3, 41, 0.664);
+}
+
+.card-ensino-FI:hover {
+  box-shadow: 3px 3px 0 3px rgba(243, 220, 13, 0.671);
+}
+
+.card-ensino-FII:hover {
+  box-shadow: 3px 3px 0 3px rgba(0, 110, 255, 0.644);
+}
+
+ion-item {
+  border-radius: 8px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+ion-item:hover {
+  background-color: rgba(0, 0, 0, 0.418) !important;
+  color: #1970C0;
+  cursor: pointer;
+}
+
+ion-item {
+  margin: 10px;
+  border-radius: 8px;
+  outline: 0px solid #196fc085;
+}
+
+ion-list-header {
+  font-size: 18px;
+}
+
+ion-item:hover {
+  transition: 0.5s;
+  outline: 1px solid var(--ion-color-primary);
+  color: #269bdf;
+  font-weight: 50px;
+  cursor: pointer;
+
+  ion-icon,
+  ion-label {
+    transition: 0.3s;
+    color: var(--ion-color-primary);
+  }
+}
+
+.spinner {
+  position: absolute;
+}
+
+.logout {
+  color: #b10707ce;
+
+  ion-icon,
+  ion-label {
+    transition: 0.3s;
+    color: #b10707ce;
+  }
+}
+
+.logout:hover {
+  outline: 1px solid #b10707ce;
+  color: #b10707ce;
+
+  ion-icon,
+  ion-label {
+    transition: 0.3s;
+    color: #b10707ce;
+  }
+}

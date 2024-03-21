@@ -3,15 +3,16 @@ import { TurmaService } from 'src/app/services/turma/turma.service';
 import { Turma } from 'src/app/models/turmas.model';
 import { Routes } from '@angular/router';
 import { AulasComponent } from '../aulas/aulas.component';
+import { Location } from '@angular/common';
+import { AlertController, ModalController, ToastController } from '@ionic/angular';
+import { MatSelect } from '@angular/material/select';
+import { Subscription } from 'rxjs';
+import { ComunicationService } from 'src/app/services/comunication/comunication.service';
 
 interface Ensino {
   tipo_ensino: string;
   turmas: Turma[];
 }
-
-const routes: Routes = [
-  { path: '../aulas', component: AulasComponent },
-];
 
 @Component({
   selector: 'app-turmas',
@@ -21,9 +22,16 @@ const routes: Routes = [
 export class TurmasComponent implements OnInit {
   ensinos: Ensino[] = [];
 
-  constructor(private turmaService: TurmaService) { }
+  private fecharModalSubscription: Subscription;
+
+  constructor(private turmaService: TurmaService, private location: Location, private modalCtrl: ModalController, private comunicationService: ComunicationService, private toastCtrl: ToastController, private alertCtrl: AlertController) {
+    this.fecharModalSubscription = this.comunicationService.fecharModal$.subscribe(() => {
+      this.listarTurmas();
+    });
+  }
 
   ngOnInit() {
+    localStorage.removeItem('turma')
     this.listarTurmas();
   }
 
@@ -80,4 +88,17 @@ export class TurmasComponent implements OnInit {
     console.log(turma)
     localStorage.setItem('turma', JSON.stringify(turma))
   }
+
+  async presentToast(message: any, icon: any, color: any) {
+    const toast = await this.toastCtrl.create({
+      icon: icon,
+      message: message,
+      duration: 3000,
+      position: 'bottom',
+      color: color,
+    });
+
+    await toast.present();
+  }
+
 }

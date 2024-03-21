@@ -22,9 +22,11 @@ export class CalendarComponent implements OnInit {
     this.todayformatted = this.formatDate(new Date());
   }
 
+  selectedDate: any
   ngOnInit() {
     // Obter a data de hoje
     const today = new Date();
+    this.selectedDate = new Date();
 
     // Emitir o evento com a data de hoje
     this.dataEvent.emit(this.formatDate(today));
@@ -54,9 +56,9 @@ export class CalendarComponent implements OnInit {
   }
 
   addEvent(type: string, event: MatDatepickerInputEvent<Date>) {
-    const selectedDate = event.value;
-    if (selectedDate) {
-      const isoFormattedDate = this.formatDate(selectedDate);
+    this.selectedDate = event.value;
+    if (this.selectedDate) {
+      const isoFormattedDate = this.formatDate(this.selectedDate);
       this.dataEvent.emit(isoFormattedDate);
     }
   }

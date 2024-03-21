@@ -21,11 +21,18 @@
 
                       <ion-card style="width: 100%;" [ngClass]="getEnsinoClass(ensino.tipo_ensino)"
                         [routerLink]="'../aulas'" (click)="accessTurma(turma)">
+                        <ion-row style="position: absolute; right: 0;">
+                          <ion-col class="ion-text-end">
+                          </ion-col>
+                        </ion-row>
+
                         <ion-card-header>
                           <ion-card-title>
                             {{ turma.nome_turma }}
                           </ion-card-title>
+
                         </ion-card-header>
+
                         <ion-card-content>
 
                           {{ turma.ensino }}
@@ -41,16 +48,6 @@
               </ion-accordion>
             </ng-container>
           </ion-accordion-group>
-        </ion-col>
-      </ion-row>
-
-      <ion-row>
-        <ion-col>
-          <ion-fab>
-            <ion-fab-button style="display: flex; position: fixed; bottom: 10px; right: 10px;">
-              <ion-icon name="add-outline"></ion-icon>
-            </ion-fab-button>
-          </ion-fab>
         </ion-col>
       </ion-row>
     </ion-col>

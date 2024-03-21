@@ -1,0 +1,31 @@
+.card-function:hover {
+  cursor: pointer;
+  transition: 0.3s;
+  scale: 0.98;
+  background-color: rgba(0, 0, 0, 0.185);
+}
+.card-function{
+  min-height: 32em;
+}
+
+.ion-icon-top-right {
+  color: white;
+  padding: 3px;
+  border-radius: 100%;
+  font-size: 24px;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  opacity: 0.3;
+}
+
+.ion-icon-top-right:hover {
+  background-color: rgba(0, 0, 0, 0.103);
+  transition: 0.3s;
+  color: white;
+  opacity: 0.8;
+  scale: 1.5;
+}
+
+
+
